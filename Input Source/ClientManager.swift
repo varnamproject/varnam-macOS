@@ -8,7 +8,6 @@
  */
 
 import InputMethodKit
-import LipikaEngine_OSX
 
 class ClientManager: CustomStringConvertible {
     private let notFoundRange = NSMakeRange(NSNotFound, NSNotFound)
@@ -31,36 +30,36 @@ class ClientManager: CustomStringConvertible {
     
     init?(client: IMKTextInput) {
         guard let bundleId = client.bundleIdentifier(), let clientId = client.uniqueClientIdentifierString() else {
-            Logger.log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
+            Log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
             return nil
         }
-        Logger.log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
+        Log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
         self.client = client
         if !client.supportsUnicode() {
-            Logger.log.warning("Client: \(bundleId) does not support Unicode!")
+            Log.warning("Client: \(bundleId) does not support Unicode!")
         }
         if !client.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportDocumentAccessPropertyTag)) {
-            Logger.log.warning("Client: \(bundleId) does not support Document Access!")
+            Log.warning("Client: \(bundleId) does not support Document Access!")
         }
         _description = "\(bundleId) with Id: \(clientId)"
     }
     
     func setGlobalCursorLocation(_ location: Int) {
-        Logger.log.debug("Setting global cursor location to: \(location)")
+        Log.debug("Setting global cursor location to: \(location)")
         client.setMarkedText("|", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
     }
     
     func updateMarkedCursorLocation(_ delta: Int) -> Bool {
-        Logger.log.debug("Cursor moved: \(delta) with selectedRange: \(client.selectedRange()), markedRange: \(client.markedRange()) and cursorPosition: \(markedCursorLocation?.description ?? "nil")")
+        Log.debug("Cursor moved: \(delta) with selectedRange: \(client.selectedRange()), markedRange: \(client.markedRange()) and cursorPosition: \(markedCursorLocation?.description ?? "nil")")
         if client.markedRange().length == NSNotFound { return false }
         let nextPosition = (markedCursorLocation ?? client.markedRange().length) + delta
         if (0...client.markedRange().length).contains(nextPosition) {
-            Logger.log.debug("Still within markedRange")
+            Log.debug("Still within markedRange")
             markedCursorLocation = nextPosition
             return true
         }
-        Logger.log.debug("Outside of markedRange")
+        Log.debug("Outside of markedRange")
         markedCursorLocation = nil
         return false
     }
@@ -86,14 +85,14 @@ class ClientManager: CustomStringConvertible {
     }
     
     func finalize(_ output: String) {
-        Logger.log.debug("Finalizing with: \(output)")
+        Log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()
         markedCursorLocation = nil
     }
     
     func clear() {
-        Logger.log.debug("Clearing MarkedText and Candidate window")
+        Log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
         candidatesWindow.hide()
         markedCursorLocation = nil

@@ -87,7 +87,7 @@ class LiteratorModel: ObservableObject {
                 return self.ante!.anteliterate(lit.finalaizedOutput + lit.unfinalaizedOutput)
             }
         case (0, 1):
-            let override: [String: MappingValue]? = MappingStore.read(schemeName: self.fromScheme, scriptName: self.toScript)
+            let override: [String: MappingValue]? = .read(schemeName: self.fromScheme, scriptName: self.toScript)
             self.trans = try! self.factory.transliterator(schemeName: self.fromScheme, scriptName: self.toScript, mappings: override)
             eval = { (input: String) -> String in
                 _ = self.trans!.reset()
