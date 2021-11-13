@@ -1,0 +1,3 @@
+[submodule "GoVarnam/govarnam"]
+	path = GoVarnam/govarnam
+	url = git@github.com:varnamproject/govarnam.git
