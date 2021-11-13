@@ -77,6 +77,7 @@ clean() {
 }
 
 build_varnam_ime() {
+    rm -rf ./VarnamIME.app
     xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build || exit 1
     cp -R ../build/Release/VarnamIME.app .
     # notarizefile "VarnamIME.app" "com.varnamproject.mac.Varnam"
@@ -89,12 +90,14 @@ build_shortcut_recorder() {
 }
 
 build_varnam_app() {
+    rm -rf ./VarnamApp.app
     xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build || exit 1
     cp -R ../build/Release/VarnamApp.app .
     # notarizefile "VarnamApp.app" "com.varnamproject.mac.VarnamApp"
 }
 
 build_varnam_installer() {
+    rm ./Scripts/installer
     xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
     cp ../build/Release/installer ./Scripts/
 }
@@ -122,14 +125,14 @@ if [[ "$1" == "ShortcutRecorder" ]]; then
 fi
 
 # Not gonna use LipikaEngine anymore. TODO remove this when it's not needed
-if [ ! -f Input\ Source/LipikaEngine_OSX.framework ]; then
+if [ ! -d ../Input\ Source/LipikaEngine_OSX.framework ]; then
     xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Debug clean build test || exit 1
     xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
     rm -rf ../Input\ Source/LipikaEngine_OSX.framework
     cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
 fi
 
-if [ ! -f ../Application/ShortcutRecorder.framework ]; then
+if [ ! -d ../Application/ShortcutRecorder.framework ]; then
     build_shortcut_recorder
 fi
 
