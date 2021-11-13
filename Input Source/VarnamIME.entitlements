@@ -5,10 +5,10 @@
     <key>com.apple.security.app-sandbox</key>
     <true/>
     <key>com.apple.security.temporary-exception.mach-register.global-name</key>
-    <string>LipikaController_Connection</string>
+    <string>VarnamController_Connection</string>
     <key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.daivajnanam.Lipika</string>
+		<string>group.varnamproject.Varnam</string>
 	</array>
 </dict>
 </plist>

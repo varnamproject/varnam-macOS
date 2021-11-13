@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@ import LipikaEngine_OSX
 
 class ClientManager: CustomStringConvertible {
     private let notFoundRange = NSMakeRange(NSNotFound, NSNotFound)
-    private let config = LipikaConfig()
+    private let config = VarnamConfig()
     private let client: IMKTextInput
     // This is the position of the cursor within the marked text
     public var markedCursorLocation: Int? = nil

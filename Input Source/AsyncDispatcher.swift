@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2019 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,

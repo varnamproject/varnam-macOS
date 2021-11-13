@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -47,33 +47,33 @@ public final class Installer {
     }
     
     private func register() {
-        try! InputSource.register(inputSourcePath: "/Library/Input Methods/LipikaIME.app")
+        try! InputSource.register(inputSourcePath: "/Library/Input Methods/VarnamIME.app")
     }
     
     private func enable() {
-        if let lipika = InputSource.getLipika().first {
-            try! InputSource.enable(inputSource: lipika)
+        if let varnam = InputSource.getVarnam().first {
+            try! InputSource.enable(inputSource: varnam)
         }
         else {
-            print("[ERROR] LipikaIME input source not found")
+            print("[ERROR] VarnamIME input source not found")
         }
     }
     
     private func select() {
-        if let lipika = InputSource.getLipika().first {
-            try! InputSource.select(inputSource: lipika)
+        if let varnam = InputSource.getVarnam().first {
+            try! InputSource.select(inputSource: varnam)
         }
         else {
-            print("[ERROR] LipikaIME input source not found")
+            print("[ERROR] VarnamIME input source not found")
         }
     }
     
     private func remove() {
-        if let lipika = InputSource.getLipika().first {
-            try! InputSource.remove(inputSource: lipika)
+        if let varnam = InputSource.getVarnam().first {
+            try! InputSource.remove(inputSource: varnam)
         }
         else {
-            print("[ERROR] LipikaIME input source not found")
+            print("[ERROR] VarnamIME input source not found")
         }
     }
 }

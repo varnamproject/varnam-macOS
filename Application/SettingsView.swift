@@ -1,5 +1,5 @@
 /*
-* LipikaApp is companion application for LipikaIME.
+* VarnamApp is companion application for VarnamIME.
 * Copyright (C) 2020 Ranganath Atreya
 *
 * This program is distributed in the hope that it will be useful,
@@ -11,7 +11,7 @@ import SwiftUI
 import LipikaEngine_OSX
 
 struct SettingsView: View {
-    private var factory = try! LiteratorFactory(config: LipikaConfig())
+    private var factory = try! LiteratorFactory(config: VarnamConfig())
     @ObservedObject var model = SettingsModel()
 
     var body: some View {

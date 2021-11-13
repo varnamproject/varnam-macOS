@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 dev_account="ranganath.atreya@gmail.com"
-dev_team="7JZ87Y4JWT"
+dev_team="2P8V429HRL"
 dev_keychain_label="Developer-altool"
 
 # functions
@@ -67,11 +67,11 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     xcrun stapler staple "$filepath"
 }
 
-rm -rf ./LipikaIME.app
-rm -rf ./LipikaIME.zip
-rm -rf ./LipikaApp.app
-rm -rf ./LipikaApp.zip
-rm -rf ./LipikaIME.pkg
+rm -rf ./VarnamIME.app
+rm -rf ./VarnamIME.zip
+rm -rf ./VarnamApp.app
+rm -rf ./VarnamApp.zip
+rm -rf ./VarnamIME.pkg
 rm ./Scripts/installer
 if [[ "$1" == "clean" ]]; then 
 exit 0
@@ -81,20 +81,20 @@ xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEn
 xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
 rm -rf ../Input\ Source/LipikaEngine_OSX.framework
 cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
-xcodebuild -project ../LipikaIME.xcodeproj -scheme LipikaIME -configuration Release clean build || exit 1
-cp -R ../build/Release/LipikaIME.app .
-notarizefile "LipikaIME.app" "com.daivajnanam.inputmethod.Lipika"
+xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build || exit 1
+cp -R ../build/Release/VarnamIME.app .
+# notarizefile "VarnamIME.app" "com.varnamproject.mac.Varnam"
 
 xcodebuild -project ../../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
 rm -rf ../Application/ShortcutRecorder.framework
-cp -R ../../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/
-xcodebuild -project ../LipikaIME.xcodeproj -scheme LipikaApp -configuration Release clean build || exit 1
-cp -R ../build/Release/LipikaApp.app .
-notarizefile "LipikaApp.app" "com.daivajnanam.LipikaApp"
+cp -R ../../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
+xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build || exit 1
+cp -R ../build/Release/VarnamApp.app .
+# notarizefile "VarnamApp.app" "com.varnamproject.mac.VarnamApp"
 
-xcodebuild -project ../LipikaIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
+xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
 cp ../build/Release/installer ./Scripts/
-packagesbuild -v LipikaIME.pkgproj
-notarizefile "LipikaIME.pkg" "com.daivajnanam.LipikaApp"
+packagesbuild -v VarnamIME.pkgproj
+# notarizefile "VarnamIME.pkg" "com.varnamproject.mac.VarnamApp"
 
 exit 0

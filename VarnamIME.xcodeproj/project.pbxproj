@@ -15,16 +15,16 @@
 		A53AD00320CC347900C95844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
 		A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
-		A53AD01720CC654700C95844 /* LipikaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* LipikaConfig.swift */; };
+		A53AD01720CC654700C95844 /* VarnamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* VarnamConfig.swift */; };
 		A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01C20CC659C00C95844 /* ClientManager.swift */; };
-		A53AD01F20CC660900C95844 /* LipikaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01E20CC660900C95844 /* LipikaController.swift */; };
+		A53AD01F20CC660900C95844 /* VarnamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01E20CC660900C95844 /* VarnamController.swift */; };
 		A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */; };
 		A54397D320D4D2F30011C7B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A54397D120D4D2F30011C7B7 /* Main.storyboard */; };
 		A54397DB20D4D5E90011C7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
 		A54397DC20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
 		A54397DD20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
-		A54397E020D4D6840011C7B7 /* LipikaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* LipikaConfig.swift */; };
+		A54397E020D4D6840011C7B7 /* VarnamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* VarnamConfig.swift */; };
 		A546182720CC6BB2003A73EB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A546181E20CC6A06003A73EB /* LICENSE */; };
 		A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
 		A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
@@ -52,7 +52,7 @@
 			containerPortal = A53ACFF520CC347900C95844 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A53ACFFC20CC347900C95844;
-			remoteInfo = LipikaIME;
+			remoteInfo = VarnamIME;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -86,21 +86,21 @@
 		A5122A4220D420E100575848 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A5122A4720D429D300575848 /* Installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Installer; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52905DC234EC67900A8D95E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		A52DCDBB20D17767001F34AC /* LipikaIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LipikaIME.entitlements; sourceTree = "<group>"; };
-		A53ACFFD20CC347900C95844 /* LipikaIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LipikaIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52DCDBB20D17767001F34AC /* VarnamIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VarnamIME.entitlements; sourceTree = "<group>"; };
+		A53ACFFD20CC347900C95844 /* VarnamIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VarnamIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53AD00020CC347900C95844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A53AD00220CC347900C95844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A53AD00720CC347900C95844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LipikaEngine_OSX.framework; sourceTree = "<group>"; };
-		A53AD01620CC654700C95844 /* LipikaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LipikaConfig.swift; sourceTree = "<group>"; };
+		A53AD01620CC654700C95844 /* VarnamConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarnamConfig.swift; sourceTree = "<group>"; };
 		A53AD01A20CC658000C95844 /* InputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
 		A53AD01C20CC659C00C95844 /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
-		A53AD01E20CC660900C95844 /* LipikaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LipikaController.swift; sourceTree = "<group>"; };
-		A54397C920D4D2F10011C7B7 /* LipikaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LipikaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A53AD01E20CC660900C95844 /* VarnamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarnamController.swift; sourceTree = "<group>"; };
+		A54397C920D4D2F10011C7B7 /* VarnamApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VarnamApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A54397D220D4D2F30011C7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A54397D420D4D2F30011C7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A54397D520D4D2F30011C7B7 /* LipikaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LipikaApp.entitlements; sourceTree = "<group>"; };
+		A54397D520D4D2F30011C7B7 /* VarnamApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VarnamApp.entitlements; sourceTree = "<group>"; };
 		A546181E20CC6A06003A73EB /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A546181F20CC6A06003A73EB /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
 		A546182020CC6A06003A73EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = .github/README.md; sourceTree = "<group>"; };
@@ -173,9 +173,9 @@
 		A53ACFFE20CC347900C95844 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A53ACFFD20CC347900C95844 /* LipikaIME.app */,
+				A53ACFFD20CC347900C95844 /* VarnamIME.app */,
 				A5122A4720D429D300575848 /* Installer */,
-				A54397C920D4D2F10011C7B7 /* LipikaApp.app */,
+				A54397C920D4D2F10011C7B7 /* VarnamApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,10 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				A54397D920D4D3D80011C7B7 /* Resources */,
-				A53AD01620CC654700C95844 /* LipikaConfig.swift */,
+				A53AD01620CC654700C95844 /* VarnamConfig.swift */,
 				A53AD00020CC347900C95844 /* AppDelegate.swift */,
 				A53AD01C20CC659C00C95844 /* ClientManager.swift */,
-				A53AD01E20CC660900C95844 /* LipikaController.swift */,
+				A53AD01E20CC660900C95844 /* VarnamController.swift */,
 				A55381F421D703EA00A3CD8A /* MappingStore.swift */,
 				A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */,
 			);
@@ -228,7 +228,7 @@
 				A53AD00720CC347900C95844 /* Info.plist */,
 				A59281E020D45634003013B8 /* TrayIcon.icns */,
 				A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */,
-				A52DCDBB20D17767001F34AC /* LipikaIME.entitlements */,
+				A52DCDBB20D17767001F34AC /* VarnamIME.entitlements */,
 				A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */,
 			);
 			name = Resources;
@@ -240,7 +240,7 @@
 				A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */,
 				A54397D120D4D2F30011C7B7 /* Main.storyboard */,
 				A54397D420D4D2F30011C7B7 /* Info.plist */,
-				A54397D520D4D2F30011C7B7 /* LipikaApp.entitlements */,
+				A54397D520D4D2F30011C7B7 /* VarnamApp.entitlements */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -289,9 +289,9 @@
 			productReference = A5122A4720D429D300575848 /* Installer */;
 			productType = "com.apple.product-type.tool";
 		};
-		A53ACFFC20CC347900C95844 /* LipikaIME */ = {
+		A53ACFFC20CC347900C95844 /* VarnamIME */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "LipikaIME" */;
+			buildConfigurationList = A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "VarnamIME" */;
 			buildPhases = (
 				A53ACFF920CC347900C95844 /* Sources */,
 				A53ACFFA20CC347900C95844 /* Frameworks */,
@@ -302,14 +302,14 @@
 			);
 			dependencies = (
 			);
-			name = LipikaIME;
-			productName = LipikaIME;
-			productReference = A53ACFFD20CC347900C95844 /* LipikaIME.app */;
+			name = VarnamIME;
+			productName = VarnamIME;
+			productReference = A53ACFFD20CC347900C95844 /* VarnamIME.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A54397C820D4D2F10011C7B7 /* LipikaApp */ = {
+		A54397C820D4D2F10011C7B7 /* VarnamApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "LipikaApp" */;
+			buildConfigurationList = A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "VarnamApp" */;
 			buildPhases = (
 				A54397C520D4D2F10011C7B7 /* Sources */,
 				A54397C620D4D2F10011C7B7 /* Frameworks */,
@@ -320,9 +320,9 @@
 			);
 			dependencies = (
 			);
-			name = LipikaApp;
-			productName = LipikaApp;
-			productReference = A54397C920D4D2F10011C7B7 /* LipikaApp.app */;
+			name = VarnamApp;
+			productName = VarnamApp;
+			productReference = A54397C920D4D2F10011C7B7 /* VarnamApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -333,7 +333,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 1250;
-				ORGANIZATIONNAME = Daivajnanam;
+				ORGANIZATIONNAME = VarnamProject;
 				TargetAttributes = {
 					A5122A4620D429D300575848 = {
 						CreatedOnToolsVersion = 9.4;
@@ -359,7 +359,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "LipikaIME" */;
+			buildConfigurationList = A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "VarnamIME" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -372,9 +372,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A53ACFFC20CC347900C95844 /* LipikaIME */,
+				A53ACFFC20CC347900C95844 /* VarnamIME */,
 				A5122A4620D429D300575848 /* Installer */,
-				A54397C820D4D2F10011C7B7 /* LipikaApp */,
+				A54397C820D4D2F10011C7B7 /* VarnamApp */,
 			);
 		};
 /* End PBXProject section */
@@ -414,7 +414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "set -ex\n${TARGET_BUILD_DIR}/Installer --remove\nif ! killall LipikaIME; then\n    echo \"note: no LipikaIME process to kill\"\nfi\nrm -rf /Library/Input\\ Methods/LipikaIME.app\ncp -r ${TARGET_BUILD_DIR}/LipikaIME.app /Library/Input\\ Methods/\nopen /Library/Input\\ Methods/LipikaIME.app\n${TARGET_BUILD_DIR}/Installer --enable\n";
+			shellScript = "set -ex\n${TARGET_BUILD_DIR}/Installer --remove\nif ! killall VarnamIME; then\n    echo \"note: no VarnamIME process to kill\"\nfi\nrm -rf /Library/Input\\ Methods/VarnamIME.app\ncp -r ${TARGET_BUILD_DIR}/VarnamIME.app /Library/Input\\ Methods/\nopen /Library/Input\\ Methods/VarnamIME.app\n${TARGET_BUILD_DIR}/Installer --enable\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -433,8 +433,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A53AD00120CC347900C95844 /* AppDelegate.swift in Sources */,
-				A53AD01F20CC660900C95844 /* LipikaController.swift in Sources */,
-				A53AD01720CC654700C95844 /* LipikaConfig.swift in Sources */,
+				A53AD01F20CC660900C95844 /* VarnamController.swift in Sources */,
+				A53AD01720CC654700C95844 /* VarnamConfig.swift in Sources */,
 				A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */,
 				A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */,
 				A5DC681F22335F72006FC519 /* AsyncDispatcher.swift in Sources */,
@@ -454,7 +454,7 @@
 				A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */,
 				A55381F621D706E500A3CD8A /* MappingStore.swift in Sources */,
 				A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */,
-				A54397E020D4D6840011C7B7 /* LipikaConfig.swift in Sources */,
+				A54397E020D4D6840011C7B7 /* VarnamConfig.swift in Sources */,
 				A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */,
 				A5E982802480658900D7B9A9 /* SettingsModel.swift in Sources */,
 			);
@@ -465,7 +465,7 @@
 /* Begin PBXTargetDependency section */
 		A5122A5420D43D8800575848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A53ACFFC20CC347900C95844 /* LipikaIME */;
+			target = A53ACFFC20CC347900C95844 /* VarnamIME */;
 			targetProxy = A5122A5320D43D8800575848 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -485,13 +485,13 @@
 		A5122A4C20D429D300575848 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika.Installer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam.Installer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -500,13 +500,13 @@
 		A5122A4D20D429D300575848 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika.Installer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam.Installer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -550,7 +550,7 @@
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -616,7 +616,7 @@
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -641,13 +641,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Input Source/LipikaIME.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = "Input Source/VarnamIME.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2.2;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -661,9 +661,9 @@
 				);
 				MARKETING_VERSION = 2.2;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LipikaIME Package Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -672,13 +672,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Input Source/LipikaIME.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = "Input Source/VarnamIME.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2.2;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -692,9 +692,9 @@
 				);
 				MARKETING_VERSION = 2.2;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LipikaIME Package Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -703,13 +703,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Application/LipikaApp.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = Application/VarnamApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2.0;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -723,9 +723,9 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.LipikaApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LipikaApp Package Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -734,13 +734,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Application/LipikaApp.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = Application/VarnamApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2.0;
-				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				DEVELOPMENT_TEAM = 2P8V429HRL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -754,9 +754,9 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.LipikaApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LipikaApp Package Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -773,7 +773,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "LipikaIME" */ = {
+		A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "VarnamIME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A53AD00920CC347900C95844 /* Debug */,
@@ -782,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "LipikaIME" */ = {
+		A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "VarnamIME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A53AD00C20CC347900C95844 /* Debug */,
@@ -791,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "LipikaApp" */ = {
+		A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "VarnamApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A54397D720D4D2F30011C7B7 /* Debug */,

@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -18,15 +18,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var _languageConfig: [LanguageConfig]?
     private var _systemTrayMenu: NSMenu?
     var systemTrayMenu: NSMenu! { get {
-        let config = LipikaConfig()
+        let config = VarnamConfig()
         if config.languageConfig == _languageConfig, let menu = _systemTrayMenu {
             return menu
         }
         _languageConfig = config.languageConfig
-        let systemTrayMenu = NSMenu(title: "LipikaIME")
+        let systemTrayMenu = NSMenu(title: "VarnamIME")
         Logger.log.debug("Adding Installed Scripts to Menu")
         for entry in _languageConfig!.filter({ $0.isEnabled }) {
-            let item = NSMenuItem(title: entry.language, action: #selector(LipikaController.menuItemSelected), keyEquivalent: "")
+            let item = NSMenuItem(title: entry.language, action: #selector(VarnamController.menuItemSelected), keyEquivalent: "")
             if let flags = entry.shortcutModifiers, let key = entry.shortcutKey {
                 item.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flags)
                 item.keyEquivalent = item.keyEquivalentModifierMask.contains(.shift) ? key : key.lowercased()

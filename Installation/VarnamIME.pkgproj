@@ -153,7 +153,7 @@
 											<key>GID</key>
 											<integer>0</integer>
 											<key>PATH</key>
-											<string>LipikaIME.app</string>
+											<string>VarnamIME.app</string>
 											<key>PATH_TYPE</key>
 											<integer>1</integer>
 											<key>PERMISSIONS</key>
@@ -504,11 +504,11 @@
 				<key>FOLLOW_SYMBOLIC_LINKS</key>
 				<false/>
 				<key>IDENTIFIER</key>
-				<string>com.daivajnanam.LipikaIME</string>
+				<string>com.varnamproject.mac.VarnamIME</string>
 				<key>LOCATION</key>
 				<integer>0</integer>
 				<key>NAME</key>
-				<string>LipikaIME</string>
+				<string>VarnamIME</string>
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
 				<key>PAYLOAD_SIZE</key>
@@ -532,7 +532,7 @@
 			<array>
 				<dict>
 					<key>APPLICATION_ID</key>
-					<string>com.daivajnanam.LipikaApp</string>
+					<string>com.varnamproject.mac.VarnamApp</string>
 					<key>STATE</key>
 					<true/>
 				</dict>
@@ -568,7 +568,7 @@
 									<key>GID</key>
 									<integer>80</integer>
 									<key>PATH</key>
-									<string>LipikaAPP.app</string>
+									<string>VarnamApp.app</string>
 									<key>PATH_TYPE</key>
 									<integer>1</integer>
 									<key>PERMISSIONS</key>
@@ -1013,11 +1013,11 @@
 				<key>FOLLOW_SYMBOLIC_LINKS</key>
 				<false/>
 				<key>IDENTIFIER</key>
-				<string>com.daivajnanam.LipikaApp</string>
+				<string>com.varnamproject.mac.VarnamApp</string>
 				<key>LOCATION</key>
 				<integer>0</integer>
 				<key>NAME</key>
-				<string>LipikaApp</string>
+				<string>VarnamApp</string>
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
 				<key>PAYLOAD_SIZE</key>
@@ -1246,7 +1246,7 @@
 						<key>LANGUAGE</key>
 						<string>English</string>
 						<key>VALUE</key>
-						<string>LipikaIME and LipikaApp</string>
+						<string>VarnamIME and VarnamApp</string>
 					</dict>
 				</array>
 			</dict>
@@ -1277,7 +1277,7 @@
 							<key>LANGUAGE</key>
 							<string>English</string>
 							<key>VALUE</key>
-							<string>You need at least macOS 10.15 (Catalina) to run Lipika.</string>
+							<string>You need at least macOS 10.15 (Catalina) to run Varnam.</string>
 						</dict>
 					</array>
 					<key>NAME</key>
@@ -1305,7 +1305,7 @@
 			<key>CERTIFICATE</key>
 			<dict>
 				<key>NAME</key>
-				<string>Developer ID Installer: Ranganath Atreya (7JZ87Y4JWT)</string>
+				<string>Developer ID Installer: Subin Siby (2P8V429HRL)</string>
 				<key>PATH</key>
 				<string>/Users/ratreya/Library/Keychains/login.keychain</string>
 			</dict>
@@ -1478,7 +1478,7 @@
 				</dict>
 			</array>
 			<key>NAME</key>
-			<string>LipikaIME</string>
+			<string>VarnamIME</string>
 			<key>PAYLOAD_ONLY</key>
 			<false/>
 			<key>TREAT_MISSING_PRESENTATION_DOCUMENTS_AS_WARNING</key>

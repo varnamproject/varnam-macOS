@@ -1,5 +1,5 @@
 /*
- * LipikaApp is companion application for LipikaIME.
+ * VarnamApp is companion application for VarnamIME.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -22,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             contentRect: NSRect(x: 0, y: 0, width: 700, height: 580),
             styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
             backing: .buffered, defer: false)
-        window.title = "LipikaApp"
-        window.setFrameAutosaveName("LipikaApp")
+        window.title = "VarnamApp"
+        window.setFrameAutosaveName("VarnamApp")
         window.contentView = NSHostingView(rootView: contentView)
         window.titlebarAppearsTransparent = true
         window.makeKeyAndOrderFront(nil)
@@ -35,14 +35,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func showUserGroup(_ sender: NSMenuItem) {
-        NSWorkspace.shared.open(URL(string: "http://facebook.com/groups/lipika.ime")!)
+        NSWorkspace.shared.open(URL(string: "http://facebook.com/groups/varnam.ime")!)
     }
     
     @IBAction func showReleaseNotes(_ sender: NSMenuItem) {
-        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/lipika-ime/releases")!)
+        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/varnam-ime/releases")!)
     }
     
     @IBAction func reportIssue(_ sender: NSMenuItem) {
-        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/lipika-ime/issues/new")!)
+        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/varnam-ime/issues/new")!)
     }
 }
