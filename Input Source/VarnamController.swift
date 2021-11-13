@@ -9,40 +9,32 @@
 
 import InputMethodKit
 import Carbon.HIToolbox
-import LipikaEngine_OSX
 
-struct VarnamLiterated {
-    var candidates: [String]
-    var inputText: String
-    
-    init(_ i: String, _ c: [String]) {
-        candidates = c
-        inputText = i
+class Log {
+    public static func warning(_ text: String) {
+        print(text)
+    }
+    public static func debug(_ text: String) {
+        print(text)
     }
 }
 
 @objc(VarnamController)
 public class VarnamController: IMKInputController {
     static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
+
     let config = VarnamConfig()
     let dispatch = AsyncDispatcher()
     private let clientManager: ClientManager
     private var currentScriptName = ""
-    private (set) var transliterator: Transliterator!
-    private (set) var anteliterator: Anteliterator!
     
     private var cursorPos = 0
     private var preedit = ""
     private (set) var candidates = autoreleasepool { return [String]() }
     private (set) var varnam: Varnam!
     
-    private func refreshLiterators() {
-//        let factory = try! LiteratorFactory(config: config)
-//        let override: [String: MappingValue]? = MappingStore.read(schemeName: config.schemeName, scriptName: config.scriptName)
-//        transliterator = try! factory.transliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
-//        anteliterator = try! factory.anteliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
+    private func initVarnam() {
         currentScriptName = config.scriptName
-
         varnam = try! Varnam("ml")
     }
     
@@ -59,21 +51,6 @@ public class VarnamController: IMKInputController {
             return false
         }
     }
-
-    private func showActive(_ literated: Literated, replacementRange: NSRange? = nil) {
-        if config.outputInClient {
-            let attributes = mark(forStyle: kTSMHiliteConvertedText, at: replacementRange ?? client().selectedRange()) as! [NSAttributedString.Key : Any]
-            let clientText = NSMutableAttributedString(string: literated.finalaizedOutput + literated.unfinalaizedOutput)
-            clientText.addAttributes(attributes, range: NSMakeRange(0, clientText.length))
-            clientManager.showActive(clientText: clientText, candidateText: literated.finalaizedInput + literated.unfinalaizedInput, replacementRange: replacementRange)
-        }
-        else {
-            let attributes = mark(forStyle: kTSMHiliteSelectedRawText, at: replacementRange ?? client().selectedRange()) as! [NSAttributedString.Key : Any]
-            let clientText = NSMutableAttributedString(string: literated.finalaizedInput + literated.unfinalaizedInput)
-            clientText.addAttributes(attributes, range: NSMakeRange(0, clientText.length))
-            clientManager.showActive(clientText: clientText, candidateText: literated.finalaizedOutput + literated.unfinalaizedOutput, replacementRange: replacementRange)
-        }
-    }
     
     private func moveCursorWithinMarkedText(delta: Int) -> Bool {
         if !config.outputInClient, clientManager.updateMarkedCursorLocation(delta) {
@@ -86,62 +63,20 @@ public class VarnamController: IMKInputController {
         return false
     }
     
-    private func convertWord(at location: Int) {
-        if let wordRange = self.clientManager.findWord(at: location), wordRange.length > 0 {
-            var actual = NSRange()
-            guard let word = self.client().string(from: wordRange, actualRange: &actual), !word.isEmpty else {
-                return
-            }
-            print("Found word: \(word) at: \(location) with actual: \(actual)")
-            let inputs = self.anteliterator.anteliterate(word)
-            print("Anteliterated inputs: \(inputs)")
-            let literated = self.transliterator.transliterate(inputs)
-            if word != literated.finalaizedOutput + literated.unfinalaizedOutput {
-                Logger.log.error("Original: \(word) != Ante + Transliterated: \(literated.finalaizedOutput + literated.unfinalaizedOutput) - aborting conversion!")
-                return
-            }
-            // Calculate the location of cursor within Marked Text
-            self.clientManager.markedCursorLocation = config.outputInClient ? location - actual.location : transliterator.convertPosition(position: location - actual.location, fromUnits: .outputScalar, toUnits: .input)
-            print("Marked Cursor Location: \(self.clientManager.markedCursorLocation!) for Global Location: \(location - actual.location)")
-            self.showActive(literated, replacementRange: actual)
-        }
-        else {
-            print("No word found at: \(location)")
-        }
-    }
-    
-    private func dispatchConversion() {
-        // Don't dispatch if active session or selection is in progress
-        if !transliterator.isEmpty() || client().selectedRange().length != 0 { return }
-        // Do this asynch after 10ms to give didCommand time to return and for the client to react to the command such as moving the cursor to the new location
-        dispatch.schedule(deadline: .now() + .milliseconds(10)) {
-            [unowned self] in
-            if self.transliterator.isEmpty() {
-                self.convertWord(at: self.client().selectedRange().location)
-            }
-        }
-    }
-    
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
         guard let client = inputClient as? IMKTextInput & NSObjectProtocol else {
-            Logger.log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
+            Log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
             return nil
         }
         guard let clientManager = ClientManager(client: client) else {
-            Logger.log.warning("Client manager failed to initialize - refusing to initiate VarnamController!")
+            Log.warning("Client manager failed to initialize - refusing to initiate VarnamController!")
             return nil
         }
         self.clientManager = clientManager
         super.init(server: server, delegate: delegate, client: inputClient)
-        print("hello")
-        // Initialize Literators
-        refreshLiterators()
-        print("hello1")
+
+        initVarnam()
         print("Initialized Controller for Client: \(clientManager)")
-    }
-    
-    func getPreedit() -> String {
-        return preedit
     }
     
     func clearState() {
@@ -167,6 +102,7 @@ public class VarnamController: IMKInputController {
         }
     }
     
+    // Handle events
     public override func inputText(_ string: String!, key keyCode: Int, modifiers flags: Int, client sender: Any!) -> Bool {
         switch keyCode {
         case kVK_Space:
@@ -260,57 +196,6 @@ public class VarnamController: IMKInputController {
         clientManager.updateCandidates(sugs)
     }
     
-    public func processEvent(_ event: NSEvent, client sender: Any!) -> Bool {
-        print("Processing event: \(event) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        // Perform shortcut actions on the system trey menu if any
-        if (NSApp.delegate as! AppDelegate).systemTrayMenu!.performKeyEquivalent(with: event) { return true }
-        // Move the cursor back to the oldLocation because commit() will move it to the end of the committed string
-        let oldLocation = client().selectedRange().location
-        print("Switching \(event) at location: \(oldLocation)")
-        if event.modifierFlags.isEmpty && event.keyCode == kVK_Delete { // backspace
-            if let result = transliterator.delete(position: clientManager.markedCursorLocation) {
-                print("Resulted in an actual delete")
-                if clientManager.markedCursorLocation != nil {
-                    _ = clientManager.updateMarkedCursorLocation(-1)
-                }
-                showActive(result)
-                return true
-            }
-            print("Nothing to delete")
-            if commit() {
-                clientManager.setGlobalCursorLocation(oldLocation)
-            }
-            if config.activeSessionOnDelete {
-                dispatchConversion()
-            }
-            return false
-        }
-        if event.modifierFlags.isEmpty && event.keyCode == kVK_Escape { // escape
-            let result = transliterator.reset()
-            clientManager.clear()
-            print("Handled the cancel: \(result != nil)")
-            return result != nil
-        }
-        if event.modifierFlags.isEmpty && event.keyCode == kVK_Return { // return
-            return commit()    // Don't dispatchConversion
-        }
-        if event.modifierFlags == [.numericPad, .function] && (event.keyCode == kVK_LeftArrow || event.keyCode == kVK_RightArrow) { // left or right arrow
-            if moveCursorWithinMarkedText(delta: event.keyCode == kVK_LeftArrow ? -1 : 1) {
-                return true
-            }
-            commit()
-            if event.keyCode == kVK_LeftArrow {
-                clientManager.setGlobalCursorLocation(oldLocation)
-            }
-        }
-        print("Not processing event: \(event)")
-        commit()
-        if config.activeSessionOnCursorMove {
-            dispatchConversion()
-        }
-        return false
-    }
-    
     /// This message is sent when our client looses focus
     public override func deactivateServer(_ sender: Any!) {
         print("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
@@ -326,7 +211,7 @@ public class VarnamController: IMKInputController {
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if config.globalScriptSelection, currentScriptName != config.scriptName {
             print("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
-            refreshLiterators()
+//            refreshLiterators() aka initVarnam() be called again ?
         }
     }
     
@@ -360,6 +245,6 @@ public class VarnamController: IMKInputController {
         // Converge (b) -> (c)
         config.scriptName = item.representedObject as! String
         // Converge (a) -> (b)
-        refreshLiterators()
+        initVarnam()
     }
 }
