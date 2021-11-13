@@ -11,6 +11,16 @@ import InputMethodKit
 import Carbon.HIToolbox
 import LipikaEngine_OSX
 
+struct VarnamLiterated {
+    var candidates: [String]
+    var inputText: String
+    
+    init(_ i: String, _ c: [String]) {
+        candidates = c
+        inputText = i
+    }
+}
+
 @objc(VarnamController)
 public class VarnamController: IMKInputController {
     static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
@@ -21,8 +31,9 @@ public class VarnamController: IMKInputController {
     private (set) var transliterator: Transliterator!
     private (set) var anteliterator: Anteliterator!
     
+    private var cursorPos = 0
     private var preedit = ""
-    private var candidates: [String] = []
+    private (set) var candidates = autoreleasepool { return [String]() }
     private (set) var varnam: Varnam!
     
     private func refreshLiterators() {
@@ -132,8 +143,33 @@ public class VarnamController: IMKInputController {
         print("Initialized Controller for Client: \(clientManager)")
     }
     
+    func getPreedit() -> String {
+        return preedit
+    }
+    
+    func commitComposition(client: IMKTextInput) {
+        let text = getPreedit()
+        if !text.isEmpty {
+            NSLog("commit: \(text)")
+            client.insertText(text, replacementRange: NSMakeRange(NSNotFound, NSNotFound))
+            preedit = ""
+        }
+    }
+    
+//    public override func inputText(_ string: String!, key keyCode: Int, modifiers flags: Int, client sender: Any!) -> Bool {
+//        NSLog("input: string(%@), keyCode(%X), flags(%X)", string, keyCode, flags)
+//
+//        guard let client = sender as? IMKTextInput else { return false }
+//
+//        var candidatesWindow: IMKCandidates { return (NSApp.delegate as! AppDelegate).candidatesWindow }
+//        candidates = ["aaa", "bbb"]
+//        candidatesWindow.update()
+//        candidatesWindow.show()
+//
+//        return true
+//    }
+    
     public override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-        print("hello2")
         print("Handling event: \(event!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         if event.type == .keyDown, let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
             return processInput(chars, client: sender)
@@ -147,15 +183,34 @@ public class VarnamController: IMKInputController {
     private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
         let index = source.index(source.startIndex, offsetBy: location)
         source.insert(Character(char), at: index)
+        print(source)
     }
     
     public func processInput(_ input: String!, client sender: Any!) -> Bool {
-        print("Processing Input: \(input!)")
-        if let markedLocation = clientManager.markedCursorLocation {
-            insertAtIndex(&preedit, markedLocation, input)
-        }
-        print(preedit)
-        return false
+        print("Processing Input: \(input!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        
+        insertAtIndex(&preedit, cursorPos, input)
+        cursorPos += 1
+        updatePreedit()
+        
+        // Naming to be consistent with govarnam-ibus
+        updateLookupTable()
+        
+        return true
+    }
+    
+    private func resetVarnamInputState() {
+        preedit = ""
+        cursorPos = 0
+    }
+    
+    private func updatePreedit() {
+        clientManager.updatePreedit(preedit)
+    }
+    
+    private func updateLookupTable() {
+        let sugs = varnam.transliterate(preedit)
+        clientManager.updateCandidates(sugs)
     }
     
     public func processInputLipika(_ input: String!, client sender: Any!) -> Bool {

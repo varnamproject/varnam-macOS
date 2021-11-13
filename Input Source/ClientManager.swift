@@ -70,7 +70,7 @@ class ClientManager: CustomStringConvertible {
         client.setMarkedText(clientText, selectionRange: NSMakeRange(markedCursorLocation ?? clientText.length, 0), replacementRange: replacementRange ?? notFoundRange)
         candidates = [candidateText]
         if clientText.string.isEmpty {
-            candidatesWindow.hide()
+//            candidatesWindow.hide()
         }
         else {
             candidatesWindow.update()
@@ -80,17 +80,28 @@ class ClientManager: CustomStringConvertible {
         }
     }
     
+    func updatePreedit(_ text: String) {
+        client.setMarkedText(text, selectionRange: NSMakeRange(0, text.count), replacementRange: NSMakeRange(NSNotFound, NSNotFound))
+    }
+    
+    func updateCandidates(_ sugs: [String]) {
+        print(sugs)
+        candidates = sugs
+        candidatesWindow.update()
+        candidatesWindow.show()
+    }
+    
     func finalize(_ output: String) {
         Logger.log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
-        candidatesWindow.hide()
+//        candidatesWindow.hide()
         markedCursorLocation = nil
     }
     
     func clear() {
         Logger.log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
-        candidatesWindow.hide()
+//        candidatesWindow.hide()
         markedCursorLocation = nil
     }
     

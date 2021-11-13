@@ -55,7 +55,6 @@ public class Varnam {
             let sug = varray_get(arr, i).assumingMemoryBound(to: Suggestion.self
             )
             let word = String(cString: sug.pointee.Word)
-            print(word)
             results.append(word)
         }
         return results
