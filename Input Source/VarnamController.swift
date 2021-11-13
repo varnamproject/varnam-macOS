@@ -21,22 +21,29 @@ public class VarnamController: IMKInputController {
     private (set) var transliterator: Transliterator!
     private (set) var anteliterator: Anteliterator!
     
+    private var preedit = ""
+    private var candidates: [String] = []
+    private (set) var varnam: Varnam!
+    
     private func refreshLiterators() {
-        let factory = try! LiteratorFactory(config: config)
-        let override: [String: MappingValue]? = MappingStore.read(schemeName: config.schemeName, scriptName: config.scriptName)
-        transliterator = try! factory.transliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
-        anteliterator = try! factory.anteliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
+//        let factory = try! LiteratorFactory(config: config)
+//        let override: [String: MappingValue]? = MappingStore.read(schemeName: config.schemeName, scriptName: config.scriptName)
+//        transliterator = try! factory.transliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
+//        anteliterator = try! factory.anteliterator(schemeName: config.schemeName, scriptName: config.scriptName, mappings: override)
         currentScriptName = config.scriptName
+
+        varnam = try! Varnam("ml")
     }
     
     @discardableResult private func commit() -> Bool {
-        if let text = transliterator.reset() {
-            Logger.log.debug("Committing with text: \(text)")
-            clientManager.finalize(text.finalaizedOutput + text.unfinalaizedOutput)
+        if candidates.count > 0 {
+            let text = candidates[0]
+            print("Committing with text: \(text)")
+            clientManager.finalize(text)
             return true
         }
         else {
-            Logger.log.debug("Nothing to commit")
+            print("Nothing to commit")
             clientManager.clear()
             return false
         }
@@ -59,7 +66,7 @@ public class VarnamController: IMKInputController {
     
     private func moveCursorWithinMarkedText(delta: Int) -> Bool {
         if transliterator.isEmpty() {
-            Logger.log.debug("Transliterator is empty, not handling cursor move")
+            print("Transliterator is empty, not handling cursor move")
         }
         else if !config.outputInClient, clientManager.updateMarkedCursorLocation(delta) {
             showActive(transliterator.transliterate())
@@ -77,9 +84,9 @@ public class VarnamController: IMKInputController {
             guard let word = self.client().string(from: wordRange, actualRange: &actual), !word.isEmpty else {
                 return
             }
-            Logger.log.debug("Found word: \(word) at: \(location) with actual: \(actual)")
+            print("Found word: \(word) at: \(location) with actual: \(actual)")
             let inputs = self.anteliterator.anteliterate(word)
-            Logger.log.debug("Anteliterated inputs: \(inputs)")
+            print("Anteliterated inputs: \(inputs)")
             let literated = self.transliterator.transliterate(inputs)
             if word != literated.finalaizedOutput + literated.unfinalaizedOutput {
                 Logger.log.error("Original: \(word) != Ante + Transliterated: \(literated.finalaizedOutput + literated.unfinalaizedOutput) - aborting conversion!")
@@ -87,11 +94,11 @@ public class VarnamController: IMKInputController {
             }
             // Calculate the location of cursor within Marked Text
             self.clientManager.markedCursorLocation = config.outputInClient ? location - actual.location : transliterator.convertPosition(position: location - actual.location, fromUnits: .outputScalar, toUnits: .input)
-            Logger.log.debug("Marked Cursor Location: \(self.clientManager.markedCursorLocation!) for Global Location: \(location - actual.location)")
+            print("Marked Cursor Location: \(self.clientManager.markedCursorLocation!) for Global Location: \(location - actual.location)")
             self.showActive(literated, replacementRange: actual)
         }
         else {
-            Logger.log.debug("No word found at: \(location)")
+            print("No word found at: \(location)")
         }
     }
     
@@ -118,27 +125,45 @@ public class VarnamController: IMKInputController {
         }
         self.clientManager = clientManager
         super.init(server: server, delegate: delegate, client: inputClient)
+        print("hello")
         // Initialize Literators
         refreshLiterators()
-        Logger.log.debug("Initialized Controller for Client: \(clientManager)")
+        print("hello1")
+        print("Initialized Controller for Client: \(clientManager)")
     }
     
     public override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-        Logger.log.debug("Handling event: \(event!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("hello2")
+        print("Handling event: \(event!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         if event.type == .keyDown, let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
             return processInput(chars, client: sender)
         }
         else {
-            return processEvent(event, client: sender)
+            return false
+//            return processEvent(event, client: sender)
         }
     }
     
+    private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
+        let index = source.index(source.startIndex, offsetBy: location)
+        source.insert(Character(char), at: index)
+    }
+    
     public func processInput(_ input: String!, client sender: Any!) -> Bool {
-        Logger.log.debug("Processing Input: \(input!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Processing Input: \(input!)")
+        if let markedLocation = clientManager.markedCursorLocation {
+            insertAtIndex(&preedit, markedLocation, input)
+        }
+        print(preedit)
+        return false
+    }
+    
+    public func processInputLipika(_ input: String!, client sender: Any!) -> Bool {
+        print("Processing Input: \(input!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         if input.unicodeScalars.count != 1 || CharacterSet.whitespaces.contains(input.unicodeScalars.first!) {
             // Handle inputting of whitespace inbetween Marked Text
             if let markedLocation = clientManager.markedCursorLocation {
-                Logger.log.debug("Handling whitespace being inserted inbetween Marked Text at: \(markedLocation)")
+                print("Handling whitespace being inserted inbetween Marked Text at: \(markedLocation)")
                 let literated = transliterator.transliterate()
                 let aggregateInputs = literated.finalaizedInput + literated.unfinalaizedInput
                 let committedIndex = aggregateInputs.index(aggregateInputs.startIndex, offsetBy: markedLocation)
@@ -151,7 +176,7 @@ public class VarnamController: IMKInputController {
                 return true
             }
             else {
-                Logger.log.debug("Input triggered a commit; not handling the input")
+                print("Input triggered a commit; not handling the input")
                 commit()
                 return false
             }
@@ -168,22 +193,22 @@ public class VarnamController: IMKInputController {
     }
     
     public func processEvent(_ event: NSEvent, client sender: Any!) -> Bool {
-        Logger.log.debug("Processing event: \(event) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Processing event: \(event) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // Perform shortcut actions on the system trey menu if any
         if (NSApp.delegate as! AppDelegate).systemTrayMenu!.performKeyEquivalent(with: event) { return true }
         // Move the cursor back to the oldLocation because commit() will move it to the end of the committed string
         let oldLocation = client().selectedRange().location
-        Logger.log.debug("Switching \(event) at location: \(oldLocation)")
+        print("Switching \(event) at location: \(oldLocation)")
         if event.modifierFlags.isEmpty && event.keyCode == kVK_Delete { // backspace
             if let result = transliterator.delete(position: clientManager.markedCursorLocation) {
-                Logger.log.debug("Resulted in an actual delete")
+                print("Resulted in an actual delete")
                 if clientManager.markedCursorLocation != nil {
                     _ = clientManager.updateMarkedCursorLocation(-1)
                 }
                 showActive(result)
                 return true
             }
-            Logger.log.debug("Nothing to delete")
+            print("Nothing to delete")
             if commit() {
                 clientManager.setGlobalCursorLocation(oldLocation)
             }
@@ -195,7 +220,7 @@ public class VarnamController: IMKInputController {
         if event.modifierFlags.isEmpty && event.keyCode == kVK_Escape { // escape
             let result = transliterator.reset()
             clientManager.clear()
-            Logger.log.debug("Handled the cancel: \(result != nil)")
+            print("Handled the cancel: \(result != nil)")
             return result != nil
         }
         if event.modifierFlags.isEmpty && event.keyCode == kVK_Return { // return
@@ -210,7 +235,7 @@ public class VarnamController: IMKInputController {
                 clientManager.setGlobalCursorLocation(oldLocation)
             }
         }
-        Logger.log.debug("Not processing event: \(event)")
+        print("Not processing event: \(event)")
         commit()
         if config.activeSessionOnCursorMove {
             dispatchConversion()
@@ -220,7 +245,7 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client looses focus
     public override func deactivateServer(_ sender: Any!) {
-        Logger.log.debug("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // Do this in case the application is quitting, otherwise we will end up with a SIGSEGV
         dispatch.cancelAll()
         commit()
@@ -228,17 +253,17 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client gains focus
     public override func activateServer(_ sender: Any!) {
-        Logger.log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // There are three sources for current script selection - (a) self.currentScriptName, (b) config.scriptName and (c) selectedMenuItem.title
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if config.globalScriptSelection, currentScriptName != config.scriptName {
-            Logger.log.debug("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
+            print("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
             refreshLiterators()
         }
     }
     
     public override func menu() -> NSMenu! {
-        Logger.log.debug("Returning menu")
+        print("Returning menu")
         // Set the system trey menu selection to reflect our literators; converge (c) -> (a)
         let systemTrayMenu = (NSApp.delegate as! AppDelegate).systemTrayMenu!
         systemTrayMenu.items.forEach() { $0.state = .off }
@@ -247,23 +272,23 @@ public class VarnamController: IMKInputController {
     }
     
     public override func candidates(_ sender: Any!) -> [Any]! {
-        Logger.log.debug("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         return clientManager.candidates
     }
     
     public override func candidateSelected(_ candidateString: NSAttributedString!) {
-        Logger.log.debug("Candidate selected: \(candidateString!)")
+        print("Candidate selected: \(candidateString!)")
         commit()
     }
     
     public override func commitComposition(_ sender: Any!) {
-        Logger.log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        print("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         commit()
     }
     
     @objc public func menuItemSelected(sender: NSDictionary) {
         let item = sender.value(forKey: kIMKCommandMenuItemName) as! NSMenuItem
-        Logger.log.debug("Menu Item Selected: \(item.title)")
+        print("Menu Item Selected: \(item.title)")
         // Converge (b) -> (c)
         config.scriptName = item.representedObject as! String
         // Converge (a) -> (b)
