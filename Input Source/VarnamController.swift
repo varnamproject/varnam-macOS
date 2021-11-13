@@ -52,17 +52,6 @@ public class VarnamController: IMKInputController {
         }
     }
     
-    private func moveCursorWithinMarkedText(delta: Int) -> Bool {
-        if !config.outputInClient, clientManager.updateMarkedCursorLocation(delta) {
-            updateLookupTable()
-            return true
-        }
-        else {
-            commit()
-        }
-        return false
-    }
-    
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
         guard let client = inputClient as? IMKTextInput & NSObjectProtocol else {
             Log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
@@ -82,6 +71,7 @@ public class VarnamController: IMKInputController {
     func clearState() {
         preedit = ""
         cursorPos = 0
+        clientManager.clear()
     }
     
     func commitText(_ text: String) {
@@ -121,7 +111,7 @@ public class VarnamController: IMKInputController {
                 cursorPos -= 1
                 updatePreedit()
             }
-            return false
+            return true
         case kVK_RightArrow:
             if preedit.count == 0 {
                 return false
@@ -130,7 +120,7 @@ public class VarnamController: IMKInputController {
                 cursorPos += 1
                 updatePreedit()
             }
-            return false
+            return true
         // TODO up arrow, down arrow to move between table
         case kVK_Delete:
             if preedit.count == 0 {
@@ -181,14 +171,11 @@ public class VarnamController: IMKInputController {
         return true
     }
     
-    private func resetVarnamInputState() {
-        preedit = ""
-        cursorPos = 0
-    }
-    
     private func updatePreedit() {
-//        clientManager.setGlobalCursorLocation(cursorPos)
-        clientManager.updatePreedit(preedit, cursorPos)
+        let attributes = mark(forStyle: kTSMHiliteSelectedRawText, at: client().selectedRange()) as! [NSAttributedString.Key : Any]
+        let clientText = NSMutableAttributedString(string: preedit)
+        clientText.addAttributes(attributes, range: NSMakeRange(0, clientText.length))
+        clientManager.updatePreedit(clientText, cursorPos)
     }
     
     private func updateLookupTable() {

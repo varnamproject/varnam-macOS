@@ -13,8 +13,7 @@ class ClientManager: CustomStringConvertible {
     private let notFoundRange = NSMakeRange(NSNotFound, NSNotFound)
     private let config = VarnamConfig()
     private let client: IMKTextInput
-    // This is the position of the cursor within the marked text
-    public var markedCursorLocation: Int? = nil
+
     private var candidatesWindow: IMKCandidates { return (NSApp.delegate as! AppDelegate).candidatesWindow }
     private (set) var candidates = autoreleasepool { return [String]() }
     // Cache, otherwise clients quitting can sometimes SEGFAULT us
@@ -50,22 +49,8 @@ class ClientManager: CustomStringConvertible {
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
     }
     
-    func updateMarkedCursorLocation(_ delta: Int) -> Bool {
-        Log.debug("Cursor moved: \(delta) with selectedRange: \(client.selectedRange()), markedRange: \(client.markedRange()) and cursorPosition: \(markedCursorLocation?.description ?? "nil")")
-        if client.markedRange().length == NSNotFound { return false }
-        let nextPosition = (markedCursorLocation ?? client.markedRange().length) + delta
-        if (0...client.markedRange().length).contains(nextPosition) {
-            Log.debug("Still within markedRange")
-            markedCursorLocation = nextPosition
-            return true
-        }
-        Log.debug("Outside of markedRange")
-        markedCursorLocation = nil
-        return false
-    }
-    
-    func updatePreedit(_ text: String, _ cursorPos: Int) {
-        client.setMarkedText(text, selectionRange: NSMakeRange(0, text.count), replacementRange: NSMakeRange(cursorPos, 0))
+    func updatePreedit(_ text: NSAttributedString, _ cursorPos: Int? = nil) {
+        client.setMarkedText(text, selectionRange: NSMakeRange(cursorPos ?? text.length, 0), replacementRange: notFoundRange)
     }
     
     func updateCandidates(_ sugs: [String]) {
@@ -88,13 +73,11 @@ class ClientManager: CustomStringConvertible {
         Log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()
-        markedCursorLocation = nil
     }
     
     func clear() {
         Log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
         candidatesWindow.hide()
-        markedCursorLocation = nil
     }
 }
