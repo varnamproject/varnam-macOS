@@ -54,7 +54,7 @@ class ClientManager: CustomStringConvertible {
     }
     
     func updateCandidates(_ sugs: [String]) {
-        print(sugs)
+        Log.debug(sugs)
         candidates = sugs
         candidatesWindow.update()
         candidatesWindow.show()

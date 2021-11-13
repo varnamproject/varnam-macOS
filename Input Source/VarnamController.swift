@@ -11,10 +11,10 @@ import InputMethodKit
 import Carbon.HIToolbox
 
 class Log {
-    public static func warning(_ text: String) {
+    public static func warning(_ text: Any) {
         print(text)
     }
-    public static func debug(_ text: String) {
+    public static func debug(_ text: Any) {
         print(text)
     }
 }

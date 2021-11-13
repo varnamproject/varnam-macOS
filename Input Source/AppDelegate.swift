@@ -53,9 +53,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         Logger.log.debug("Initialized IMK Server: \(server.bundle().bundleIdentifier ?? "nil")")
         self.server = server
-        candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleRowSteppingCandidatePanel)
+        
+        // Panel type is the orientation. Default: Vertical
+        // Use kIMKSingleRowSteppingCandidatePanel for horizontal
+        candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleColumnScrollingCandidatePanel)
         candidatesWindow.setAttributes([IMKCandidatesSendServerKeyEventFirst: NSNumber(booleanLiteral: true)])
-        candidatesWindow.setPanelType(kIMKScrollingGridCandidatePanel)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
