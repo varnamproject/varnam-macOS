@@ -1,0 +1,13 @@
+.DS_Store
+xcuserdata
+*.xccheckout
+*.swp
+*.lock
+*.app
+*.pkg
+profile
+*~.nib
+/build
+installer
+LipikaEngine_OSX.framework
+ShortcutRecorder.framework

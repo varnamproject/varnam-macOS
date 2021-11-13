@@ -1,0 +1,806 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A5122A4E20D42A2000575848 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01A20CC658000C95844 /* InputSource.swift */; };
+		A5122A4F20D42A2000575848 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5122A4220D420E100575848 /* main.swift */; };
+		A5122A5020D42A9500575848 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
+		A5122A5120D42AA600575848 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
+		A53AD00120CC347900C95844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD00020CC347900C95844 /* AppDelegate.swift */; };
+		A53AD00320CC347900C95844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
+		A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
+		A53AD01720CC654700C95844 /* LipikaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* LipikaConfig.swift */; };
+		A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01C20CC659C00C95844 /* ClientManager.swift */; };
+		A53AD01F20CC660900C95844 /* LipikaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01E20CC660900C95844 /* LipikaController.swift */; };
+		A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */; };
+		A54397D320D4D2F30011C7B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A54397D120D4D2F30011C7B7 /* Main.storyboard */; };
+		A54397DB20D4D5E90011C7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
+		A54397DC20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
+		A54397DD20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
+		A54397E020D4D6840011C7B7 /* LipikaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* LipikaConfig.swift */; };
+		A546182720CC6BB2003A73EB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A546181E20CC6A06003A73EB /* LICENSE */; };
+		A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
+		A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
+		A54B15D724900FC000E013A1 /* LiteratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54B15D624900FC000E013A1 /* LiteratorView.swift */; };
+		A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55381F421D703EA00A3CD8A /* MappingStore.swift */; };
+		A55381F621D706E500A3CD8A /* MappingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55381F421D703EA00A3CD8A /* MappingStore.swift */; };
+		A5698AE9247EFA8E00443158 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52905DC234EC67900A8D95E /* MainView.swift */; };
+		A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C00A32353705C00B53051 /* SettingsView.swift */; };
+		A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585A17C24AC28FC00816D1E /* PersistenceView.swift */; };
+		A59281E120D45653003013B8 /* TrayIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A59281E020D45634003013B8 /* TrayIcon.icns */; };
+		A59364ED2481D12100674FBD /* MappingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59364EC2481D12100674FBD /* MappingsView.swift */; };
+		A59E32562495A93300736334 /* LanguageTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59E32552495A93300736334 /* LanguageTable.swift */; };
+		A5BDA2F620D06FFC00C9D006 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */; };
+		A5C06C7C24A1358600FBD1E9 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */; };
+		A5C06C7D24A1358F00FBD1E9 /* ShortcutRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5DC681F22335F72006FC519 /* AsyncDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */; };
+		A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E20D8324944B6E00EF7B1C /* LanguageView.swift */; };
+		A5E982802480658900D7B9A9 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9827F2480658900D7B9A9 /* SettingsModel.swift */; };
+		A5ECEBB924887A800084CFBD /* MappingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECEBB824887A800084CFBD /* MappingTable.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5122A5320D43D8800575848 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A53ACFF520CC347900C95844 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A53ACFFC20CC347900C95844;
+			remoteInfo = LipikaIME;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A53AD01320CC643700C95844 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54397DE20D4D6090011C7B7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5C06C7D24A1358F00FBD1E9 /* ShortcutRecorder.framework in Embed Frameworks */,
+				A54397DD20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A5122A4220D420E100575848 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A5122A4720D429D300575848 /* Installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Installer; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52905DC234EC67900A8D95E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A52DCDBB20D17767001F34AC /* LipikaIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LipikaIME.entitlements; sourceTree = "<group>"; };
+		A53ACFFD20CC347900C95844 /* LipikaIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LipikaIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A53AD00020CC347900C95844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A53AD00220CC347900C95844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A53AD00720CC347900C95844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LipikaEngine_OSX.framework; sourceTree = "<group>"; };
+		A53AD01620CC654700C95844 /* LipikaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LipikaConfig.swift; sourceTree = "<group>"; };
+		A53AD01A20CC658000C95844 /* InputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
+		A53AD01C20CC659C00C95844 /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		A53AD01E20CC660900C95844 /* LipikaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LipikaController.swift; sourceTree = "<group>"; };
+		A54397C920D4D2F10011C7B7 /* LipikaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LipikaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A54397D220D4D2F30011C7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A54397D420D4D2F30011C7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A54397D520D4D2F30011C7B7 /* LipikaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LipikaApp.entitlements; sourceTree = "<group>"; };
+		A546181E20CC6A06003A73EB /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A546181F20CC6A06003A73EB /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
+		A546182020CC6A06003A73EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = .github/README.md; sourceTree = "<group>"; };
+		A546182120CC6A06003A73EB /* PULL_REQUEST_TEMPLATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PULL_REQUEST_TEMPLATE.md; path = .github/PULL_REQUEST_TEMPLATE.md; sourceTree = "<group>"; };
+		A546182220CC6A06003A73EB /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CODE_OF_CONDUCT.md; path = .github/CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		A546182320CC6A23003A73EB /* bug_report.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = bug_report.md; path = .github/ISSUE_TEMPLATE/bug_report.md; sourceTree = "<group>"; };
+		A546182420CC6A23003A73EB /* feature_request.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = feature_request.md; path = .github/ISSUE_TEMPLATE/feature_request.md; sourceTree = "<group>"; };
+		A546182820CC6BEA003A73EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A546182A20CC6BF3003A73EB /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
+		A54B15D624900FC000E013A1 /* LiteratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteratorView.swift; sourceTree = "<group>"; };
+		A55381F421D703EA00A3CD8A /* MappingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingStore.swift; sourceTree = "<group>"; };
+		A585A17C24AC28FC00816D1E /* PersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceView.swift; sourceTree = "<group>"; };
+		A58C00A32353705C00B53051 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A59281E020D45634003013B8 /* TrayIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TrayIcon.icns; sourceTree = "<group>"; };
+		A59364EC2481D12100674FBD /* MappingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingsView.swift; sourceTree = "<group>"; };
+		A59E32552495A93300736334 /* LanguageTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTable.swift; sourceTree = "<group>"; };
+		A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShortcutRecorder.framework; sourceTree = "<group>"; };
+		A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDispatcher.swift; sourceTree = "<group>"; };
+		A5E20D8324944B6E00EF7B1C /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		A5E9827F2480658900D7B9A9 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		A5ECEBB824887A800084CFBD /* MappingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingTable.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5122A4420D429D300575848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5122A5120D42AA600575848 /* Cocoa.framework in Frameworks */,
+				A5122A5020D42A9500575848 /* InputMethodKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A53ACFFA20CC347900C95844 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */,
+				A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */,
+				A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54397C620D4D2F10011C7B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C06C7C24A1358600FBD1E9 /* ShortcutRecorder.framework in Frameworks */,
+				A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */,
+				A54397DC20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A53ACFF420CC347900C95844 = {
+			isa = PBXGroup;
+			children = (
+				A546181D20CC69EC003A73EB /* Documents */,
+				A53ACFFF20CC347900C95844 /* Input Source */,
+				A57F18EA20D1FBA1007C9745 /* Installation */,
+				A54397CA20D4D2F20011C7B7 /* Application */,
+				A53ACFFE20CC347900C95844 /* Products */,
+				A53AD01420CC64FD00C95844 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A53ACFFE20CC347900C95844 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A53ACFFD20CC347900C95844 /* LipikaIME.app */,
+				A5122A4720D429D300575848 /* Installer */,
+				A54397C920D4D2F10011C7B7 /* LipikaApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A53ACFFF20CC347900C95844 /* Input Source */ = {
+			isa = PBXGroup;
+			children = (
+				A54397D920D4D3D80011C7B7 /* Resources */,
+				A53AD01620CC654700C95844 /* LipikaConfig.swift */,
+				A53AD00020CC347900C95844 /* AppDelegate.swift */,
+				A53AD01C20CC659C00C95844 /* ClientManager.swift */,
+				A53AD01E20CC660900C95844 /* LipikaController.swift */,
+				A55381F421D703EA00A3CD8A /* MappingStore.swift */,
+				A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */,
+			);
+			path = "Input Source";
+			sourceTree = "<group>";
+		};
+		A53AD01420CC64FD00C95844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A546182820CC6BEA003A73EB /* Cocoa.framework */,
+				A546182A20CC6BF3003A73EB /* InputMethodKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A54397CA20D4D2F20011C7B7 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A54397DA20D4D3F50011C7B7 /* Resources */,
+				A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */,
+				A52905DC234EC67900A8D95E /* MainView.swift */,
+				A54B15D624900FC000E013A1 /* LiteratorView.swift */,
+				A5ECEBB824887A800084CFBD /* MappingTable.swift */,
+				A59364EC2481D12100674FBD /* MappingsView.swift */,
+				A5E9827F2480658900D7B9A9 /* SettingsModel.swift */,
+				A58C00A32353705C00B53051 /* SettingsView.swift */,
+				A59E32552495A93300736334 /* LanguageTable.swift */,
+				A5E20D8324944B6E00EF7B1C /* LanguageView.swift */,
+				A585A17C24AC28FC00816D1E /* PersistenceView.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		A54397D920D4D3D80011C7B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A53AD00220CC347900C95844 /* Assets.xcassets */,
+				A53AD00720CC347900C95844 /* Info.plist */,
+				A59281E020D45634003013B8 /* TrayIcon.icns */,
+				A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */,
+				A52DCDBB20D17767001F34AC /* LipikaIME.entitlements */,
+				A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A54397DA20D4D3F50011C7B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */,
+				A54397D120D4D2F30011C7B7 /* Main.storyboard */,
+				A54397D420D4D2F30011C7B7 /* Info.plist */,
+				A54397D520D4D2F30011C7B7 /* LipikaApp.entitlements */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A546181D20CC69EC003A73EB /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				A546182320CC6A23003A73EB /* bug_report.md */,
+				A546182420CC6A23003A73EB /* feature_request.md */,
+				A546182220CC6A06003A73EB /* CODE_OF_CONDUCT.md */,
+				A546181F20CC6A06003A73EB /* CONTRIBUTING.md */,
+				A546181E20CC6A06003A73EB /* LICENSE */,
+				A546182120CC6A06003A73EB /* PULL_REQUEST_TEMPLATE.md */,
+				A546182020CC6A06003A73EB /* README.md */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
+		A57F18EA20D1FBA1007C9745 /* Installation */ = {
+			isa = PBXGroup;
+			children = (
+				A53AD01A20CC658000C95844 /* InputSource.swift */,
+				A5122A4220D420E100575848 /* main.swift */,
+			);
+			path = Installation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5122A4620D429D300575848 /* Installer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5122A4B20D429D300575848 /* Build configuration list for PBXNativeTarget "Installer" */;
+			buildPhases = (
+				A5122A4320D429D300575848 /* Sources */,
+				A5122A4420D429D300575848 /* Frameworks */,
+				A5122A5520D43EE200575848 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5122A5420D43D8800575848 /* PBXTargetDependency */,
+			);
+			name = Installer;
+			productName = Installer;
+			productReference = A5122A4720D429D300575848 /* Installer */;
+			productType = "com.apple.product-type.tool";
+		};
+		A53ACFFC20CC347900C95844 /* LipikaIME */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "LipikaIME" */;
+			buildPhases = (
+				A53ACFF920CC347900C95844 /* Sources */,
+				A53ACFFA20CC347900C95844 /* Frameworks */,
+				A53ACFFB20CC347900C95844 /* Resources */,
+				A53AD01320CC643700C95844 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LipikaIME;
+			productName = LipikaIME;
+			productReference = A53ACFFD20CC347900C95844 /* LipikaIME.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A54397C820D4D2F10011C7B7 /* LipikaApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "LipikaApp" */;
+			buildPhases = (
+				A54397C520D4D2F10011C7B7 /* Sources */,
+				A54397C620D4D2F10011C7B7 /* Frameworks */,
+				A54397C720D4D2F10011C7B7 /* Resources */,
+				A54397DE20D4D6090011C7B7 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LipikaApp;
+			productName = LipikaApp;
+			productReference = A54397C920D4D2F10011C7B7 /* LipikaApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A53ACFF520CC347900C95844 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = Daivajnanam;
+				TargetAttributes = {
+					A5122A4620D429D300575848 = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1030;
+					};
+					A53ACFFC20CC347900C95844 = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1030;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
+					A54397C820D4D2F10011C7B7 = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1030;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "LipikaIME" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A53ACFF420CC347900C95844;
+			productRefGroup = A53ACFFE20CC347900C95844 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A53ACFFC20CC347900C95844 /* LipikaIME */,
+				A5122A4620D429D300575848 /* Installer */,
+				A54397C820D4D2F10011C7B7 /* LipikaApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A53ACFFB20CC347900C95844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A546182720CC6BB2003A73EB /* LICENSE in Resources */,
+				A59281E120D45653003013B8 /* TrayIcon.icns in Resources */,
+				A5BDA2F620D06FFC00C9D006 /* MainMenu.xib in Resources */,
+				A53AD00320CC347900C95844 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54397C720D4D2F10011C7B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54397DB20D4D5E90011C7B7 /* Assets.xcassets in Resources */,
+				A54397D320D4D2F30011C7B7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A5122A5520D43EE200575848 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "set -ex\n${TARGET_BUILD_DIR}/Installer --remove\nif ! killall LipikaIME; then\n    echo \"note: no LipikaIME process to kill\"\nfi\nrm -rf /Library/Input\\ Methods/LipikaIME.app\ncp -r ${TARGET_BUILD_DIR}/LipikaIME.app /Library/Input\\ Methods/\nopen /Library/Input\\ Methods/LipikaIME.app\n${TARGET_BUILD_DIR}/Installer --enable\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A5122A4320D429D300575848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5122A4E20D42A2000575848 /* InputSource.swift in Sources */,
+				A5122A4F20D42A2000575848 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A53ACFF920CC347900C95844 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53AD00120CC347900C95844 /* AppDelegate.swift in Sources */,
+				A53AD01F20CC660900C95844 /* LipikaController.swift in Sources */,
+				A53AD01720CC654700C95844 /* LipikaConfig.swift in Sources */,
+				A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */,
+				A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */,
+				A5DC681F22335F72006FC519 /* AsyncDispatcher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54397C520D4D2F10011C7B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5698AE9247EFA8E00443158 /* MainView.swift in Sources */,
+				A5ECEBB924887A800084CFBD /* MappingTable.swift in Sources */,
+				A59E32562495A93300736334 /* LanguageTable.swift in Sources */,
+				A54B15D724900FC000E013A1 /* LiteratorView.swift in Sources */,
+				A59364ED2481D12100674FBD /* MappingsView.swift in Sources */,
+				A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */,
+				A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */,
+				A55381F621D706E500A3CD8A /* MappingStore.swift in Sources */,
+				A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */,
+				A54397E020D4D6840011C7B7 /* LipikaConfig.swift in Sources */,
+				A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */,
+				A5E982802480658900D7B9A9 /* SettingsModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5122A5420D43D8800575848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A53ACFFC20CC347900C95844 /* LipikaIME */;
+			targetProxy = A5122A5320D43D8800575848 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A54397D120D4D2F30011C7B7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A54397D220D4D2F30011C7B7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A5122A4C20D429D300575848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika.Installer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		A5122A4D20D429D300575848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika.Installer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+		A53AD00920CC347900C95844 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A53AD00A20CC347900C95844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A53AD00C20CC347900C95844 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Input Source/LipikaIME.entitlements";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2.2;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Input\\ Source",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Input Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Input Methods";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.2;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "LipikaIME Package Distribution";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		A53AD00D20CC347900C95844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Input Source/LipikaIME.entitlements";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2.2;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Input\\ Source",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Input Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Input Methods";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.2;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.inputmethod.Lipika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "LipikaIME Package Distribution";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		A54397D720D4D2F30011C7B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Application/LipikaApp.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2.0;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Input\\ Source",
+					"$(PROJECT_DIR)/Application",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.LipikaApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "LipikaApp Package Distribution";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		A54397D820D4D2F30011C7B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Application/LipikaApp.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2.0;
+				DEVELOPMENT_TEAM = 7JZ87Y4JWT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Input\\ Source",
+					"$(PROJECT_DIR)/Application",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.daivajnanam.LipikaApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "LipikaApp Package Distribution";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A5122A4B20D429D300575848 /* Build configuration list for PBXNativeTarget "Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5122A4C20D429D300575848 /* Debug */,
+				A5122A4D20D429D300575848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A53ACFF820CC347900C95844 /* Build configuration list for PBXProject "LipikaIME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53AD00920CC347900C95844 /* Debug */,
+				A53AD00A20CC347900C95844 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A53AD00B20CC347900C95844 /* Build configuration list for PBXNativeTarget "LipikaIME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53AD00C20CC347900C95844 /* Debug */,
+				A53AD00D20CC347900C95844 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A54397D620D4D2F30011C7B7 /* Build configuration list for PBXNativeTarget "LipikaApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A54397D720D4D2F30011C7B7 /* Debug */,
+				A54397D820D4D2F30011C7B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A53ACFF520CC347900C95844 /* Project object */;
+}
