@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@ import LipikaEngine_OSX
 
 class MappingStore {
     
-    static let kAppGroupId = "group.daivajnanam.Lipika"
+    static let kAppGroupId = "group.varnamproject.Varnam"
     
     class func read(schemeName: String, scriptName: String) -> [[String]]? {
         let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: kAppGroupId)

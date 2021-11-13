@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -11,10 +11,10 @@ import InputMethodKit
 import Carbon.HIToolbox
 import LipikaEngine_OSX
 
-@objc(LipikaController)
-public class LipikaController: IMKInputController {
+@objc(VarnamController)
+public class VarnamController: IMKInputController {
     static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
-    let config = LipikaConfig()
+    let config = VarnamConfig()
     let dispatch = AsyncDispatcher()
     private let clientManager: ClientManager
     private var currentScriptName = ""
@@ -109,11 +109,11 @@ public class LipikaController: IMKInputController {
     
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
         guard let client = inputClient as? IMKTextInput & NSObjectProtocol else {
-            Logger.log.warning("Client does not conform to the necessary protocols - refusing to initiate LipikaController!")
+            Logger.log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
             return nil
         }
         guard let clientManager = ClientManager(client: client) else {
-            Logger.log.warning("Client manager failed to initialize - refusing to initiate LipikaController!")
+            Logger.log.warning("Client manager failed to initialize - refusing to initiate VarnamController!")
             return nil
         }
         self.clientManager = clientManager
@@ -125,7 +125,7 @@ public class LipikaController: IMKInputController {
     
     public override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         Logger.log.debug("Handling event: \(event!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        if event.type == .keyDown, let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), LipikaController.validInputs.contains(chars.unicodeScalars.first!) {
+        if event.type == .keyDown, let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
             return processInput(chars, client: sender)
         }
         else {

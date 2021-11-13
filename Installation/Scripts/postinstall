@@ -1,5 +1,5 @@
 #!/bin/sh
-open /Library/Input\ Methods/LipikaIME.app
+open /Library/Input\ Methods/VarnamIME.app
 sleep 1
 until ./installer --register
 do

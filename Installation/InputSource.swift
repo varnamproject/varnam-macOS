@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -10,14 +10,14 @@
 import Carbon
 
 class InputSource {
-    enum LipikaError: Error {
+    enum VarnamError: Error {
         case systemError(String)
     }
     
     private init() {}
 
-    static func getLipika() -> Array<TISInputSource> {
-        let options: CFDictionary = [kTISPropertyBundleID as String: "com.daivajnanam.inputmethod.Lipika"] as CFDictionary
+    static func getVarnam() -> Array<TISInputSource> {
+        let options: CFDictionary = [kTISPropertyBundleID as String: "com.varnamproject.mac.inputmethod.Varnam"] as CFDictionary
         if let rawList = TISCreateInputSourceList(options, true) {
             let inputSourceNSArray = rawList.takeRetainedValue() as NSArray
             let inputSourceList = inputSourceNSArray as! [TISInputSource]
@@ -43,28 +43,28 @@ class InputSource {
         let path = NSURL(fileURLWithPath: inputSourcePath)
         let status = TISRegisterInputSource(path)
         if (Int(status) == paramErr) {
-            throw LipikaError.systemError("Failed to register: \(inputSourcePath) due to: \(status)!")
+            throw VarnamError.systemError("Failed to register: \(inputSourcePath) due to: \(status)!")
         }
     }
 
     static func remove(inputSource: TISInputSource) throws {
         let status = TISDisableInputSource(inputSource)
         if (Int(status) == paramErr) {
-            throw LipikaError.systemError("Failed to remove due to: \(status)!")
+            throw VarnamError.systemError("Failed to remove due to: \(status)!")
         }
     }
 
     static func enable(inputSource: TISInputSource) throws {
         let status = TISEnableInputSource(inputSource)
         if (Int(status) == paramErr) {
-            throw LipikaError.systemError("Failed to enable due to: \(status)!")
+            throw VarnamError.systemError("Failed to enable due to: \(status)!")
         }
     }
 
     static func select(inputSource: TISInputSource) throws {
         let status = TISSelectInputSource(inputSource)
         if (Int(status) == paramErr) {
-            throw LipikaError.systemError("Failed to select due to: \(status)!")
+            throw VarnamError.systemError("Failed to select due to: \(status)!")
         }
     }
 }

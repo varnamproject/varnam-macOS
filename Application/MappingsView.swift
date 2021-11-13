@@ -1,5 +1,5 @@
 /*
-* LipikaApp is companion application for LipikaIME.
+* VarnamApp is companion application for VarnamIME.
 * Copyright (C) 2020 Ranganath Atreya
 *
 * This program is distributed in the hope that it will be useful,
@@ -28,7 +28,7 @@ class MappingModel: ObservableObject, PersistenceModel {
     }
     
     init() {
-        let config = LipikaConfig()
+        let config = VarnamConfig()
         factory = try! LiteratorFactory(config: config)
         scheme = config.schemeName
         script = config.scriptName
@@ -41,7 +41,7 @@ class MappingModel: ObservableObject, PersistenceModel {
             return mappings
         }
         else {
-            let factory = try! LiteratorFactory(config: LipikaConfig())
+            let factory = try! LiteratorFactory(config: VarnamConfig())
             let nested = try! factory.mappings(schemeName: scheme, scriptName: script)
             return MappingStore.denest(nested: nested)
         }

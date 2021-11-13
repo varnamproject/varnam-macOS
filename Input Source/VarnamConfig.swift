@@ -1,5 +1,5 @@
 /*
- * LipikaIME is a user-configurable phonetic Input Method Engine for Mac OS X.
+ * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
  * Copyright (C) 2018 Ranganath Atreya
  *
  * This program is distributed in the hope that it will be useful,
@@ -18,31 +18,31 @@ struct LanguageConfig: Codable, Equatable, Hashable {
     var shortcutModifiers: UInt?
 }
 
-class LipikaConfig: Config {
-    private static let kGroupDomainName = "group.daivajnanam.Lipika"
+class VarnamConfig: Config {
+    private static let kGroupDomainName = "group.varnamproject.Varnam"
     private var userDefaults: UserDefaults
     
     override init() {
-        guard let groupDefaults = UserDefaults(suiteName: LipikaConfig.kGroupDomainName) else {
-            fatalError("Unable to open UserDefaults for suite: \(LipikaConfig.kGroupDomainName)!")
+        guard let groupDefaults = UserDefaults(suiteName: VarnamConfig.kGroupDomainName) else {
+            fatalError("Unable to open UserDefaults for suite: \(VarnamConfig.kGroupDomainName)!")
         }
         self.userDefaults = groupDefaults
         super.init()
     }
     
     func resetSettings() {
-        guard var domain = UserDefaults.standard.persistentDomain(forName: LipikaConfig.kGroupDomainName) else { return }
+        guard var domain = UserDefaults.standard.persistentDomain(forName: VarnamConfig.kGroupDomainName) else { return }
         domain.keys.forEach() { key in
             if key != "languageConfig" {
                 domain.removeValue(forKey: key)
             }
         }
-        UserDefaults.standard.setPersistentDomain(domain, forName: LipikaConfig.kGroupDomainName)
+        UserDefaults.standard.setPersistentDomain(domain, forName: VarnamConfig.kGroupDomainName)
         UserDefaults.standard.synchronize()
     }
     
     func isFactorySettings() -> Bool {
-        guard let domain = UserDefaults.standard.persistentDomain(forName: LipikaConfig.kGroupDomainName) else { return true }
+        guard let domain = UserDefaults.standard.persistentDomain(forName: VarnamConfig.kGroupDomainName) else { return true }
         return domain.keys.isEmpty || (domain.keys.count == 1 && domain.keys.first! == "languageConfig")
     }
     

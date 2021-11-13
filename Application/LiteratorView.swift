@@ -1,5 +1,5 @@
 /*
-* LipikaApp is companion application for LipikaIME.
+* VarnamApp is companion application for VarnamIME.
 * Copyright (C) 2020 Ranganath Atreya
 *
 * This program is distributed in the hope that it will be useful,
@@ -66,7 +66,7 @@ class LiteratorModel: ObservableObject {
     @Published var toScript: String { didSet { self.reeval() }}
 
     init() {
-        let settings = LipikaConfig()
+        let settings = VarnamConfig()
         fromScheme = settings.schemeName
         fromScript = settings.scriptName
         toScheme = settings.schemeName
@@ -122,12 +122,12 @@ class LiteratorModel: ObservableObject {
 }
 
 struct LiteratorView: View {
-    private let settings: LipikaConfig
+    private let settings: VarnamConfig
     private let factory: LiteratorFactory
     @ObservedObject var model = LiteratorModel()
 
     init() {
-        self.settings = LipikaConfig()
+        self.settings = VarnamConfig()
         self.factory = try! LiteratorFactory(config: settings)
     }
     

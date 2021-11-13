@@ -19,11 +19,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>InputMethodConnectionName</key>
-	<string>LipikaController_Connection</string>
+	<string>VarnamController_Connection</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>LipikaController</string>
+	<string>VarnamController</string>
 	<key>InputMethodServerDelegateClass</key>
-	<string>LipikaController</string>
+	<string>VarnamController</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSBackgroundOnly</key>

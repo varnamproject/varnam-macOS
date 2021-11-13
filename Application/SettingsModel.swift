@@ -1,5 +1,5 @@
 /*
-* LipikaApp is companion application for LipikaIME.
+* VarnamApp is companion application for VarnamIME.
 * Copyright (C) 2020 Ranganath Atreya
 *
 * This program is distributed in the hope that it will be useful,
@@ -45,7 +45,7 @@ class SettingsModel: Config, ObservableObject, PersistenceModel {
         return output.finalaizedOutput + output.unfinalaizedOutput
     }
 
-    let config = LipikaConfig()
+    let config = VarnamConfig()
     
     override init() {
         schemeName = config.schemeName

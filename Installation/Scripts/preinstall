@@ -1,5 +1,5 @@
 #!/bin/sh
 ./installer --remove
 sleep 1
-killall LipikaIME
+killall VarnamIME
 exit 0
