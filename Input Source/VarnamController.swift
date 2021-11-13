@@ -96,6 +96,15 @@ public class VarnamController: IMKInputController {
                 commitText(text! + " ")
             }
             return true
+        case kVK_Return:
+            let text = clientManager.getCandidate()
+            if text == nil {
+                commitText(preedit)
+                return false
+            } else {
+                commitText(text!)
+            }
+            return true
         case kVK_Escape:
             if preedit.count == 0 {
                return false
