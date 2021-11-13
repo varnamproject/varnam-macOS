@@ -55,6 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.server = server
         candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleRowSteppingCandidatePanel)
         candidatesWindow.setAttributes([IMKCandidatesSendServerKeyEventFirst: NSNumber(booleanLiteral: true)])
+        candidatesWindow.setPanelType(kIMKScrollingGridCandidatePanel)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

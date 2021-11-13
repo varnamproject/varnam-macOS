@@ -76,11 +76,8 @@ public class VarnamController: IMKInputController {
     }
     
     private func moveCursorWithinMarkedText(delta: Int) -> Bool {
-        if transliterator.isEmpty() {
-            print("Transliterator is empty, not handling cursor move")
-        }
-        else if !config.outputInClient, clientManager.updateMarkedCursorLocation(delta) {
-            showActive(transliterator.transliterate())
+        if !config.outputInClient, clientManager.updateMarkedCursorLocation(delta) {
+            updateLookupTable()
             return true
         }
         else {
@@ -147,48 +144,97 @@ public class VarnamController: IMKInputController {
         return preedit
     }
     
-    func commitComposition(client: IMKTextInput) {
-        let text = getPreedit()
-        if !text.isEmpty {
-            NSLog("commit: \(text)")
-            client.insertText(text, replacementRange: NSMakeRange(NSNotFound, NSNotFound))
-            preedit = ""
-        }
+    func clearState() {
+        preedit = ""
+        cursorPos = 0
     }
     
-//    public override func inputText(_ string: String!, key keyCode: Int, modifiers flags: Int, client sender: Any!) -> Bool {
-//        NSLog("input: string(%@), keyCode(%X), flags(%X)", string, keyCode, flags)
-//
-//        guard let client = sender as? IMKTextInput else { return false }
-//
-//        var candidatesWindow: IMKCandidates { return (NSApp.delegate as! AppDelegate).candidatesWindow }
-//        candidates = ["aaa", "bbb"]
-//        candidatesWindow.update()
-//        candidatesWindow.show()
-//
-//        return true
-//    }
-    
-    public override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-        print("Handling event: \(event!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        if event.type == .keyDown, let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
-            return processInput(chars, client: sender)
-        }
-        else {
-            return false
-//            return processEvent(event, client: sender)
-        }
+    func commitText(_ text: String) {
+        clientManager.finalize(text)
+        clearState()
     }
     
     private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
         let index = source.index(source.startIndex, offsetBy: location)
         source.insert(Character(char), at: index)
-        print(source)
     }
     
-    public func processInput(_ input: String!, client sender: Any!) -> Bool {
-        print("Processing Input: \(input!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        
+    private func removeAtIndex(_ source: inout String, _ position: String.IndexDistance) {
+        if let index = source.index(source.startIndex, offsetBy: position, limitedBy: source.endIndex) {
+            source.remove(at: index)
+        } else {
+            // out of range
+        }
+    }
+    
+    public override func inputText(_ string: String!, key keyCode: Int, modifiers flags: Int, client sender: Any!) -> Bool {
+        switch keyCode {
+        case kVK_Space:
+            let text = clientManager.getCandidate()
+            if text == nil {
+                commitText(preedit + " ")
+            } else {
+                commitText(text! + " ")
+            }
+            return true
+        case kVK_LeftArrow:
+            if preedit.count == 0 {
+                return false
+            }
+            if cursorPos > 0 {
+                cursorPos -= 1
+                updatePreedit()
+            }
+            return false
+        case kVK_RightArrow:
+            if preedit.count == 0 {
+                return false
+            }
+            if cursorPos < preedit.count {
+                cursorPos += 1
+                updatePreedit()
+            }
+            return false
+        // TODO up arrow, down arrow to move between table
+        case kVK_Delete:
+            if preedit.count == 0 {
+                return false
+            }
+            if (cursorPos > 0) {
+                cursorPos -= 1
+                removeAtIndex(&preedit, cursorPos)
+                updatePreedit()
+                updateLookupTable()
+                if preedit.count == 0 {
+                    /* Current backspace has cleared the preedit. Need to reset the engine state */
+                    clearState()
+                }
+            }
+            return true
+        case kVK_ForwardDelete:
+            if preedit.count == 0 {
+                return false
+            }
+            if cursorPos < preedit.count {
+                removeAtIndex(&preedit, cursorPos)
+                updatePreedit()
+                updateLookupTable()
+                if preedit.count == 0 {
+                    /* Current delete has cleared the preedit. Need to reset the engine state */
+                    clearState()
+                }
+            }
+            return true
+        default:
+            if VarnamController.validInputs.contains(string.unicodeScalars.first!) {
+                NSLog("character event: \(string ?? "")")
+                return processInput(string)
+            }
+        }
+        return false
+    }
+    
+    public func processInput(_ input: String!) -> Bool {
         insertAtIndex(&preedit, cursorPos, input)
         cursorPos += 1
         updatePreedit()
@@ -205,46 +251,13 @@ public class VarnamController: IMKInputController {
     }
     
     private func updatePreedit() {
-        clientManager.updatePreedit(preedit)
+//        clientManager.setGlobalCursorLocation(cursorPos)
+        clientManager.updatePreedit(preedit, cursorPos)
     }
     
     private func updateLookupTable() {
         let sugs = varnam.transliterate(preedit)
         clientManager.updateCandidates(sugs)
-    }
-    
-    public func processInputLipika(_ input: String!, client sender: Any!) -> Bool {
-        print("Processing Input: \(input!) from sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        if input.unicodeScalars.count != 1 || CharacterSet.whitespaces.contains(input.unicodeScalars.first!) {
-            // Handle inputting of whitespace inbetween Marked Text
-            if let markedLocation = clientManager.markedCursorLocation {
-                print("Handling whitespace being inserted inbetween Marked Text at: \(markedLocation)")
-                let literated = transliterator.transliterate()
-                let aggregateInputs = literated.finalaizedInput + literated.unfinalaizedInput
-                let committedIndex = aggregateInputs.index(aggregateInputs.startIndex, offsetBy: markedLocation)
-                _ = transliterator.reset()
-                _ = transliterator.transliterate(String(aggregateInputs.prefix(upTo: committedIndex)))
-                commit()
-                clientManager.finalize(input)
-                clientManager.markedCursorLocation = 0
-                showActive(transliterator.transliterate(String(aggregateInputs.suffix(from: committedIndex))))
-                return true
-            }
-            else {
-                print("Input triggered a commit; not handling the input")
-                commit()
-                return false
-            }
-        }
-        if config.activeSessionOnInsert, transliterator.isEmpty() {
-            convertWord(at: client().selectedRange().location)
-        }
-        let literated = transliterator.transliterate(input, position: clientManager.markedCursorLocation)
-        if clientManager.markedCursorLocation != nil {
-            _ = clientManager.updateMarkedCursorLocation(1)
-        }
-        showActive(literated)
-        return true
     }
     
     public func processEvent(_ event: NSEvent, client sender: Any!) -> Bool {
