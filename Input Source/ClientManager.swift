@@ -60,6 +60,11 @@ class ClientManager: CustomStringConvertible {
         candidatesWindow.show()
     }
     
+    // Move between items of candidate table
+    func updateCandidateCursor() {
+
+    }
+    
     func getCandidate() -> String? {
         if candidates.count == 0 {
             return nil
@@ -78,6 +83,7 @@ class ClientManager: CustomStringConvertible {
     func clear() {
         Log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
+        candidates = []
         candidatesWindow.hide()
     }
 }

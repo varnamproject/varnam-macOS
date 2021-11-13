@@ -38,20 +38,6 @@ public class VarnamController: IMKInputController {
         varnam = try! Varnam("ml")
     }
     
-    @discardableResult private func commit() -> Bool {
-        if candidates.count > 0 {
-            let text = candidates[0]
-            print("Committing with text: \(text)")
-            clientManager.finalize(text)
-            return true
-        }
-        else {
-            print("Nothing to commit")
-            clientManager.clear()
-            return false
-        }
-    }
-    
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
         guard let client = inputClient as? IMKTextInput & NSObjectProtocol else {
             Log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
@@ -79,6 +65,13 @@ public class VarnamController: IMKInputController {
         clearState()
     }
     
+    // Commits the first candidate if available
+    func commit() {
+        if let text = clientManager.getCandidate() {
+            commitText(text)
+        }
+    }
+    
     private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
         let index = source.index(source.startIndex, offsetBy: location)
         source.insert(Character(char), at: index)
@@ -102,6 +95,12 @@ public class VarnamController: IMKInputController {
             } else {
                 commitText(text! + " ")
             }
+            return true
+        case kVK_Escape:
+            if preedit.count == 0 {
+               return false
+            }
+            commitText(preedit)
             return true
         case kVK_LeftArrow:
             if preedit.count == 0 {
@@ -188,7 +187,7 @@ public class VarnamController: IMKInputController {
         print("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // Do this in case the application is quitting, otherwise we will end up with a SIGSEGV
         dispatch.cancelAll()
-        commit()
+        clearState()
     }
     
     /// This message is sent when our client gains focus
@@ -218,7 +217,7 @@ public class VarnamController: IMKInputController {
     
     public override func candidateSelected(_ candidateString: NSAttributedString!) {
         print("Candidate selected: \(candidateString!)")
-        commit()
+        commitText(candidateString.string)
     }
     
     public override func commitComposition(_ sender: Any!) {
