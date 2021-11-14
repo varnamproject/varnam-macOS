@@ -45,9 +45,7 @@ public class VarnamController: IMKInputController {
         if (varnam != nil) {
             varnam.close()
         }
-        // TODO add schemeID to config
-        // config.scriptName is "Malayalam", change that to shortcode "ml"
-        schemeID = "ml"
+        schemeID = config.schemeID
         do {
             varnam = try Varnam(schemeID)
         } catch let error {
@@ -230,10 +228,10 @@ public class VarnamController: IMKInputController {
     /// This message is sent when our client gains focus
     public override func activateServer(_ sender: Any!) {
         Log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        // There are three sources for current script selection - (a) self.currentScriptName, (b) config.scriptName and (c) selectedMenuItem.title
+        // There are three sources for current script selection - (a) self.schemeID, (b) config.schemeID and (c) selectedMenuItem.title
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
-        if config.globalScriptSelection, schemeID != config.scriptName {
-            Log.debug("Initializing varnam: \(schemeID) to: \(config.scriptName)")
+        if config.globalScriptSelection, schemeID != config.schemeID {
+            Log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
             initVarnam()
         }
     }
@@ -266,7 +264,7 @@ public class VarnamController: IMKInputController {
         let item = sender.value(forKey: kIMKCommandMenuItemName) as! NSMenuItem
         Log.debug("Menu Item Selected: \(item.title)")
         // Converge (b) -> (c)
-        config.scriptName = item.representedObject as! String
+        config.schemeID = item.representedObject as! String
         // Converge (a) -> (b)
         initVarnam()
     }

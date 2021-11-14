@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 item.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flags)
                 item.keyEquivalent = item.keyEquivalentModifierMask.contains(.shift) ? key : key.lowercased()
             }
-            if entry.identifier == config.scriptName {
+            if entry.identifier == config.schemeID {
                 item.state = .on
             }
             item.representedObject = entry.identifier
