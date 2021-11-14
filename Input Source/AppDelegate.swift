@@ -47,6 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 exit(0)
             }
         }
+        print("Initing...")
         
         guard let connectionName = Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String else {
             fatalError("Unable to get Connection Name from Info dictionary!")
@@ -64,6 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Use kIMKSingleRowSteppingCandidatePanel for horizontal
         candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleColumnScrollingCandidatePanel)
         candidatesWindow.setAttributes([IMKCandidatesSendServerKeyEventFirst: NSNumber(booleanLiteral: true)])
+        
+        print("Inited")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
