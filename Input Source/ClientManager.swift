@@ -55,7 +55,10 @@ class ClientManager: CustomStringConvertible {
     
     func updateCandidates(_ sugs: [String]) {
         Log.debug(sugs)
-        candidates = sugs
+        // Remove duplicates
+        // For some weird reason, when there are duplicates,
+        // candidate window makes them hidden
+        candidates = NSOrderedSet(array: sugs).array as! [String]
         candidatesWindow.update()
         candidatesWindow.show()
     }
