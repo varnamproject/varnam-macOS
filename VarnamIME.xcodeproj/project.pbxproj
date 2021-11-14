@@ -10,8 +10,6 @@
 		043C818D274139D900E6832E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69827411F47006C3B54 /* Config.swift */; };
 		043C818E274139DC00E6832E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69A27411F6D006C3B54 /* Logger.swift */; };
 		043C818F274139DE00E6832E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69C27411FB1006C3B54 /* Common.swift */; };
-		043C819127413A2400E6832E /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043C819027413A2400E6832E /* LipikaEngine_OSX.framework */; };
-		043C819227413A2400E6832E /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 043C819027413A2400E6832E /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		043C819427413B3800E6832E /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
 		043C819B27413CB500E6832E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C819A27413CB500E6832E /* SettingsView.swift */; };
 		043C819C27413D8000E6832E /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
@@ -90,7 +88,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				043C819227413A2400E6832E /* LipikaEngine_OSX.framework in Embed Frameworks */,
 				A5C06C7D24A1358F00FBD1E9 /* ShortcutRecorder.framework in Embed Frameworks */,
 				043C819D27413D8000E6832E /* libgovarnam.dylib in Embed Frameworks */,
 			);
@@ -173,7 +170,6 @@
 				A5C06C7C24A1358600FBD1E9 /* ShortcutRecorder.framework in Frameworks */,
 				043C819C27413D8000E6832E /* libgovarnam.dylib in Frameworks */,
 				A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */,
-				043C819127413A2400E6832E /* LipikaEngine_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

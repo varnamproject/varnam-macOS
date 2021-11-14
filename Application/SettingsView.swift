@@ -1,6 +1,7 @@
 /*
 * VarnamApp is companion application for VarnamIME.
-* Copyright (C) 2020 Ranganath Atreya
+* Copyright (C) 2020 Ranganath Atreya - LipikaIME
+* Copyright (C) 2021 Subin Siby - VarnamIME
 *
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -8,7 +9,6 @@
 */
 
 import SwiftUI
-import LipikaEngine_OSX
 
 struct SettingsView: View {
     @ObservedObject var model = SettingsModel()

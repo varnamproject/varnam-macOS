@@ -129,14 +129,6 @@ if [[ "$1" == "ShortcutRecorder" ]]; then
     exit 0
 fi
 
-# Not gonna use LipikaEngine anymore. TODO remove this when it's not needed
-if [ ! -d ../Input\ Source/LipikaEngine_OSX.framework ]; then
-    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Debug clean build test || exit 1
-    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
-    rm -rf ../Input\ Source/LipikaEngine_OSX.framework
-    cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
-fi
-
 if [ ! -d ../Application/ShortcutRecorder.framework ]; then
     build_shortcut_recorder
 fi

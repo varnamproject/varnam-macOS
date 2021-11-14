@@ -21,7 +21,7 @@ func synchronize<T>(_ lockObject: AnyObject, _ closure: () throws -> T) throws -
     return try closure()
 }
 
-let keyBase = Bundle.main.bundleIdentifier ?? "LipikaEngine"
+let keyBase = Bundle.main.bundleIdentifier ?? "VarnamEngine"
 
 func getThreadLocalData(key: String) -> Any? {
     let fullKey: NSString = "\(keyBase).\(key)" as NSString
