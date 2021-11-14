@@ -91,7 +91,18 @@ class VarnamConfig: Config {
         }
     }
     
+    // TODO remove this
     var scriptName: String {
+        get {
+            return userDefaults.string(forKey: #function) ?? languageConfig.first(where: { $0.isEnabled })?.identifier ?? languageConfig.first!.identifier
+        }
+        set(value) {
+            userDefaults.set(value, forKey: #function)
+        }
+    }
+    
+    // Varnam schemeID to use
+    var schemeID: String {
         get {
             return userDefaults.string(forKey: #function) ?? languageConfig.first(where: { $0.isEnabled })?.identifier ?? languageConfig.first!.identifier
         }
@@ -179,8 +190,16 @@ class VarnamConfig: Config {
     
     var factoryLanguageConfig: [LanguageConfig] {
         get {
-            let scripts = try! LiteratorFactory(config: self).availableScripts()
-            return scripts.compactMap() { script in LanguageConfig(identifier: script, language: script, isEnabled: true) }
+            let schemes = Varnam.getAllSchemeDetails()
+            var configs = [LanguageConfig]()
+            for scheme in schemes {
+                configs.append(LanguageConfig(
+                    identifier: scheme.Identifier,
+                    language: scheme.DisplayName,
+                    isEnabled: true
+                ))
+            }
+            return configs
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct VarnamException: Error {
+public struct VarnamException: Error {
     let message: String
 
     init(_ message: String) {
@@ -20,25 +20,36 @@ struct VarnamException: Error {
     }
 }
 
-func strToCStr(_ str: String) -> UnsafeMutablePointer<CChar>? {
-    return UnsafeMutablePointer(mutating: (str as NSString).utf8String)
+public struct SchemeDetails {
+    var Identifier: String
+    var LangCode: String
+    var DisplayName: String
+    var Author: String
+    var CompiledDate: String
+    var IsStable: Bool
+}
+
+extension String {
+    func toCStr() -> UnsafeMutablePointer<CChar>? {
+        return UnsafeMutablePointer(mutating: (self as NSString).utf8String)
+    }
 }
 
 public class Varnam {
     private var varnamHandle: Int32 = 0;
     
     // This will only run once
-    struct Once {
-        static let once = Once()
+    struct VarnamInit {
+        static let once = VarnamInit()
         init() {
             let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
             print(assetsFolderPath)
-            varnam_set_vst_lookup_dir(strToCStr(assetsFolderPath))
+            varnam_set_vst_lookup_dir(assetsFolderPath.toCStr())
         }
     }
     
     internal init(_ schemeID: String = "ml") throws {
-        _ = Once.once
+        _ = VarnamInit.once
 
         schemeID.withCString {
             let rc = varnam_init_from_id(UnsafeMutablePointer(mutating: $0), &varnamHandle)
@@ -65,7 +76,7 @@ public class Varnam {
         varnam_transliterate(
             varnamHandle,
             1,
-            strToCStr(input),
+            input.toCStr(),
             &arr
         )
 
@@ -77,5 +88,27 @@ public class Varnam {
             results.append(word)
         }
         return results
+    }
+    
+    public static func getAllSchemeDetails() -> [SchemeDetails] {
+        _ = VarnamInit.once
+        
+        var schemes = [SchemeDetails]()
+
+        let arr = varnam_get_all_scheme_details()
+        for i in (0..<varray_length(arr)) {
+            let sdPointer = varray_get(arr, i).assumingMemoryBound(to: SchemeDetails_t.self
+            )
+            let sd = sdPointer.pointee
+            schemes.append(SchemeDetails(
+                Identifier: String(cString: sd.Identifier),
+                LangCode: String(cString: sd.LangCode),
+                DisplayName: String(cString: sd.DisplayName),
+                Author: String(cString: sd.Author),
+                CompiledDate: String(cString: sd.CompiledDate),
+                IsStable: (sd.IsStable != 0)
+            ))
+        }
+        return schemes
     }
 }
