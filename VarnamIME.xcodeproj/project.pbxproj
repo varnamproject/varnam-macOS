@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043C818D274139D900E6832E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69827411F47006C3B54 /* Config.swift */; };
+		043C818E274139DC00E6832E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69A27411F6D006C3B54 /* Logger.swift */; };
+		043C818F274139DE00E6832E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69C27411FB1006C3B54 /* Common.swift */; };
+		043C819427413B3800E6832E /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
+		043C819B27413CB500E6832E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C819A27413CB500E6832E /* SettingsView.swift */; };
+		043C819C27413D8000E6832E /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
+		043C819D27413D8000E6832E /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
 		04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D0A683273FC367006C3B54 /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
@@ -26,19 +33,14 @@
 		A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */; };
 		A54397D320D4D2F30011C7B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A54397D120D4D2F30011C7B7 /* Main.storyboard */; };
 		A54397DB20D4D5E90011C7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
-		A54397DC20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
-		A54397DD20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
 		A54397E020D4D6840011C7B7 /* VarnamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* VarnamConfig.swift */; };
 		A546182720CC6BB2003A73EB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A546181E20CC6A06003A73EB /* LICENSE */; };
 		A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
 		A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
-		A54B15D724900FC000E013A1 /* LiteratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54B15D624900FC000E013A1 /* LiteratorView.swift */; };
 		A5698AE9247EFA8E00443158 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52905DC234EC67900A8D95E /* MainView.swift */; };
-		A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C00A32353705C00B53051 /* SettingsView.swift */; };
 		A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585A17C24AC28FC00816D1E /* PersistenceView.swift */; };
 		A59281E120D45653003013B8 /* TrayIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A59281E020D45634003013B8 /* TrayIcon.icns */; };
-		A59364ED2481D12100674FBD /* MappingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59364EC2481D12100674FBD /* MappingsView.swift */; };
 		A59E32562495A93300736334 /* LanguageTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59E32552495A93300736334 /* LanguageTable.swift */; };
 		A5BDA2F620D06FFC00C9D006 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */; };
 		A5C06C7C24A1358600FBD1E9 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */; };
@@ -46,7 +48,6 @@
 		A5DC681F22335F72006FC519 /* AsyncDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */; };
 		A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E20D8324944B6E00EF7B1C /* LanguageView.swift */; };
 		A5E982802480658900D7B9A9 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9827F2480658900D7B9A9 /* SettingsModel.swift */; };
-		A5ECEBB924887A800084CFBD /* MappingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECEBB824887A800084CFBD /* MappingTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +89,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A5C06C7D24A1358F00FBD1E9 /* ShortcutRecorder.framework in Embed Frameworks */,
-				A54397DD20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Embed Frameworks */,
+				043C819D27413D8000E6832E /* libgovarnam.dylib in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +97,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VarnamIME-Bridging-Header.h"; sourceTree = "<group>"; };
+		043C819027413A2400E6832E /* LipikaEngine_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LipikaEngine_OSX.framework; path = "../lipika-engine/build/Release/LipikaEngine_OSX.framework"; sourceTree = "<group>"; };
+		043C819527413C1E00E6832E /* govarnam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "govarnam-Bridging-Header.h"; sourceTree = "<group>"; };
+		043C819A27413CB500E6832E /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
 		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
 		04D0A696274112BE006C3B54 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -130,18 +133,14 @@
 		A546182420CC6A23003A73EB /* feature_request.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = feature_request.md; path = .github/ISSUE_TEMPLATE/feature_request.md; sourceTree = "<group>"; };
 		A546182820CC6BEA003A73EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A546182A20CC6BF3003A73EB /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
-		A54B15D624900FC000E013A1 /* LiteratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteratorView.swift; sourceTree = "<group>"; };
 		A585A17C24AC28FC00816D1E /* PersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceView.swift; sourceTree = "<group>"; };
-		A58C00A32353705C00B53051 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A59281E020D45634003013B8 /* TrayIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TrayIcon.icns; sourceTree = "<group>"; };
-		A59364EC2481D12100674FBD /* MappingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingsView.swift; sourceTree = "<group>"; };
 		A59E32552495A93300736334 /* LanguageTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTable.swift; sourceTree = "<group>"; };
 		A5BDA2F520D06FFC00C9D006 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		A5C06C7B24A1358600FBD1E9 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShortcutRecorder.framework; sourceTree = "<group>"; };
 		A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDispatcher.swift; sourceTree = "<group>"; };
 		A5E20D8324944B6E00EF7B1C /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		A5E9827F2480658900D7B9A9 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
-		A5ECEBB824887A800084CFBD /* MappingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,21 +168,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C06C7C24A1358600FBD1E9 /* ShortcutRecorder.framework in Frameworks */,
+				043C819C27413D8000E6832E /* libgovarnam.dylib in Frameworks */,
 				A54397DF20D4D6170011C7B7 /* Cocoa.framework in Frameworks */,
-				A54397DC20D4D6090011C7B7 /* LipikaEngine_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043C818C274139C900E6832E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				04D0A69827411F47006C3B54 /* Config.swift */,
+				04D0A69A27411F6D006C3B54 /* Logger.swift */,
+				04D0A69C27411FB1006C3B54 /* Common.swift */,
+				A53AD01620CC654700C95844 /* VarnamConfig.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		04D0A67A273FC1F1006C3B54 /* GoVarnam */ = {
 			isa = PBXGroup;
 			children = (
 				04D0A696274112BE006C3B54 /* assets */,
-				04D0A682273FC367006C3B54 /* Varnam.swift */,
 				04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */,
-				04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */,
+				04D0A682273FC367006C3B54 /* Varnam.swift */,
+				043C819527413C1E00E6832E /* govarnam-Bridging-Header.h */,
 			);
 			path = GoVarnam;
 			sourceTree = "<group>";
@@ -191,6 +201,7 @@
 		A53ACFF420CC347900C95844 = {
 			isa = PBXGroup;
 			children = (
+				043C818C274139C900E6832E /* Common */,
 				04D0A67A273FC1F1006C3B54 /* GoVarnam */,
 				A546181D20CC69EC003A73EB /* Documents */,
 				A53ACFFF20CC347900C95844 /* Input Source */,
@@ -215,14 +226,10 @@
 			isa = PBXGroup;
 			children = (
 				A54397D920D4D3D80011C7B7 /* Resources */,
-				A53AD01620CC654700C95844 /* VarnamConfig.swift */,
 				A53AD00020CC347900C95844 /* AppDelegate.swift */,
 				A53AD01C20CC659C00C95844 /* ClientManager.swift */,
 				A53AD01E20CC660900C95844 /* VarnamController.swift */,
 				A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */,
-				04D0A69827411F47006C3B54 /* Config.swift */,
-				04D0A69A27411F6D006C3B54 /* Logger.swift */,
-				04D0A69C27411FB1006C3B54 /* Common.swift */,
 			);
 			path = "Input Source";
 			sourceTree = "<group>";
@@ -230,6 +237,7 @@
 		A53AD01420CC64FD00C95844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				043C819027413A2400E6832E /* LipikaEngine_OSX.framework */,
 				A546182820CC6BEA003A73EB /* Cocoa.framework */,
 				A546182A20CC6BF3003A73EB /* InputMethodKit.framework */,
 			);
@@ -242,14 +250,11 @@
 				A54397DA20D4D3F50011C7B7 /* Resources */,
 				A54397CB20D4D2F20011C7B7 /* AppDelegate.swift */,
 				A52905DC234EC67900A8D95E /* MainView.swift */,
-				A54B15D624900FC000E013A1 /* LiteratorView.swift */,
-				A5ECEBB824887A800084CFBD /* MappingTable.swift */,
-				A59364EC2481D12100674FBD /* MappingsView.swift */,
 				A5E9827F2480658900D7B9A9 /* SettingsModel.swift */,
-				A58C00A32353705C00B53051 /* SettingsView.swift */,
 				A59E32552495A93300736334 /* LanguageTable.swift */,
 				A5E20D8324944B6E00EF7B1C /* LanguageView.swift */,
 				A585A17C24AC28FC00816D1E /* PersistenceView.swift */,
+				043C819A27413CB500E6832E /* SettingsView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -384,7 +389,7 @@
 					};
 					A54397C820D4D2F10011C7B7 = {
 						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1030;
+						LastSwiftMigration = 1250;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 1;
@@ -483,15 +488,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043C819427413B3800E6832E /* Varnam.swift in Sources */,
 				A5698AE9247EFA8E00443158 /* MainView.swift in Sources */,
-				A5ECEBB924887A800084CFBD /* MappingTable.swift in Sources */,
 				A59E32562495A93300736334 /* LanguageTable.swift in Sources */,
-				A54B15D724900FC000E013A1 /* LiteratorView.swift in Sources */,
-				A59364ED2481D12100674FBD /* MappingsView.swift in Sources */,
+				043C818D274139D900E6832E /* Config.swift in Sources */,
+				043C818F274139DE00E6832E /* Common.swift in Sources */,
 				A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */,
-				A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */,
 				A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */,
+				043C818E274139DC00E6832E /* Logger.swift in Sources */,
 				A54397E020D4D6840011C7B7 /* VarnamConfig.swift in Sources */,
+				043C819B27413CB500E6832E /* SettingsView.swift in Sources */,
 				A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */,
 				A5E982802480658900D7B9A9 /* SettingsModel.swift in Sources */,
 			);
@@ -706,7 +712,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -745,7 +751,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -755,6 +761,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Application/VarnamApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
@@ -773,11 +780,18 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoVarnam",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -786,6 +800,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Application/VarnamApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
@@ -804,11 +819,17 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoVarnam",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

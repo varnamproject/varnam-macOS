@@ -14,18 +14,6 @@ struct MainView: View {
     
     var body: some View {
         TabView(selection: $currentTab) {
-            LiteratorView().tabItem {
-                Text("Transliterator")
-            }.tag(0)
-            .onAppear() {
-                self.currentTab = 0
-            }
-            MappingsView().tabItem {
-                Text("Mapping")
-            }.tag(1)
-            .onAppear() {
-                self.currentTab = 1
-            }
             SettingsView().tabItem {
                 Text("Settings")
             }.tag(2)

@@ -113,23 +113,20 @@ if [[ "$1" == "clean" ]]; then
 fi
 
 if [[ "$1" == "ime" ]]; then
-    rm -rf ./VarnamIME.app
     rm -rf ./VarnamIME.zip
     build_varnam_ime
+    exit 0
+fi
+
+if [[ "$1" == "app" ]]; then
+    rm -rf ./VarnamApp.zip
+    build_varnam_app
     exit 0
 fi
 
 if [[ "$1" == "ShortcutRecorder" ]]; then
     build_shortcut_recorder
     exit 0
-fi
-
-# Not gonna use LipikaEngine anymore. TODO remove this when it's not needed
-if [ ! -d ../Input\ Source/LipikaEngine_OSX.framework ]; then
-    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Debug clean build test || exit 1
-    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
-    rm -rf ../Input\ Source/LipikaEngine_OSX.framework
-    cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
 fi
 
 if [ ! -d ../Application/ShortcutRecorder.framework ]; then

@@ -59,12 +59,16 @@ public class Varnam {
         }
     }
     
+    static func setVSTLookupDir(_ path: String) {
+        varnam_set_vst_lookup_dir(assetsFolderPath.toCStr())
+    }
+    
     // This will only run once
     struct VarnamInit {
         static let once = VarnamInit()
         init() {
             print(assetsFolderPath)
-            varnam_set_vst_lookup_dir(assetsFolderPath.toCStr())
+            Varnam.setVSTLookupDir(assetsFolderPath)
         }
     }
     
