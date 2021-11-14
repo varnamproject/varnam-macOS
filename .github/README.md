@@ -12,6 +12,7 @@ There aren't many documentation on how to make IMEs for macOS, especially in **E
 Resources that helped in making IME on macOS (ordered by most important to the least):
 * https://blog.inoki.cc/2021/06/19/Write-your-own-IME-on-macOS-1/ (The last section is very important!)
 * https://jyhong836.github.io/tech/2015/07/29/add-3rd-part-dynamic-library-dylib-to-xcode-target.html
+* https://github.com/lennylxx/google-input-tools-macos (An IME made 2 months ago, Has GitHub CI builds)
 * https://github.com/nh7a/hiragany (Simple Japanese IME)
 * https://github.com/pkamb/NumberInput_IMKit_Sample/issues/1
 * API Docs: https://developer.apple.com/documentation/inputmethodkit/imkcandidates

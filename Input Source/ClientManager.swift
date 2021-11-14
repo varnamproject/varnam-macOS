@@ -67,24 +67,9 @@ class ClientManager: CustomStringConvertible {
         candidatesWindow.show()
     }
     
-    func getCurrentLine() -> Int {
-        return candidatesWindow.lineNumberForCandidate(withIdentifier: candidatesWindow.selectedCandidate())
-    }
-    
-    func tableMoveCursor(_ position: Int) {
-        candidatesWindow.selectCandidate(withIdentifier: candidatesWindow.candidateIdentifier(atLineNumber: position)
-        )
-    }
-    
     // For moving between items of candidate table
-    func tableMoveCursorUp(_ sender: Any?) {
-        tableMoveCursor(getCurrentLine() - 1)
-        updateLookupTable()
-    }
-    func tableMoveCursorDown(_ sender: Any?) {
-        tableMoveCursor(getCurrentLine() + 1)
-        candidatesWindow.clearSelection()
-//        updateLookupTable()
+    func interpretEvents(_ event: [NSEvent]) {
+        candidatesWindow.interpretKeyEvents(event)
     }
     
     func getCandidate() -> String? {
