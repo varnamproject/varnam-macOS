@@ -8,16 +8,16 @@
  */
 
 import InputMethodKit
-import LipikaEngine_OSX
 
 class ClientManager: CustomStringConvertible {
     private let notFoundRange = NSMakeRange(NSNotFound, NSNotFound)
     private let config = VarnamConfig()
     private let client: IMKTextInput
-    // This is the position of the cursor within the marked text
-    public var markedCursorLocation: Int? = nil
+
     private var candidatesWindow: IMKCandidates { return (NSApp.delegate as! AppDelegate).candidatesWindow }
     private (set) var candidates = autoreleasepool { return [String]() }
+    private var tableCursorPos = 0 // Candidates table cursor position
+
     // Cache, otherwise clients quitting can sometimes SEGFAULT us
     private var _description: String
     var description: String {
@@ -31,101 +31,76 @@ class ClientManager: CustomStringConvertible {
     
     init?(client: IMKTextInput) {
         guard let bundleId = client.bundleIdentifier(), let clientId = client.uniqueClientIdentifierString() else {
-            Logger.log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
+            Log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
             return nil
         }
-        Logger.log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
+        Log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
         self.client = client
         if !client.supportsUnicode() {
-            Logger.log.warning("Client: \(bundleId) does not support Unicode!")
+            Log.warning("Client: \(bundleId) does not support Unicode!")
         }
         if !client.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportDocumentAccessPropertyTag)) {
-            Logger.log.warning("Client: \(bundleId) does not support Document Access!")
+            Log.warning("Client: \(bundleId) does not support Document Access!")
         }
         _description = "\(bundleId) with Id: \(clientId)"
     }
     
     func setGlobalCursorLocation(_ location: Int) {
-        Logger.log.debug("Setting global cursor location to: \(location)")
+        Log.debug("Setting global cursor location to: \(location)")
         client.setMarkedText("|", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
     }
     
-    func updateMarkedCursorLocation(_ delta: Int) -> Bool {
-        Logger.log.debug("Cursor moved: \(delta) with selectedRange: \(client.selectedRange()), markedRange: \(client.markedRange()) and cursorPosition: \(markedCursorLocation?.description ?? "nil")")
-        if client.markedRange().length == NSNotFound { return false }
-        let nextPosition = (markedCursorLocation ?? client.markedRange().length) + delta
-        if (0...client.markedRange().length).contains(nextPosition) {
-            Logger.log.debug("Still within markedRange")
-            markedCursorLocation = nextPosition
-            return true
-        }
-        Logger.log.debug("Outside of markedRange")
-        markedCursorLocation = nil
-        return false
+    func updatePreedit(_ text: NSAttributedString, _ cursorPos: Int? = nil) {
+        client.setMarkedText(text, selectionRange: NSMakeRange(cursorPos ?? text.length, 0), replacementRange: notFoundRange)
     }
     
-    func showActive(clientText: NSAttributedString, candidateText: String, replacementRange: NSRange? = nil) {
-        Logger.log.debug("Showing clientText: \(clientText) and candidateText: \(candidateText)")
-        client.setMarkedText(clientText, selectionRange: NSMakeRange(markedCursorLocation ?? clientText.length, 0), replacementRange: replacementRange ?? notFoundRange)
-        candidates = [candidateText]
-        if clientText.string.isEmpty {
-            candidatesWindow.hide()
+    func updateCandidates(_ sugs: [String]) {
+        Log.debug(sugs)
+        // Remove duplicates
+        // For some weird reason, when there are duplicates,
+        // candidate window makes them hidden
+        candidates = NSOrderedSet(array: sugs).array as! [String]
+        updateLookupTable()
+    }
+    
+    func updateLookupTable() {
+        tableCursorPos = 0
+        candidatesWindow.update()
+        candidatesWindow.show()
+    }
+    
+    // For moving between items of candidate table
+    func tableMoveEvent(_ event: NSEvent) {
+        if event.keyCode == kVK_UpArrow && tableCursorPos > 0 {
+            // TODO allow moving to the end
+            // This would need a custom candidate window
+            // https://github.com/lennylxx/google-input-tools-macos/blob/main/GoogleInputTools/CandidatesWindow.swift
+            tableCursorPos -= 1
+        } else if event.keyCode == kVK_DownArrow && tableCursorPos < candidates.count - 1 {
+            tableCursorPos += 1
         }
-        else {
-            candidatesWindow.update()
-            if config.showCandidates {
-                candidatesWindow.show()
-            }
+        candidatesWindow.interpretKeyEvents([event])
+    }
+    
+    func getCandidate() -> String? {
+        if candidates.count == 0 {
+            return nil
+        } else {
+            return candidates[tableCursorPos]
         }
     }
     
     func finalize(_ output: String) {
-        Logger.log.debug("Finalizing with: \(output)")
+        Log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()
-        markedCursorLocation = nil
     }
     
     func clear() {
-        Logger.log.debug("Clearing MarkedText and Candidate window")
+        Log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
+        candidates = []
         candidatesWindow.hide()
-        markedCursorLocation = nil
-    }
-    
-    func findWord(at current: Int) -> NSRange? {
-        let maxLength = client.length()
-        var exponent = 2
-        var wordStart = -1, wordEnd = -1
-        Logger.log.debug("Finding word at: \(current) with max: \(maxLength)")
-        repeat {
-            let low = wordStart == -1 ? max(current - 2 << exponent, 0): wordStart
-            let high = wordEnd == -1 ? min(current + 2 << exponent, maxLength): wordEnd
-            Logger.log.debug("Looking for word between \(low) and \(high)")
-            var real = NSRange()
-            guard let text = client.string(from: NSMakeRange(low, high - low), actualRange: &real) else { return nil }
-            Logger.log.debug("Looking for word in text: \(text)")
-            if wordStart == -1, let startOffset = text.unicodeScalars[text.unicodeScalars.startIndex..<text.unicodeScalars.index(text.unicodeScalars.startIndex, offsetBy: current - real.location)].reversed().firstIndex(where: { CharacterSet.whitespacesAndNewlines.contains($0) })?.base.utf16Offset(in: text) {
-                wordStart = real.location + startOffset
-                Logger.log.debug("Found wordStart: \(wordStart)")
-            }
-            if wordEnd == -1, let endOffset = text.unicodeScalars[text.unicodeScalars.index(text.unicodeScalars.startIndex, offsetBy: current - real.location)..<text.unicodeScalars.endIndex].firstIndex(where: { CharacterSet.whitespacesAndNewlines.contains($0) })?.utf16Offset(in: text) {
-                wordEnd = real.location + endOffset
-                Logger.log.debug("Found wordEnd: \(wordEnd)")
-            }
-            exponent += 1
-            if wordStart == -1, low == 0 {
-                wordStart = low
-                Logger.log.debug("Starting word at beginning of document")
-            }
-            if wordEnd == -1, high == maxLength {
-                wordEnd = high
-                Logger.log.debug("Ending word at end of document")
-            }
-        }
-        while(wordStart == -1 || wordEnd == -1)
-        Logger.log.debug("Found word between \(wordStart) and \(wordEnd)")
-        return NSMakeRange(wordStart, wordEnd - wordStart)
     }
 }

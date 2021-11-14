@@ -67,34 +67,78 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     xcrun stapler staple "$filepath"
 }
 
-rm -rf ./VarnamIME.app
-rm -rf ./VarnamIME.zip
-rm -rf ./VarnamApp.app
-rm -rf ./VarnamApp.zip
-rm -rf ./VarnamIME.pkg
-rm ./Scripts/installer
-if [[ "$1" == "clean" ]]; then 
-exit 0
+clean() {
+    rm -rf ./VarnamIME.app
+    rm -rf ./VarnamIME.zip
+    rm -rf ./VarnamApp.app
+    rm -rf ./VarnamApp.zip
+    rm -rf ./VarnamIME.pkg
+    rm ./Scripts/installer
+}
+
+build_varnam_ime() {
+    rm -rf ./VarnamIME.app
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build || exit 1
+    cp -R ../build/Release/VarnamIME.app .
+    # notarizefile "VarnamIME.app" "com.varnamproject.mac.Varnam"
+}
+
+build_shortcut_recorder() {
+    xcodebuild -project ../../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
+    rm -rf ../Application/ShortcutRecorder.framework
+    cp -R ../../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
+}
+
+build_varnam_app() {
+    rm -rf ./VarnamApp.app
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build || exit 1
+    cp -R ../build/Release/VarnamApp.app .
+    # notarizefile "VarnamApp.app" "com.varnamproject.mac.VarnamApp"
+}
+
+build_varnam_installer() {
+    rm ./Scripts/installer
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
+    cp ../build/Release/installer ./Scripts/
+}
+
+build_pkg() {
+    packagesbuild -v VarnamIME.pkgproj
+    # notarizefile "VarnamIME.pkg" "com.varnamproject.mac.VarnamApp"
+}
+
+if [[ "$1" == "clean" ]]; then
+    clean
+    exit 0
 fi
 
-xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Debug clean build test || exit 1
-xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
-rm -rf ../Input\ Source/LipikaEngine_OSX.framework
-cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
-xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build || exit 1
-cp -R ../build/Release/VarnamIME.app .
-# notarizefile "VarnamIME.app" "com.varnamproject.mac.Varnam"
+if [[ "$1" == "ime" ]]; then
+    rm -rf ./VarnamIME.app
+    rm -rf ./VarnamIME.zip
+    build_varnam_ime
+    exit 0
+fi
 
-xcodebuild -project ../../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
-rm -rf ../Application/ShortcutRecorder.framework
-cp -R ../../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
-xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build || exit 1
-cp -R ../build/Release/VarnamApp.app .
-# notarizefile "VarnamApp.app" "com.varnamproject.mac.VarnamApp"
+if [[ "$1" == "ShortcutRecorder" ]]; then
+    build_shortcut_recorder
+    exit 0
+fi
 
-xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
-cp ../build/Release/installer ./Scripts/
-packagesbuild -v VarnamIME.pkgproj
-# notarizefile "VarnamIME.pkg" "com.varnamproject.mac.VarnamApp"
+# Not gonna use LipikaEngine anymore. TODO remove this when it's not needed
+if [ ! -d ../Input\ Source/LipikaEngine_OSX.framework ]; then
+    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Debug clean build test || exit 1
+    xcodebuild -project ../../lipika-engine/LipikaEngine.xcodeproj -scheme "LipikaEngine_OSX" -configuration Release clean build || exit 1
+    rm -rf ../Input\ Source/LipikaEngine_OSX.framework
+    cp -R ../../lipika-engine/build/Release/LipikaEngine_OSX.framework ../Input\ Source/
+fi
+
+if [ ! -d ../Application/ShortcutRecorder.framework ]; then
+    build_shortcut_recorder
+fi
+
+build_varnam_ime
+build_varnam_app
+build_varnam_installer
+build_pkg
 
 exit 0

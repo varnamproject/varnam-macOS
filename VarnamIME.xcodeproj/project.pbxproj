@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
+		04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		04D0A683273FC367006C3B54 /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
 		A5122A4E20D42A2000575848 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01A20CC658000C95844 /* InputSource.swift */; };
 		A5122A4F20D42A2000575848 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5122A4220D420E100575848 /* main.swift */; };
 		A5122A5020D42A9500575848 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
@@ -64,6 +67,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */,
+				04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +87,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VarnamIME-Bridging-Header.h"; sourceTree = "<group>"; };
+		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
+		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
 		A5122A4220D420E100575848 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A5122A4720D429D300575848 /* Installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Installer; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52905DC234EC67900A8D95E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -140,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */,
+				04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */,
 				A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */,
 				A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */,
 			);
@@ -158,9 +166,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D0A67A273FC1F1006C3B54 /* GoVarnam */ = {
+			isa = PBXGroup;
+			children = (
+				04D0A682273FC367006C3B54 /* Varnam.swift */,
+				04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */,
+				04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */,
+			);
+			path = GoVarnam;
+			sourceTree = "<group>";
+		};
 		A53ACFF420CC347900C95844 = {
 			isa = PBXGroup;
 			children = (
+				04D0A67A273FC1F1006C3B54 /* GoVarnam */,
 				A546181D20CC69EC003A73EB /* Documents */,
 				A53ACFFF20CC347900C95844 /* Input Source */,
 				A57F18EA20D1FBA1007C9745 /* Installation */,
@@ -341,7 +360,7 @@
 					};
 					A53ACFFC20CC347900C95844 = {
 						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1030;
+						LastSwiftMigration = 1250;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 1;
@@ -434,6 +453,7 @@
 			files = (
 				A53AD00120CC347900C95844 /* AppDelegate.swift in Sources */,
 				A53AD01F20CC660900C95844 /* VarnamController.swift in Sources */,
+				04D0A683273FC367006C3B54 /* Varnam.swift in Sources */,
 				A53AD01720CC654700C95844 /* VarnamConfig.swift in Sources */,
 				A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */,
 				A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */,
@@ -641,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Input Source/VarnamIME.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
@@ -659,11 +680,18 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoVarnam",
+				);
 				MARKETING_VERSION = 2.2;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -672,6 +700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Input Source/VarnamIME.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
@@ -690,11 +719,17 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoVarnam",
+				);
 				MARKETING_VERSION = 2.2;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
