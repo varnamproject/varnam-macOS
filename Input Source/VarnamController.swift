@@ -38,6 +38,12 @@ public class VarnamController: IMKInputController {
         } catch let error {
             Logger.log.error(error.localizedDescription)
         }
+        
+        // This is being set because VarnamApp doesn't know
+        // the location who also access govarnam
+        if config.vstDir == "" {
+            config.vstDir = Varnam.assetsFolderPath
+        }
     }
     
     private func closeVarnam() {

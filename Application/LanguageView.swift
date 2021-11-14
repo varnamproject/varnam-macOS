@@ -23,6 +23,7 @@ class LanguageModel: ObservableObject, PersistenceModel {
     let config = VarnamConfig()
 
     init() {
+        Varnam.setVSTLookupDir(config.vstDir)
         mappings = config.languageConfig
         reeval()
     }

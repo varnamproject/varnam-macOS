@@ -64,6 +64,17 @@ class VarnamConfig: Config {
         }
     }
     
+    // This is being set because VarnamApp doesn't know
+    // the location who also access govarnam
+    var vstDir: String {
+        get {
+            return userDefaults.string(forKey: #function) ?? ""
+        }
+        set(value) {
+            userDefaults.set(value, forKey: #function)
+        }
+    }
+    
     // Varnam schemeID to use
     var schemeID: String {
         get {
