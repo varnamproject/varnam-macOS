@@ -29,7 +29,7 @@ Download `VarnamIME.pkg` installer from Releases. Double click to open the insta
 ## Building
 
 * Make sure XCode is installed
-* Clone
+* Clone and do `git submodule update --init`
 * `cd Installation && ./build`
 * Run the newly built `VarnamIME.pkg` installer
 
