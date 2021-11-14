@@ -39,10 +39,7 @@ class SettingsModel: Config, ObservableObject, PersistenceModel {
     }}
     
     func transliterate(_ input: String) -> String {
-        let factory = try! LiteratorFactory(config: self)
-        let transliterator = try! factory.transliterator(schemeName: schemeName, scriptName: scriptName)
-        let output = transliterator.transliterate(input)
-        return output.finalaizedOutput + output.unfinalaizedOutput
+        return ""
     }
 
     let config = VarnamConfig()

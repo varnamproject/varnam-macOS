@@ -11,7 +11,6 @@ import SwiftUI
 import LipikaEngine_OSX
 
 struct SettingsView: View {
-    private var factory = try! LiteratorFactory(config: VarnamConfig())
     @ObservedObject var model = SettingsModel()
 
     var body: some View {
@@ -21,13 +20,6 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 18) {
                     HStack {
                         Text("Use")
-                        MenuButton(model.schemeName) {
-                            ForEach(try! factory.availableSchemes(), id: \.self) { scheme in
-                                Button(scheme) { self.model.schemeName = scheme }
-                            }
-                        }
-                        .padding(0)
-                        .fixedSize()
                         Text("to transliterate into")
                         MenuButton(model.scriptName) {
                             ForEach(model.languages, id: \.self) { script in

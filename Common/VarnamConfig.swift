@@ -82,6 +82,24 @@ class VarnamConfig: Config {
         }
     }
     
+    var schemeName: String {
+        get {
+            return "000000"
+        }
+        set {
+            
+        }
+    }
+    
+    var scriptName: String {
+        get {
+            return "aaaaaaaa"
+        }
+        set {
+            
+        }
+    }
+    
     // Varnam schemeID to use
     var schemeID: String {
         get {
