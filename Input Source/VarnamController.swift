@@ -1,6 +1,9 @@
 /*
  * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
- * Copyright (C) 2018 Ranganath Atreya
+ * Copyright (C) 2018 Ranganath Atreya - LipikaIME
+ * https://github.com/ratreya/lipika-ime
+ * Copyright (C) 2021 Subin Siby - VarnamIME
+ * https://github.com/varnamproject/varnam-macOS
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -11,6 +14,7 @@ import InputMethodKit
 import Carbon.HIToolbox
 
 class Log {
+    // TODO implement setting from app to enable log levels
     public static func warning(_ text: Any) {
         print(text)
     }
@@ -51,7 +55,7 @@ public class VarnamController: IMKInputController {
         super.init(server: server, delegate: delegate, client: inputClient)
 
         initVarnam()
-        print("Initialized Controller for Client: \(clientManager)")
+        Log.debug("Initialized Controller for Client: \(clientManager)")
     }
     
     func clearState() {
@@ -204,7 +208,7 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client looses focus
     public override func deactivateServer(_ sender: Any!) {
-        print("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Log.debug("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // Do this in case the application is quitting, otherwise we will end up with a SIGSEGV
         dispatch.cancelAll()
         clearState()
@@ -212,17 +216,17 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client gains focus
     public override func activateServer(_ sender: Any!) {
-        print("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // There are three sources for current script selection - (a) self.currentScriptName, (b) config.scriptName and (c) selectedMenuItem.title
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if config.globalScriptSelection, currentScriptName != config.scriptName {
-            print("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
+            Log.debug("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
 //            refreshLiterators() aka initVarnam() be called again ?
         }
     }
     
     public override func menu() -> NSMenu! {
-        print("Returning menu")
+        Log.debug("Returning menu")
         // Set the system trey menu selection to reflect our literators; converge (c) -> (a)
         let systemTrayMenu = (NSApp.delegate as! AppDelegate).systemTrayMenu!
         systemTrayMenu.items.forEach() { $0.state = .off }
@@ -231,23 +235,23 @@ public class VarnamController: IMKInputController {
     }
     
     public override func candidates(_ sender: Any!) -> [Any]! {
-        print("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Log.debug("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         return clientManager.candidates
     }
     
     public override func candidateSelected(_ candidateString: NSAttributedString!) {
-        print("Candidate selected: \(candidateString!)")
+        Log.debug("Candidate selected: \(candidateString!)")
         commitText(candidateString.string)
     }
     
     public override func commitComposition(_ sender: Any!) {
-        print("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         commit()
     }
     
     @objc public func menuItemSelected(sender: NSDictionary) {
         let item = sender.value(forKey: kIMKCommandMenuItemName) as! NSMenuItem
-        print("Menu Item Selected: \(item.title)")
+        Log.debug("Menu Item Selected: \(item.title)")
         // Converge (b) -> (c)
         config.scriptName = item.representedObject as! String
         // Converge (a) -> (b)
