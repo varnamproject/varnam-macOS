@@ -7,6 +7,8 @@ Built at FOSSUnited's [FOSSHack21](https://fossunited.org/fosshack/2021/project?
 This project is a hard-fork of [lipika-ime](https://github.com/ratreya/Lipika_IME). Changes made:
 * https://github.com/varnamproject/varnam-macOS/pull/1
 * https://github.com/varnamproject/varnam-macOS/pull/2
+* https://github.com/varnamproject/varnam-macOS/pull/3
+* https://github.com/varnamproject/varnam-macOS/pull/4
 
 Lipika & Varnam is very different in their handling of transliteration. Both are incompatible with each other. Lipika is a good project to hack on to make your IME, it has a settings window, IME and installer. But it's difficult to get started. This IME removes many complicated code from it and tries to make it easier with improved documentation as well.
 
