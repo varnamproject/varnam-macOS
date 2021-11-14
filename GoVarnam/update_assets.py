@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import gzip
 import json
 from os.path import basename
@@ -40,6 +42,6 @@ def copyScheme(schemeID):
     with open(target + '/packs.json', 'w') as f:
         json.dump(packsInfo, f, ensure_ascii=False)
 
-# For now just Malayalam for Indic Keyboard
-for schemeID in ["ml"]:
+# For now just Malayalam, Kannada for govarnam-macOS
+for schemeID in ["ml", "kn"]:
     copyScheme(schemeID)
