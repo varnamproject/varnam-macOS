@@ -82,24 +82,6 @@ class VarnamConfig: Config {
         }
     }
     
-    var schemeName: String {
-        get {
-            return "000000"
-        }
-        set {
-            
-        }
-    }
-    
-    var scriptName: String {
-        get {
-            return "aaaaaaaa"
-        }
-        set {
-            
-        }
-    }
-    
     // Varnam schemeID to use
     var schemeID: String {
         get {
@@ -110,58 +92,9 @@ class VarnamConfig: Config {
         }
     }
     
-    var showCandidates: Bool {
-        get {
-            return !userDefaults.bool(forKey: #function)
-        }
-        set(value) {
-            userDefaults.set(!value, forKey: #function)
-        }
-    }
-    
-    var outputInClient: Bool {
+    var learnWords: Bool {
         get {
             return userDefaults.bool(forKey: #function)
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
-        }
-    }
-    
-    var globalScriptSelection: Bool {
-        get {
-            return userDefaults.bool(forKey: #function)
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
-        }
-    }
-
-    /*
-     It is impossible to reliably determine the PositionalUnit a given client uses to report caret location.
-     And so, when output is in client, don't try to start your own session.
-    */
-    var activeSessionOnDelete: Bool {
-        get {
-            return !outputInClient && userDefaults.bool(forKey: #function)
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
-        }
-    }
-    
-    var activeSessionOnInsert: Bool {
-        get {
-            return !outputInClient && userDefaults.bool(forKey: #function)
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
-        }
-    }
-    
-    var activeSessionOnCursorMove: Bool {
-        get {
-            return !outputInClient && userDefaults.bool(forKey: #function)
         }
         set(value) {
             userDefaults.set(value, forKey: #function)

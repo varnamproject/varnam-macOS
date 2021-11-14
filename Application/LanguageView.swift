@@ -36,8 +36,8 @@ class LanguageModel: ObservableObject, PersistenceModel {
     func save() {
         config.languageConfig = mappings
         let validScripts = config.languageConfig.filter({ $0.isEnabled }).map({ $0.identifier })
-        if !validScripts.contains(config.scriptName) {
-            config.scriptName = validScripts.first!
+        if !validScripts.contains(config.schemeID) {
+            config.schemeID = validScripts.first!
         }
         reeval()
     }
