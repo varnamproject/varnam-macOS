@@ -22,6 +22,17 @@ Resources that helped in making IME on macOS (ordered by most important to the l
 * https://github.com/pkamb/NumberInput_IMKit_Sample/issues/1
 * API Docs: https://developer.apple.com/documentation/inputmethodkit/imkcandidates
 
+## Installation
+
+Download `VarnamIME.pkg` installer from Releases. Double click to open the installer. You might need to explicitly allow installer to run from security settings.
+
+## Building
+
+* Make sure XCode is installed
+* Clone
+* `cd Installation && ./build`
+* Run the newly built `VarnamIME.pkg` installer
+
 ## License
 
 > Copyright (C) 2018 Ranganath Atreya
