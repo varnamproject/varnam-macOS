@@ -60,3 +60,12 @@ extension String {
         return lhs + stringRHS
     }
 }
+
+// Copyright mxcl, CC-BY-SA 4.0
+// https://stackoverflow.com/a/46354989/1372424
+public extension Array where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter{ seen.insert($0).inserted }
+    }
+}

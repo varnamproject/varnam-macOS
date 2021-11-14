@@ -59,7 +59,7 @@ class ClientManager: CustomStringConvertible {
         // Remove duplicates
         // For some weird reason, when there are duplicates,
         // candidate window makes them hidden
-        candidates = NSOrderedSet(array: sugs).array as! [String]
+        candidates = sugs.uniqued()
         updateLookupTable()
     }
     

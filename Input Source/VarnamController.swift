@@ -30,7 +30,7 @@ public class VarnamController: IMKInputController {
     
     private func initVarnam() {
         if (varnam != nil) {
-            varnam.close()
+            closeVarnam()
         }
         schemeID = config.schemeID
         do {
@@ -38,6 +38,11 @@ public class VarnamController: IMKInputController {
         } catch let error {
             Logger.log.error(error.localizedDescription)
         }
+    }
+    
+    private func closeVarnam() {
+        varnam.close()
+        varnam = nil
     }
     
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
@@ -210,6 +215,7 @@ public class VarnamController: IMKInputController {
         // Do this in case the application is quitting, otherwise we will end up with a SIGSEGV
         dispatch.cancelAll()
         clearState()
+        closeVarnam()
     }
     
     /// This message is sent when our client gains focus
@@ -219,6 +225,9 @@ public class VarnamController: IMKInputController {
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if config.globalScriptSelection, schemeID != config.schemeID {
             Logger.log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
+            initVarnam()
+        }
+        if (varnam == nil) {
             initVarnam()
         }
     }
