@@ -86,7 +86,13 @@ public class VarnamController: IMKInputController {
     }
     
     // Handle events
-    public override func inputText(_ string: String!, key keyCode: Int, modifiers flags: Int, client sender: Any!) -> Bool {
+    public override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
+        if event.type != NSEvent.EventType.keyDown {
+            return false
+        }
+        
+        let keyCode = Int(event.keyCode)
+        
         switch keyCode {
         case kVK_Space:
             let text = clientManager.getCandidate()
@@ -129,17 +135,11 @@ public class VarnamController: IMKInputController {
                 updatePreedit()
             }
             return true
-        case kVK_UpArrow:
+        case kVK_UpArrow, kVK_DownArrow:
             if preedit.isEmpty {
                 return false
             }
-            clientManager.tableMoveCursorUp(sender)
-            return true
-        case kVK_DownArrow:
-            if preedit.isEmpty {
-                return false
-            }
-            clientManager.tableMoveCursorDown(sender)
+            clientManager.interpretEvents([event])
             return true
         case kVK_Delete:
             if preedit.isEmpty {
@@ -170,12 +170,10 @@ public class VarnamController: IMKInputController {
                 }
             }
             return true
-        case kVK_ANSI_1, kVK_ANSI_2, kVK_ANSI_3, kVK_ANSI_4:
-            return false
         default:
-            if VarnamController.validInputs.contains(string.unicodeScalars.first!) {
-                NSLog("character event: \(string ?? "")")
-                return processInput(string)
+            if let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
+                NSLog("character event: \(chars)")
+                return processInput(chars)
             }
         }
         return false
