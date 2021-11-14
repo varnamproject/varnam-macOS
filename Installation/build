@@ -84,9 +84,9 @@ build_varnam_ime() {
 }
 
 build_shortcut_recorder() {
-    xcodebuild -project ../../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
+    xcodebuild -project ../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
     rm -rf ../Application/ShortcutRecorder.framework
-    cp -R ../../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
+    cp -R ../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
 }
 
 build_varnam_app() {

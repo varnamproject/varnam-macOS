@@ -43,5 +43,5 @@ def copyScheme(schemeID):
         json.dump(packsInfo, f, ensure_ascii=False)
 
 # For now just Malayalam, Kannada for govarnam-macOS
-for schemeID in ["ml", "kn"]:
+for schemeID in ["ml", "kn", "hi"]:
     copyScheme(schemeID)

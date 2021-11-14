@@ -26,10 +26,12 @@ Resources that helped in making IME on macOS (ordered by most important to the l
 
 Download `VarnamIME.pkg` installer from Releases. Double click to open the installer. You might need to explicitly allow installer to run from security settings.
 
+The installation instructions is same as LipikaIME's. See it here: https://github.com/ratreya/lipika-ime/wiki#installation
+
 ## Building
 
 * Make sure XCode is installed
-* Clone
+* Clone and do `git submodule update --init`
 * `cd Installation && ./build`
 * Run the newly built `VarnamIME.pkg` installer
 
