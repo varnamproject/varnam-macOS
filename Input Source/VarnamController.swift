@@ -33,20 +33,23 @@ public class VarnamController: IMKInputController {
     let config = VarnamConfig()
     let dispatch = AsyncDispatcher()
     private let clientManager: ClientManager
-    private var currentScriptName = ""
     
     private var cursorPos = 0
     private var preedit = ""
     private (set) var candidates = autoreleasepool { return [String]() }
+    
+    private var schemeID = "ml"
     private (set) var varnam: Varnam! = nil
     
     private func initVarnam() {
         if (varnam != nil) {
             varnam.close()
         }
-        currentScriptName = config.scriptName
+        // TODO add schemeID to config
+        // config.scriptName is "Malayalam", change that to shortcode "ml"
+        schemeID = "ml"
         do {
-            varnam = try Varnam("ml")
+            varnam = try Varnam(schemeID)
         } catch let error {
             Log.error(error)
         }
@@ -229,9 +232,9 @@ public class VarnamController: IMKInputController {
         Log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // There are three sources for current script selection - (a) self.currentScriptName, (b) config.scriptName and (c) selectedMenuItem.title
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
-        if config.globalScriptSelection, currentScriptName != config.scriptName {
-            Log.debug("Refreshing Literators from: \(currentScriptName) to: \(config.scriptName)")
-//            refreshLiterators() aka initVarnam() be called again ?
+        if config.globalScriptSelection, schemeID != config.scriptName {
+            Log.debug("Initializing varnam: \(schemeID) to: \(config.scriptName)")
+            initVarnam()
         }
     }
     
@@ -240,7 +243,7 @@ public class VarnamController: IMKInputController {
         // Set the system trey menu selection to reflect our literators; converge (c) -> (a)
         let systemTrayMenu = (NSApp.delegate as! AppDelegate).systemTrayMenu!
         systemTrayMenu.items.forEach() { $0.state = .off }
-        systemTrayMenu.items.first(where: { ($0.representedObject as! String) == currentScriptName } )?.state = .on
+        systemTrayMenu.items.first(where: { ($0.representedObject as! String) == schemeID } )?.state = .on
         return systemTrayMenu
     }
     

@@ -20,10 +20,26 @@ struct VarnamException: Error {
     }
 }
 
+func strToCStr(_ str: String) -> UnsafeMutablePointer<CChar>? {
+    return UnsafeMutablePointer(mutating: (str as NSString).utf8String)
+}
+
 public class Varnam {
     private var varnamHandle: Int32 = 0;
     
+    // This will only run once
+    struct Once {
+        static let once = Once()
+        init() {
+            let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
+            print(assetsFolderPath)
+            varnam_set_vst_lookup_dir(strToCStr(assetsFolderPath))
+        }
+    }
+    
     internal init(_ schemeID: String = "ml") throws {
+        _ = Once.once
+
         schemeID.withCString {
             let rc = varnam_init_from_id(UnsafeMutablePointer(mutating: $0), &varnamHandle)
             try! checkError(rc)
@@ -46,11 +62,10 @@ public class Varnam {
 
     public func transliterate(_ input: String) -> [String] {
         var arr: UnsafeMutablePointer<varray>? = varray_init()
-        let cInput = (input as NSString).utf8String
         varnam_transliterate(
             varnamHandle,
             1,
-            UnsafeMutablePointer(mutating: cInput),
+            strToCStr(input),
             &arr
         )
 

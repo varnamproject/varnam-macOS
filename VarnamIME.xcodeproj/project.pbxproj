@@ -10,6 +10,7 @@
 		04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
 		04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D0A683273FC367006C3B54 /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
+		04D0A697274112BE006C3B54 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 04D0A696274112BE006C3B54 /* assets */; };
 		A5122A4E20D42A2000575848 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01A20CC658000C95844 /* InputSource.swift */; };
 		A5122A4F20D42A2000575848 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5122A4220D420E100575848 /* main.swift */; };
 		A5122A5020D42A9500575848 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
@@ -60,6 +61,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		04D0A69527411260006C3B54 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A53AD01320CC643700C95844 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,6 +101,7 @@
 		04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VarnamIME-Bridging-Header.h"; sourceTree = "<group>"; };
 		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
 		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
+		04D0A696274112BE006C3B54 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		A5122A4220D420E100575848 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A5122A4720D429D300575848 /* Installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Installer; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52905DC234EC67900A8D95E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -169,6 +181,7 @@
 		04D0A67A273FC1F1006C3B54 /* GoVarnam */ = {
 			isa = PBXGroup;
 			children = (
+				04D0A696274112BE006C3B54 /* assets */,
 				04D0A682273FC367006C3B54 /* Varnam.swift */,
 				04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */,
 				04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */,
@@ -316,6 +329,7 @@
 				A53ACFFA20CC347900C95844 /* Frameworks */,
 				A53ACFFB20CC347900C95844 /* Resources */,
 				A53AD01320CC643700C95844 /* Embed Frameworks */,
+				04D0A69527411260006C3B54 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -403,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D0A697274112BE006C3B54 /* assets in Resources */,
 				A546182720CC6BB2003A73EB /* LICENSE in Resources */,
 				A59281E120D45653003013B8 /* TrayIcon.icns in Resources */,
 				A5BDA2F620D06FFC00C9D006 /* MainMenu.xib in Resources */,

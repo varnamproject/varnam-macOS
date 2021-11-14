@@ -1,1 +1,4 @@
 *.dylib
+assets/
+*.vst
+*.vlf
