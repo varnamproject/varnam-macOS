@@ -31,22 +31,22 @@ class ClientManager: CustomStringConvertible {
     
     init?(client: IMKTextInput) {
         guard let bundleId = client.bundleIdentifier(), let clientId = client.uniqueClientIdentifierString() else {
-            Log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
+            Logger.log.warning("bundleIdentifier: \(client.bundleIdentifier() ?? "nil") or uniqueClientIdentifierString: \(client.uniqueClientIdentifierString() ?? "nil") - failing ClientManager.init()")
             return nil
         }
-        Log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
+        Logger.log.debug("Initializing client: \(bundleId) with Id: \(clientId)")
         self.client = client
         if !client.supportsUnicode() {
-            Log.warning("Client: \(bundleId) does not support Unicode!")
+            Logger.log.warning("Client: \(bundleId) does not support Unicode!")
         }
         if !client.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportDocumentAccessPropertyTag)) {
-            Log.warning("Client: \(bundleId) does not support Document Access!")
+            Logger.log.warning("Client: \(bundleId) does not support Document Access!")
         }
         _description = "\(bundleId) with Id: \(clientId)"
     }
     
     func setGlobalCursorLocation(_ location: Int) {
-        Log.debug("Setting global cursor location to: \(location)")
+        Logger.log.debug("Setting global cursor location to: \(location)")
         client.setMarkedText("|", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: NSMakeRange(location, 0))
     }
@@ -56,7 +56,6 @@ class ClientManager: CustomStringConvertible {
     }
     
     func updateCandidates(_ sugs: [String]) {
-        Log.debug(sugs)
         // Remove duplicates
         // For some weird reason, when there are duplicates,
         // candidate window makes them hidden
@@ -92,13 +91,13 @@ class ClientManager: CustomStringConvertible {
     }
     
     func finalize(_ output: String) {
-        Log.debug("Finalizing with: \(output)")
+        Logger.log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()
     }
     
     func clear() {
-        Log.debug("Clearing MarkedText and Candidate window")
+        Logger.log.debug("Clearing MarkedText and Candidate window")
         client.setMarkedText("", selectionRange: NSMakeRange(0, 0), replacementRange: notFoundRange)
         candidates = []
         candidatesWindow.hide()

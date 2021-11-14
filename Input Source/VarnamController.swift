@@ -13,19 +13,6 @@
 import InputMethodKit
 import Carbon.HIToolbox
 
-class Log {
-    // TODO implement setting from app to enable log levels
-    public static func error(_ text: Any) {
-        print(text)
-    }
-    public static func warning(_ text: Any) {
-        print(text)
-    }
-    public static func debug(_ text: Any) {
-        print(text)
-    }
-}
-
 @objc(VarnamController)
 public class VarnamController: IMKInputController {
     static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
@@ -49,24 +36,24 @@ public class VarnamController: IMKInputController {
         do {
             varnam = try Varnam(schemeID)
         } catch let error {
-            Log.error(error)
+            Logger.log.error(error.localizedDescription)
         }
     }
     
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {
         guard let client = inputClient as? IMKTextInput & NSObjectProtocol else {
-            Log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
+            Logger.log.warning("Client does not conform to the necessary protocols - refusing to initiate VarnamController!")
             return nil
         }
         guard let clientManager = ClientManager(client: client) else {
-            Log.warning("Client manager failed to initialize - refusing to initiate VarnamController!")
+            Logger.log.warning("Client manager failed to initialize - refusing to initiate VarnamController!")
             return nil
         }
         self.clientManager = clientManager
         super.init(server: server, delegate: delegate, client: inputClient)
 
         initVarnam()
-        Log.debug("Initialized Controller for Client: \(clientManager)")
+        Logger.log.debug("Initialized Controller for Client: \(clientManager)")
     }
     
     func clearState() {
@@ -219,7 +206,7 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client looses focus
     public override func deactivateServer(_ sender: Any!) {
-        Log.debug("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Logger.log.debug("Client: \(clientManager) loosing focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // Do this in case the application is quitting, otherwise we will end up with a SIGSEGV
         dispatch.cancelAll()
         clearState()
@@ -227,17 +214,17 @@ public class VarnamController: IMKInputController {
     
     /// This message is sent when our client gains focus
     public override func activateServer(_ sender: Any!) {
-        Log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Logger.log.debug("Client: \(clientManager) gained focus by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         // There are three sources for current script selection - (a) self.schemeID, (b) config.schemeID and (c) selectedMenuItem.title
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if config.globalScriptSelection, schemeID != config.schemeID {
-            Log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
+            Logger.log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
             initVarnam()
         }
     }
     
     public override func menu() -> NSMenu! {
-        Log.debug("Returning menu")
+        Logger.log.debug("Returning menu")
         // Set the system trey menu selection to reflect our literators; converge (c) -> (a)
         let systemTrayMenu = (NSApp.delegate as! AppDelegate).systemTrayMenu!
         systemTrayMenu.items.forEach() { $0.state = .off }
@@ -246,23 +233,23 @@ public class VarnamController: IMKInputController {
     }
     
     public override func candidates(_ sender: Any!) -> [Any]! {
-        Log.debug("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Logger.log.debug("Returning Candidates for sender: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         return clientManager.candidates
     }
     
     public override func candidateSelected(_ candidateString: NSAttributedString!) {
-        Log.debug("Candidate selected: \(candidateString!)")
+        Logger.log.debug("Candidate selected: \(candidateString!)")
         commitText(candidateString.string)
     }
     
     public override func commitComposition(_ sender: Any!) {
-        Log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
+        Logger.log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
         commit()
     }
     
     @objc public func menuItemSelected(sender: NSDictionary) {
         let item = sender.value(forKey: kIMKCommandMenuItemName) as! NSMenuItem
-        Log.debug("Menu Item Selected: \(item.title)")
+        Logger.log.debug("Menu Item Selected: \(item.title)")
         // Converge (b) -> (c)
         config.schemeID = item.representedObject as! String
         // Converge (a) -> (b)
