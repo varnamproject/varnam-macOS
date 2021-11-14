@@ -15,6 +15,9 @@ import Carbon.HIToolbox
 
 class Log {
     // TODO implement setting from app to enable log levels
+    public static func error(_ text: Any) {
+        print(text)
+    }
     public static func warning(_ text: Any) {
         print(text)
     }
@@ -35,11 +38,18 @@ public class VarnamController: IMKInputController {
     private var cursorPos = 0
     private var preedit = ""
     private (set) var candidates = autoreleasepool { return [String]() }
-    private (set) var varnam: Varnam!
+    private (set) var varnam: Varnam! = nil
     
     private func initVarnam() {
+        if (varnam != nil) {
+            varnam.close()
+        }
         currentScriptName = config.scriptName
-        varnam = try! Varnam("ml")
+        do {
+            varnam = try Varnam("ml")
+        } catch let error {
+            Log.error(error)
+        }
     }
     
     public override init!(server: IMKServer, delegate: Any!, client inputClient: Any) {

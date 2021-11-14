@@ -39,6 +39,10 @@ public class Varnam {
             throw VarnamException(getLastError())
         }
     }
+    
+    public func close() {
+        varnam_close(varnamHandle)
+    }
 
     public func transliterate(_ input: String) -> [String] {
         var arr: UnsafeMutablePointer<varray>? = varray_init()
