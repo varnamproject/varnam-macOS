@@ -9,4 +9,5 @@ until ./installer --enable
 do
   sleep 1
 done
+/Library/Input\ Methods/VarnamIME.app/Contents/MacOS/VarnamIME -import
 exit 0

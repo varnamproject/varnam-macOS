@@ -41,6 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }}
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        for arg in CommandLine.arguments {
+            if arg == "-import" {
+                importVLF()
+                exit(0)
+            }
+        }
+        
         guard let connectionName = Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String else {
             fatalError("Unable to get Connection Name from Info dictionary!")
         }
@@ -62,5 +69,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         Logger.log.debug("Comitting all editing before terminating")
         server.commitComposition(self)
+    }
+    
+    func importVLF() {
+        Varnam.importAllVLFInAssets()
     }
 }
