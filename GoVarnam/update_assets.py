@@ -33,7 +33,7 @@ def copyScheme(schemeID):
 
             with open(
                 packPath, 'rb'
-            ) as f_in, gzip.open(
+            ) as f_in, open(
                 target + '/' + basename(packPath),
                 'wb'
             ) as f_out:
