@@ -106,13 +106,13 @@ public class VarnamController: IMKInputController {
             }
             return true
         case kVK_Escape:
-            if preedit.count == 0 {
+            if preedit.isEmpty {
                return false
             }
             commitText(preedit)
             return true
         case kVK_LeftArrow:
-            if preedit.count == 0 {
+            if preedit.isEmpty {
                 return false
             }
             if cursorPos > 0 {
@@ -121,7 +121,7 @@ public class VarnamController: IMKInputController {
             }
             return true
         case kVK_RightArrow:
-            if preedit.count == 0 {
+            if preedit.isEmpty {
                 return false
             }
             if cursorPos < preedit.count {
@@ -129,9 +129,20 @@ public class VarnamController: IMKInputController {
                 updatePreedit()
             }
             return true
-        // TODO up arrow, down arrow to move between table
+        case kVK_UpArrow:
+            if preedit.isEmpty {
+                return false
+            }
+            clientManager.tableMoveCursorUp(sender)
+            return true
+        case kVK_DownArrow:
+            if preedit.isEmpty {
+                return false
+            }
+            clientManager.tableMoveCursorDown(sender)
+            return true
         case kVK_Delete:
-            if preedit.count == 0 {
+            if preedit.isEmpty {
                 return false
             }
             if (cursorPos > 0) {
@@ -139,26 +150,28 @@ public class VarnamController: IMKInputController {
                 removeAtIndex(&preedit, cursorPos)
                 updatePreedit()
                 updateLookupTable()
-                if preedit.count == 0 {
+                if preedit.isEmpty {
                     /* Current backspace has cleared the preedit. Need to reset the engine state */
                     clearState()
                 }
             }
             return true
         case kVK_ForwardDelete:
-            if preedit.count == 0 {
+            if preedit.isEmpty {
                 return false
             }
             if cursorPos < preedit.count {
                 removeAtIndex(&preedit, cursorPos)
                 updatePreedit()
                 updateLookupTable()
-                if preedit.count == 0 {
+                if preedit.isEmpty {
                     /* Current delete has cleared the preedit. Need to reset the engine state */
                     clearState()
                 }
             }
             return true
+        case kVK_ANSI_1, kVK_ANSI_2, kVK_ANSI_3, kVK_ANSI_4:
+            return false
         default:
             if VarnamController.validInputs.contains(string.unicodeScalars.first!) {
                 NSLog("character event: \(string ?? "")")

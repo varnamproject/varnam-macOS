@@ -59,13 +59,32 @@ class ClientManager: CustomStringConvertible {
         // For some weird reason, when there are duplicates,
         // candidate window makes them hidden
         candidates = NSOrderedSet(array: sugs).array as! [String]
+        updateLookupTable()
+    }
+    
+    func updateLookupTable() {
         candidatesWindow.update()
         candidatesWindow.show()
     }
     
-    // Move between items of candidate table
-    func updateCandidateCursor() {
-
+    func getCurrentLine() -> Int {
+        return candidatesWindow.lineNumberForCandidate(withIdentifier: candidatesWindow.selectedCandidate())
+    }
+    
+    func tableMoveCursor(_ position: Int) {
+        candidatesWindow.selectCandidate(withIdentifier: candidatesWindow.candidateIdentifier(atLineNumber: position)
+        )
+    }
+    
+    // For moving between items of candidate table
+    func tableMoveCursorUp(_ sender: Any?) {
+        tableMoveCursor(getCurrentLine() - 1)
+        updateLookupTable()
+    }
+    func tableMoveCursorDown(_ sender: Any?) {
+        tableMoveCursor(getCurrentLine() + 1)
+        candidatesWindow.clearSelection()
+//        updateLookupTable()
     }
     
     func getCandidate() -> String? {
