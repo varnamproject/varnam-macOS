@@ -28,6 +28,8 @@ Download `VarnamIME.pkg` installer from Releases. Double click to open the insta
 
 The installation instructions is same as LipikaIME's. See it here: https://github.com/ratreya/lipika-ime/wiki#installation
 
+See a demo of how Varnam works: https://www.youtube.com/watch?v=7bvahY0sdWo
+
 ## Building
 
 * Make sure XCode is installed
