@@ -1,6 +1,7 @@
 /*
  * VarnamIME is a user-configurable phonetic Input Method Engine for Mac OS X.
- * Copyright (C) 2018 Ranganath Atreya
+ * Copyright (C) 2018 Ranganath Atreya - LipikaIME
+ * Copyright (C) 2021 Subin Siby - VarnamIME
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -8,7 +9,6 @@
  */
 
 import Foundation
-import LipikaEngine_OSX
 
 struct LanguageConfig: Codable, Equatable, Hashable {
     var identifier: String  // Factory default name of the language
@@ -79,25 +79,6 @@ class VarnamConfig: Config {
         }
         set(value) {
             userDefaults.set(value.rawValue, forKey: #function)
-        }
-    }
-    
-    var schemeName: String {
-        get {
-            return try! userDefaults.string(forKey: #function) ?? LiteratorFactory(config: self).availableSchemes().first!
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
-        }
-    }
-    
-    // TODO remove this
-    var scriptName: String {
-        get {
-            return userDefaults.string(forKey: #function) ?? languageConfig.first(where: { $0.isEnabled })?.identifier ?? languageConfig.first!.identifier
-        }
-        set(value) {
-            userDefaults.set(value, forKey: #function)
         }
     }
     

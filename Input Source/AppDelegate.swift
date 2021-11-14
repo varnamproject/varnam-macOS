@@ -8,7 +8,6 @@
  */
 
 import InputMethodKit
-import LipikaEngine_OSX
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
