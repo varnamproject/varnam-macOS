@@ -8,7 +8,6 @@
  */
 
 import InputMethodKit
-import LipikaEngine_OSX
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -31,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 item.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flags)
                 item.keyEquivalent = item.keyEquivalentModifierMask.contains(.shift) ? key : key.lowercased()
             }
-            if entry.identifier == config.scriptName {
+            if entry.identifier == config.schemeID {
                 item.state = .on
             }
             item.representedObject = entry.identifier
@@ -42,6 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }}
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        for arg in CommandLine.arguments {
+            if arg == "-import" {
+                importVLF()
+                exit(0)
+            }
+        }
+        
         guard let connectionName = Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String else {
             fatalError("Unable to get Connection Name from Info dictionary!")
         }
@@ -63,5 +69,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         Logger.log.debug("Comitting all editing before terminating")
         server.commitComposition(self)
+    }
+    
+    func importVLF() {
+        Varnam.importAllVLFInAssets()
     }
 }

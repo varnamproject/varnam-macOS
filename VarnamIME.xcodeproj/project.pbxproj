@@ -10,14 +10,16 @@
 		04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
 		04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D0A683273FC367006C3B54 /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
+		04D0A697274112BE006C3B54 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 04D0A696274112BE006C3B54 /* assets */; };
+		04D0A69927411F47006C3B54 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69827411F47006C3B54 /* Config.swift */; };
+		04D0A69B27411F6D006C3B54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69A27411F6D006C3B54 /* Logger.swift */; };
+		04D0A69D27411FB1006C3B54 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69C27411FB1006C3B54 /* Common.swift */; };
 		A5122A4E20D42A2000575848 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01A20CC658000C95844 /* InputSource.swift */; };
 		A5122A4F20D42A2000575848 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5122A4220D420E100575848 /* main.swift */; };
 		A5122A5020D42A9500575848 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
 		A5122A5120D42AA600575848 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
 		A53AD00120CC347900C95844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD00020CC347900C95844 /* AppDelegate.swift */; };
 		A53AD00320CC347900C95844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53AD00220CC347900C95844 /* Assets.xcassets */; };
-		A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53AD00F20CC641900C95844 /* LipikaEngine_OSX.framework */; };
 		A53AD01720CC654700C95844 /* VarnamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01620CC654700C95844 /* VarnamConfig.swift */; };
 		A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01C20CC659C00C95844 /* ClientManager.swift */; };
 		A53AD01F20CC660900C95844 /* VarnamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AD01E20CC660900C95844 /* VarnamController.swift */; };
@@ -32,8 +34,6 @@
 		A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182820CC6BEA003A73EB /* Cocoa.framework */; };
 		A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546182A20CC6BF3003A73EB /* InputMethodKit.framework */; };
 		A54B15D724900FC000E013A1 /* LiteratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54B15D624900FC000E013A1 /* LiteratorView.swift */; };
-		A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55381F421D703EA00A3CD8A /* MappingStore.swift */; };
-		A55381F621D706E500A3CD8A /* MappingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55381F421D703EA00A3CD8A /* MappingStore.swift */; };
 		A5698AE9247EFA8E00443158 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52905DC234EC67900A8D95E /* MainView.swift */; };
 		A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C00A32353705C00B53051 /* SettingsView.swift */; };
 		A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585A17C24AC28FC00816D1E /* PersistenceView.swift */; };
@@ -60,13 +60,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		04D0A69527411260006C3B54 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A53AD01320CC643700C95844 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A53AD01220CC643700C95844 /* LipikaEngine_OSX.framework in Embed Frameworks */,
 				04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -90,6 +99,10 @@
 		04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VarnamIME-Bridging-Header.h"; sourceTree = "<group>"; };
 		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
 		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
+		04D0A696274112BE006C3B54 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		04D0A69827411F47006C3B54 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		04D0A69A27411F6D006C3B54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		04D0A69C27411FB1006C3B54 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		A5122A4220D420E100575848 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A5122A4720D429D300575848 /* Installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Installer; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52905DC234EC67900A8D95E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -118,7 +131,6 @@
 		A546182820CC6BEA003A73EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A546182A20CC6BF3003A73EB /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		A54B15D624900FC000E013A1 /* LiteratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteratorView.swift; sourceTree = "<group>"; };
-		A55381F421D703EA00A3CD8A /* MappingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingStore.swift; sourceTree = "<group>"; };
 		A585A17C24AC28FC00816D1E /* PersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceView.swift; sourceTree = "<group>"; };
 		A58C00A32353705C00B53051 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A59281E020D45634003013B8 /* TrayIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TrayIcon.icns; sourceTree = "<group>"; };
@@ -149,7 +161,6 @@
 				A546182920CC6BEA003A73EB /* Cocoa.framework in Frameworks */,
 				04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */,
 				A546182B20CC6BF3003A73EB /* InputMethodKit.framework in Frameworks */,
-				A53AD01520CC64FD00C95844 /* LipikaEngine_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +180,7 @@
 		04D0A67A273FC1F1006C3B54 /* GoVarnam */ = {
 			isa = PBXGroup;
 			children = (
+				04D0A696274112BE006C3B54 /* assets */,
 				04D0A682273FC367006C3B54 /* Varnam.swift */,
 				04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */,
 				04D0A67B273FC20D006C3B54 /* VarnamIME-Bridging-Header.h */,
@@ -207,8 +219,10 @@
 				A53AD00020CC347900C95844 /* AppDelegate.swift */,
 				A53AD01C20CC659C00C95844 /* ClientManager.swift */,
 				A53AD01E20CC660900C95844 /* VarnamController.swift */,
-				A55381F421D703EA00A3CD8A /* MappingStore.swift */,
 				A5DC681E22335F72006FC519 /* AsyncDispatcher.swift */,
+				04D0A69827411F47006C3B54 /* Config.swift */,
+				04D0A69A27411F6D006C3B54 /* Logger.swift */,
+				04D0A69C27411FB1006C3B54 /* Common.swift */,
 			);
 			path = "Input Source";
 			sourceTree = "<group>";
@@ -316,6 +330,7 @@
 				A53ACFFA20CC347900C95844 /* Frameworks */,
 				A53ACFFB20CC347900C95844 /* Resources */,
 				A53AD01320CC643700C95844 /* Embed Frameworks */,
+				04D0A69527411260006C3B54 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -403,6 +418,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D0A697274112BE006C3B54 /* assets in Resources */,
 				A546182720CC6BB2003A73EB /* LICENSE in Resources */,
 				A59281E120D45653003013B8 /* TrayIcon.icns in Resources */,
 				A5BDA2F620D06FFC00C9D006 /* MainMenu.xib in Resources */,
@@ -455,8 +471,10 @@
 				A53AD01F20CC660900C95844 /* VarnamController.swift in Sources */,
 				04D0A683273FC367006C3B54 /* Varnam.swift in Sources */,
 				A53AD01720CC654700C95844 /* VarnamConfig.swift in Sources */,
+				04D0A69B27411F6D006C3B54 /* Logger.swift in Sources */,
 				A53AD01D20CC659C00C95844 /* ClientManager.swift in Sources */,
-				A55381F521D703EA00A3CD8A /* MappingStore.swift in Sources */,
+				04D0A69927411F47006C3B54 /* Config.swift in Sources */,
+				04D0A69D27411FB1006C3B54 /* Common.swift in Sources */,
 				A5DC681F22335F72006FC519 /* AsyncDispatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +490,6 @@
 				A59364ED2481D12100674FBD /* MappingsView.swift in Sources */,
 				A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */,
 				A5698AEA247EFA8E00443158 /* SettingsView.swift in Sources */,
-				A55381F621D706E500A3CD8A /* MappingStore.swift in Sources */,
 				A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */,
 				A54397E020D4D6840011C7B7 /* VarnamConfig.swift in Sources */,
 				A54397CC20D4D2F20011C7B7 /* AppDelegate.swift in Sources */,
