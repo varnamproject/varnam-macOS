@@ -101,7 +101,7 @@
 
 /* Begin PBXFileReference section */
 		043C819027413A2400E6832E /* LipikaEngine_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LipikaEngine_OSX.framework; path = "../lipika-engine/build/Release/LipikaEngine_OSX.framework"; sourceTree = "<group>"; };
-		043C819527413C1E00E6832E /* VarnamApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VarnamApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		043C819527413C1E00E6832E /* govarnam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "govarnam-Bridging-Header.h"; sourceTree = "<group>"; };
 		043C819A27413CB500E6832E /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
 		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				04D0A696274112BE006C3B54 /* assets */,
 				04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */,
 				04D0A682273FC367006C3B54 /* Varnam.swift */,
-				043C819527413C1E00E6832E /* VarnamApp-Bridging-Header.h */,
+				043C819527413C1E00E6832E /* govarnam-Bridging-Header.h */,
 			);
 			path = GoVarnam;
 			sourceTree = "<group>";
@@ -716,7 +716,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -755,7 +755,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.inputmethod.Varnam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamIME-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -793,7 +793,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -832,7 +832,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.varnamproject.mac.VarnamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/VarnamApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GoVarnam/govarnam-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

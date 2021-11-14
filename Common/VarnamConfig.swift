@@ -50,24 +50,6 @@ class VarnamConfig: Config {
         userDefaults.removeObject(forKey: "languageConfig")
     }
 
-    override var stopCharacter: UnicodeScalar {
-        get {
-            return userDefaults.string(forKey: #function)?.unicodeScalars.first ?? super.stopCharacter
-        }
-        set(value) {
-            userDefaults.set(String(value), forKey: #function)
-        }
-    }
-    
-    override var escapeCharacter: UnicodeScalar {
-        get {
-            return userDefaults.string(forKey: #function)?.unicodeScalars.first ?? super.escapeCharacter
-        }
-        set(value) {
-            userDefaults.set(String(value), forKey: #function)
-        }
-    }
-
     override var logLevel: Logger.Level {
         get {
             if let logLevelString = userDefaults.string(forKey: #function) {

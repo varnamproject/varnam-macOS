@@ -38,9 +38,8 @@ struct SettingsView: View {
                     }
                 }
             }
-            Spacer(minLength: 38)
+            Spacer(minLength: 50)
             PersistenceView(model: model, context: "settings")
-            Spacer(minLength: 25)
         }.padding(20)
     }
 }

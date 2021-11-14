@@ -38,7 +38,9 @@ extension String {
 public class Varnam {
     private var varnamHandle: Int32 = 0;
     
-    static let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
+//    static let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
+    // Hardcoding this because VarnamApp also access libgovarnam
+    static let assetsFolderPath = "/Library/Input Methods/VarnamIME.app/Contents/Resources/assets"
     static func importAllVLFInAssets() {
         // TODO import only necessary ones
         let fm = FileManager.default

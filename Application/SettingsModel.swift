@@ -50,8 +50,8 @@ class SettingsModel: Config, ObservableObject, PersistenceModel {
     }
     
     func save() {
-        logLevelString = config.logLevel.rawValue
-        learnWords = config.learnWords
+        config.logLevel = logLevel
+        config.learnWords = learnWords
         reeval()
     }
     
