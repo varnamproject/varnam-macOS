@@ -16,6 +16,8 @@ class ClientManager: CustomStringConvertible {
 
     private var candidatesWindow: IMKCandidates { return (NSApp.delegate as! AppDelegate).candidatesWindow }
     private (set) var candidates = autoreleasepool { return [String]() }
+    private var tableCursorPos = 0 // Candidates table cursor position
+
     // Cache, otherwise clients quitting can sometimes SEGFAULT us
     private var _description: String
     var description: String {
@@ -63,21 +65,29 @@ class ClientManager: CustomStringConvertible {
     }
     
     func updateLookupTable() {
+        tableCursorPos = 0
         candidatesWindow.update()
         candidatesWindow.show()
     }
     
     // For moving between items of candidate table
-    func interpretEvents(_ event: [NSEvent]) {
-        candidatesWindow.interpretKeyEvents(event)
+    func tableMoveEvent(_ event: NSEvent) {
+        if event.keyCode == kVK_UpArrow && tableCursorPos > 0 {
+            // TODO allow moving to the end
+            // This would need a custom candidate window
+            // https://github.com/lennylxx/google-input-tools-macos/blob/main/GoogleInputTools/CandidatesWindow.swift
+            tableCursorPos -= 1
+        } else if event.keyCode == kVK_DownArrow && tableCursorPos < candidates.count - 1 {
+            tableCursorPos += 1
+        }
+        candidatesWindow.interpretKeyEvents([event])
     }
     
     func getCandidate() -> String? {
         if candidates.count == 0 {
             return nil
         } else {
-            // TODO get text from current highlighted candidate instead of first one
-            return candidates[0]
+            return candidates[tableCursorPos]
         }
     }
     

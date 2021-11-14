@@ -139,7 +139,7 @@ public class VarnamController: IMKInputController {
             if preedit.isEmpty {
                 return false
             }
-            clientManager.interpretEvents([event])
+            clientManager.tableMoveEvent(event)
             return true
         case kVK_Delete:
             if preedit.isEmpty {
