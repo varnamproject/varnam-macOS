@@ -26,15 +26,17 @@ Resources that helped in making IME on macOS (ordered by most important to the l
 
 Download `VarnamIME.pkg` installer from Releases. Double click to open the installer. You might need to explicitly allow installer to run from security settings.
 
-For now, you need to codesign manually to run it:
+After installation, you need to codesign manually to run it:
 ```
 sudo codesign --force --deep --sign - /Library/Input\ Methods/VarnamIME.app
 sudo codesign --force --deep --sign - /Applications/VarnamApp.app
-/Library/Input\ Methods/VarnamIME.app -import
-open /Library/Input\ Methods/VarnamIME.app
+/Library/Input\ Methods/VarnamIME.app/Contents/MacOS/VarnamIME -import # Import words
+open /Library/Input\ Methods/VarnamIME.app # Run IME
 ```
 
 This will get fixed once an Apple Developer account is purchased and the apps are signed with an official certificate.
+
+After this, VarnamIME will be running in the background and you can switch to it from the system tray: https://apple.stackexchange.com/questions/135370/how-can-i-set-up-a-keyboard-shortcut-for-switching-input-source
 
 If the installation didn't enable IME by default, try this: https://github.com/ratreya/lipika-ime/wiki#installation
 
