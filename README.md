@@ -26,7 +26,17 @@ Resources that helped in making IME on macOS (ordered by most important to the l
 
 Download `VarnamIME.pkg` installer from Releases. Double click to open the installer. You might need to explicitly allow installer to run from security settings.
 
-The installation instructions is same as LipikaIME's. See it here: https://github.com/ratreya/lipika-ime/wiki#installation
+For now, you need to codesign manually to run it:
+```
+sudo codesign --force --deep --sign - /Library/Input\ Methods/VarnamIME.app
+sudo codesign --force --deep --sign - /Applications/VarnamApp.app
+/Library/Input\ Methods/VarnamIME.app -import
+open /Library/Input\ Methods/VarnamIME.app
+```
+
+This will get fixed once an Apple Developer account is purchased and the apps are signed with an official certificate.
+
+If the installation didn't enable IME by default, try this: https://github.com/ratreya/lipika-ime/wiki#installation
 
 See a demo of how Varnam works: https://www.youtube.com/watch?v=7bvahY0sdWo
 
