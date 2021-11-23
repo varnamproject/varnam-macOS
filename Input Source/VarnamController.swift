@@ -15,8 +15,6 @@ import Carbon.HIToolbox
 
 @objc(VarnamController)
 public class VarnamController: IMKInputController {
-    static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
-
     let config = VarnamConfig()
     let dispatch = AsyncDispatcher()
     private let clientManager: ClientManager
@@ -28,7 +26,16 @@ public class VarnamController: IMKInputController {
     private var schemeID = "ml"
     private (set) var varnam: Varnam! = nil
     
-    private func initVarnam() {
+    private (set) var validInputs: CharacterSet;
+    private (set) var wordBreakChars: CharacterSet;
+    
+    private func initVarnam() -> Bool {
+        // This is being set because VarnamApp doesn't know
+        // the location who also access govarnam
+        if config.vstDir == "" {
+            config.vstDir = Varnam.assetsFolderPath
+        }
+
         if (varnam != nil) {
             closeVarnam()
         }
@@ -37,13 +44,9 @@ public class VarnamController: IMKInputController {
             varnam = try Varnam(schemeID)
         } catch let error {
             Logger.log.error(error.localizedDescription)
+            return false
         }
-        
-        // This is being set because VarnamApp doesn't know
-        // the location who also access govarnam
-        if config.vstDir == "" {
-            config.vstDir = Varnam.assetsFolderPath
-        }
+        return true
     }
     
     private func closeVarnam() {
@@ -61,9 +64,24 @@ public class VarnamController: IMKInputController {
             return nil
         }
         self.clientManager = clientManager
+        
+        validInputs = CharacterSet.letters
+        wordBreakChars = CharacterSet.punctuationCharacters
+        
+        // TODO get special characters from varnam via SearchSymbolTable
+        let validSpecialInputs = [
+            "_", // Used for ZWJ
+            "~" // Used usually for virama
+        ]
+        for char in validSpecialInputs {
+            let charScalar = char.unicodeScalars.first!
+            validInputs.insert(charScalar)
+            wordBreakChars.remove(charScalar)
+        }
+        
         super.init(server: server, delegate: delegate, client: inputClient)
-
-        initVarnam()
+        
+        _ = initVarnam()
         Logger.log.debug("Initialized Controller for Client: \(clientManager)")
     }
     
@@ -78,11 +96,21 @@ public class VarnamController: IMKInputController {
         clearState()
     }
     
-    // Commits the first candidate if available
-    func commit() {
-        if let text = clientManager.getCandidate() {
+    func commitCandidateAt(_ position: Int) {
+        if position == 0 {
+            commitText(preedit)
+        } else if let text = clientManager.getCandidateAt(position-1) {
             commitText(text)
         }
+    }
+    
+    // Commits the first candidate if available
+    func commit() -> Bool {
+        if let text = clientManager.getCandidate() {
+            commitText(text)
+            return true
+        }
+        return false
     }
     
     private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
@@ -184,11 +212,32 @@ public class VarnamController: IMKInputController {
             }
             return true
         default:
-            if let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
-                NSLog("character event: \(chars)")
-                return processInput(chars)
+            if let chars = event.characters, chars.unicodeScalars.count == 1 {
+                let numericKey: Int = Int(chars) ?? 10
+                
+                if numericKey >= 0 && numericKey <= 9 {
+                    // Numeric key press
+                    commitCandidateAt(numericKey)
+                    return true
+                }
+                
+                let charScalar = chars.unicodeScalars.first!
+                
+                if wordBreakChars.contains(charScalar) {
+                    if let text = clientManager.getCandidate() {
+                        commitText(text + chars)
+                        return true
+                    }
+                    return false
+                }
+                
+                if event.modifierFlags.isSubset(of: [.capsLock, .shift]), validInputs.contains(charScalar) {
+                    NSLog("character event: \(chars)")
+                    return processInput(chars)
+                }
             }
         }
+        
         return false
     }
     
