@@ -92,8 +92,17 @@ public class VarnamController: IMKInputController {
     }
     
     func commitText(_ text: String) {
-        clientManager.finalize(text)
+        clientManager.commitText(text)
         clearState()
+        
+        if config.learnWords {
+            Logger.log.debug("Learning \(text)")
+            do {
+                try varnam.learn(text)
+            } catch let error {
+                Logger.log.warning(error.localizedDescription)
+            }
+        }
     }
     
     func commitCandidateAt(_ position: Int) {
@@ -232,7 +241,7 @@ public class VarnamController: IMKInputController {
                 }
                 
                 if event.modifierFlags.isSubset(of: [.capsLock, .shift]), validInputs.contains(charScalar) {
-                    NSLog("character event: \(chars)")
+                    Logger.log.debug("character event: \(chars)")
                     return processInput(chars)
                 }
             }

@@ -75,10 +75,7 @@ public class Varnam {
     internal init(_ schemeID: String = "ml") throws {
         _ = VarnamInit.once
 
-        schemeID.withCString {
-            let rc = varnam_init_from_id(UnsafeMutablePointer(mutating: $0), &varnamHandle)
-            try! checkError(rc)
-        }
+        try checkError(varnam_init_from_id(schemeID.toCStr(), &varnamHandle))
     }
     
     public func getLastError() -> String {
@@ -112,6 +109,10 @@ public class Varnam {
             results.append(word)
         }
         return results
+    }
+    
+    public func learn(_ input: String) throws {
+        try checkError(varnam_learn(varnamHandle, input.toCStr(), 0))
     }
     
     public func importFromFile(_ path: String) {

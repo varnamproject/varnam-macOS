@@ -99,7 +99,7 @@ class ClientManager: CustomStringConvertible {
         }
     }
     
-    func finalize(_ output: String) {
+    func commitText(_ output: String) {
         Logger.log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()
