@@ -115,6 +115,10 @@ public class Varnam {
         try checkError(varnam_learn(varnamHandle, input.toCStr(), 0))
     }
     
+    public func unlearn(_ input: String) throws {
+        try checkError(varnam_unlearn(varnamHandle, input.toCStr()))
+    }
+    
     public func importFromFile(_ path: String) {
         varnam_import(varnamHandle, path.toCStr())
     }

@@ -143,6 +143,19 @@ public class VarnamController: IMKInputController {
         
         let keyCode = Int(event.keyCode)
         
+        if event.modifierFlags.contains(.command) || event.modifierFlags.contains(.control) {
+            if preedit.count == 0 {
+                return false
+            }
+            if keyCode == kVK_Delete || keyCode == kVK_ForwardDelete {
+                Logger.log.debug("CMD + DEL = Unlearn word")
+                if let text = clientManager.getCandidate() {
+                    try! varnam.unlearn(text)
+                    updateLookupTable()
+                }
+            }
+        }
+        
         switch keyCode {
         case kVK_Space:
             let text = clientManager.getCandidate()
