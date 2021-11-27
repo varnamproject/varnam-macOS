@@ -8,15 +8,18 @@
 
 import Foundation
 
+// Thank you Martin R
+// https://stackoverflow.com/a/44548174/1372424
 public struct VarnamException: Error {
-    let message: String
-
-    init(_ message: String) {
-        self.message = message
+    let msg: String
+    init(_ msg: String) {
+        self.msg = msg
     }
+}
 
-    public var localizedDescription: String {
-        return message
+extension VarnamException: LocalizedError {
+    public var errorDescription: String? {
+        return NSLocalizedString(msg, comment: "")
     }
 }
 
@@ -27,6 +30,12 @@ public struct SchemeDetails {
     var Author: String
     var CompiledDate: String
     var IsStable: Bool
+}
+
+public struct Suggestion {
+    var Word: String
+    var Weight: Int
+    var LearnedOn: Int
 }
 
 extension String {
@@ -67,7 +76,6 @@ public class Varnam {
     struct VarnamInit {
         static let once = VarnamInit()
         init() {
-            print(assetsFolderPath)
             Varnam.setVSTLookupDir(assetsFolderPath)
         }
     }
@@ -103,7 +111,7 @@ public class Varnam {
 
         var results = [String]()
         for i in (0..<varray_length(arr)) {
-            let sug = varray_get(arr, i).assumingMemoryBound(to: Suggestion.self
+            let sug = varray_get(arr, i).assumingMemoryBound(to: Suggestion_t.self
             )
             let word = String(cString: sug.pointee.Word)
             results.append(word)
@@ -121,6 +129,26 @@ public class Varnam {
     
     public func importFromFile(_ path: String) {
         varnam_import(varnamHandle, path.toCStr())
+    }
+    
+    public func getRecentlyLearnedWords() throws -> [Suggestion] {
+        var arr: UnsafeMutablePointer<varray>? = varray_init()
+        try checkError(varnam_get_recently_learned_words(varnamHandle, 1, 0, 30, &arr))
+        
+        var results = [Suggestion]()
+        for i in (0..<varray_length(arr)) {
+            let cSug = varray_get(arr, i).assumingMemoryBound(to: Suggestion_t.self
+            )
+            let sug = cSug.pointee
+            results.append(
+                Suggestion(
+                    Word: String(cString: sug.Word),
+                    Weight: Int(sug.Weight),
+                    LearnedOn: Int(sug.LearnedOn)
+                )
+            )
+        }
+        return results
     }
     
     public static func getAllSchemeDetails() -> [SchemeDetails] {

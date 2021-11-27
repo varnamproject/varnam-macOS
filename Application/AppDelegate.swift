@@ -39,10 +39,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func showReleaseNotes(_ sender: NSMenuItem) {
-        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/varnam-ime/releases")!)
+        NSWorkspace.shared.open(URL(string: "https://github.com/varnamproject/varnam-macOS/releases")!)
     }
     
     @IBAction func reportIssue(_ sender: NSMenuItem) {
-        NSWorkspace.shared.open(URL(string: "https://github.com/ratreya/varnam-ime/issues/new")!)
+        NSWorkspace.shared.open(URL(string: "https://github.com/varnamproject/varnam-macOS/issues/new")!)
     }
 }

@@ -16,17 +16,23 @@ struct MainView: View {
         TabView(selection: $currentTab) {
             SettingsView().tabItem {
                 Text("Settings")
+            }.tag(0)
+            .onAppear() {
+                self.currentTab = 0
+            }
+            LanguageView().tabItem {
+                Text("Languages")
+            }.tag(1)
+            .onAppear() {
+                self.currentTab = 1
+            }
+            RecentlyLearnedWordsView().tabItem {
+                Text("Recently Learned Words")
             }.tag(2)
             .onAppear() {
                 self.currentTab = 2
             }
-            LanguageView().tabItem {
-                Text("Languages")
-            }.tag(3)
-            .onAppear() {
-                self.currentTab = 3
-            }
-            }.padding(20)
+        }.padding(20)
     }
 }
 
