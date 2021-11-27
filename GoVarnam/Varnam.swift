@@ -8,15 +8,18 @@
 
 import Foundation
 
+// Thank you Martin R
+// https://stackoverflow.com/a/44548174/1372424
 public struct VarnamException: Error {
-    let message: String
-
-    init(_ message: String) {
-        self.message = message
+    let msg: String
+    init(_ msg: String) {
+        self.msg = msg
     }
+}
 
-    public var localizedDescription: String {
-        return message
+extension VarnamException: LocalizedError {
+    public var errorDescription: String? {
+        return NSLocalizedString(msg, comment: "")
     }
 }
 
@@ -29,6 +32,12 @@ public struct SchemeDetails {
     var IsStable: Bool
 }
 
+public struct Suggestion {
+    var Word: String
+    var Weight: Int
+    var LearnedOn: Int
+}
+
 extension String {
     func toCStr() -> UnsafeMutablePointer<CChar>? {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String)
@@ -38,7 +47,15 @@ extension String {
 public class Varnam {
     private var varnamHandle: Int32 = 0;
     
+    // VSTs are stored in VarnamIME.app's assets.
+    // VarnamApp.app will know this path by a config value
+    // set by the IME app. Kind of weird, yes.
+    // Setting the lookup dir to assetsFolderPath only
+    // works for VarnamIME.app. For VarnamApp, the VST
+    // lookup path should be set from the config value.
+
     static let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
+
     static func importAllVLFInAssets() {
         // TODO import only necessary ones
         let fm = FileManager.default
@@ -60,25 +77,11 @@ public class Varnam {
     }
     
     static func setVSTLookupDir(_ path: String) {
-        varnam_set_vst_lookup_dir(assetsFolderPath.toCStr())
-    }
-    
-    // This will only run once
-    struct VarnamInit {
-        static let once = VarnamInit()
-        init() {
-            print(assetsFolderPath)
-            Varnam.setVSTLookupDir(assetsFolderPath)
-        }
+        varnam_set_vst_lookup_dir(path.toCStr())
     }
     
     internal init(_ schemeID: String = "ml") throws {
-        _ = VarnamInit.once
-
-        schemeID.withCString {
-            let rc = varnam_init_from_id(UnsafeMutablePointer(mutating: $0), &varnamHandle)
-            try! checkError(rc)
-        }
+        try checkError(varnam_init_from_id(schemeID.toCStr(), &varnamHandle))
     }
     
     public func getLastError() -> String {
@@ -106,7 +109,7 @@ public class Varnam {
 
         var results = [String]()
         for i in (0..<varray_length(arr)) {
-            let sug = varray_get(arr, i).assumingMemoryBound(to: Suggestion.self
+            let sug = varray_get(arr, i).assumingMemoryBound(to: Suggestion_t.self
             )
             let word = String(cString: sug.pointee.Word)
             results.append(word)
@@ -114,13 +117,39 @@ public class Varnam {
         return results
     }
     
+    public func learn(_ input: String) throws {
+        try checkError(varnam_learn(varnamHandle, input.toCStr(), 0))
+    }
+    
+    public func unlearn(_ input: String) throws {
+        try checkError(varnam_unlearn(varnamHandle, input.toCStr()))
+    }
+    
     public func importFromFile(_ path: String) {
         varnam_import(varnamHandle, path.toCStr())
     }
     
-    public static func getAllSchemeDetails() -> [SchemeDetails] {
-        _ = VarnamInit.once
+    public func getRecentlyLearnedWords() throws -> [Suggestion] {
+        var arr: UnsafeMutablePointer<varray>? = varray_init()
+        try checkError(varnam_get_recently_learned_words(varnamHandle, 1, 0, 30, &arr))
         
+        var results = [Suggestion]()
+        for i in (0..<varray_length(arr)) {
+            let cSug = varray_get(arr, i).assumingMemoryBound(to: Suggestion_t.self
+            )
+            let sug = cSug.pointee
+            results.append(
+                Suggestion(
+                    Word: String(cString: sug.Word),
+                    Weight: Int(sug.Weight),
+                    LearnedOn: Int(sug.LearnedOn)
+                )
+            )
+        }
+        return results
+    }
+    
+    public static func getAllSchemeDetails() -> [SchemeDetails] {
         var schemes = [SchemeDetails]()
 
         let arr = varnam_get_all_scheme_details()

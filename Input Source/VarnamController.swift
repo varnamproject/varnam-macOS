@@ -15,8 +15,6 @@ import Carbon.HIToolbox
 
 @objc(VarnamController)
 public class VarnamController: IMKInputController {
-    static let validInputs = CharacterSet.alphanumerics.union(CharacterSet.whitespaces).union(CharacterSet.punctuationCharacters).union(.symbols)
-
     let config = VarnamConfig()
     let dispatch = AsyncDispatcher()
     private let clientManager: ClientManager
@@ -28,7 +26,10 @@ public class VarnamController: IMKInputController {
     private var schemeID = "ml"
     private (set) var varnam: Varnam! = nil
     
-    private func initVarnam() {
+    private (set) var validInputs: CharacterSet;
+    private (set) var wordBreakChars: CharacterSet;
+    
+    private func initVarnam() -> Bool {
         if (varnam != nil) {
             closeVarnam()
         }
@@ -37,13 +38,9 @@ public class VarnamController: IMKInputController {
             varnam = try Varnam(schemeID)
         } catch let error {
             Logger.log.error(error.localizedDescription)
+            return false
         }
-        
-        // This is being set because VarnamApp doesn't know
-        // the location who also access govarnam
-        if config.vstDir == "" {
-            config.vstDir = Varnam.assetsFolderPath
-        }
+        return true
     }
     
     private func closeVarnam() {
@@ -61,9 +58,24 @@ public class VarnamController: IMKInputController {
             return nil
         }
         self.clientManager = clientManager
+        
+        validInputs = CharacterSet.letters
+        wordBreakChars = CharacterSet.punctuationCharacters
+        
+        // TODO get special characters from varnam via SearchSymbolTable
+        let validSpecialInputs = [
+            "_", // Used for ZWJ
+            "~" // Used usually for virama
+        ]
+        for char in validSpecialInputs {
+            let charScalar = char.unicodeScalars.first!
+            validInputs.insert(charScalar)
+            wordBreakChars.remove(charScalar)
+        }
+        
         super.init(server: server, delegate: delegate, client: inputClient)
-
-        initVarnam()
+        
+        _ = initVarnam()
         Logger.log.debug("Initialized Controller for Client: \(clientManager)")
     }
     
@@ -74,15 +86,42 @@ public class VarnamController: IMKInputController {
     }
     
     func commitText(_ text: String) {
-        clientManager.finalize(text)
+        clientManager.commitText(text)
         clearState()
+        
+        if config.learnWords {
+            Logger.log.debug("Learning \(text)")
+            do {
+                try varnam.learn(text)
+            } catch let error {
+                Logger.log.warning(error.localizedDescription)
+            }
+        }
+    }
+    
+    func commitCandidateAt(_ position: Int) {
+        if position == 0 {
+            commitText(preedit)
+        } else if let text = clientManager.getCandidateAt(position-1) {
+            commitText(text)
+        }
+    }
+    
+    func commitPreedit() -> Bool {
+        if preedit.isEmpty {
+           return false
+        }
+        commitText(preedit)
+        return true
     }
     
     // Commits the first candidate if available
-    func commit() {
+    func commit() -> Bool {
         if let text = clientManager.getCandidate() {
             commitText(text)
+            return true
         }
+        return false
     }
     
     private func insertAtIndex(_ source: inout String, _ location: String.IndexDistance, _ char: String!) {
@@ -106,6 +145,19 @@ public class VarnamController: IMKInputController {
         
         let keyCode = Int(event.keyCode)
         
+        if event.modifierFlags.contains(.command) || event.modifierFlags.contains(.control) {
+            if preedit.count == 0 {
+                return false
+            }
+            if keyCode == kVK_Delete || keyCode == kVK_ForwardDelete {
+                Logger.log.debug("CMD + DEL = Unlearn word")
+                if let text = clientManager.getCandidate() {
+                    try! varnam.unlearn(text)
+                    updateLookupTable()
+                }
+            }
+        }
+        
         switch keyCode {
         case kVK_Space:
             let text = clientManager.getCandidate()
@@ -118,18 +170,13 @@ public class VarnamController: IMKInputController {
         case kVK_Return:
             let text = clientManager.getCandidate()
             if text == nil {
-                commitText(preedit)
-                return false
+                return commitPreedit()
             } else {
                 commitText(text!)
             }
             return true
         case kVK_Escape:
-            if preedit.isEmpty {
-               return false
-            }
-            commitText(preedit)
-            return true
+            return commitPreedit()
         case kVK_LeftArrow:
             if preedit.isEmpty {
                 return false
@@ -184,11 +231,32 @@ public class VarnamController: IMKInputController {
             }
             return true
         default:
-            if let chars = event.characters, chars.unicodeScalars.count == 1, event.modifierFlags.isSubset(of: [.capsLock, .shift]), VarnamController.validInputs.contains(chars.unicodeScalars.first!) {
-                NSLog("character event: \(chars)")
-                return processInput(chars)
+            if let chars = event.characters, chars.unicodeScalars.count == 1 {
+                let numericKey: Int = Int(chars) ?? 10
+                
+                if numericKey >= 0 && numericKey <= 9 {
+                    // Numeric key press
+                    commitCandidateAt(numericKey)
+                    return true
+                }
+                
+                let charScalar = chars.unicodeScalars.first!
+                
+                if wordBreakChars.contains(charScalar) {
+                    if let text = clientManager.getCandidate() {
+                        commitText(text + chars)
+                        return true
+                    }
+                    return false
+                }
+                
+                if event.modifierFlags.isSubset(of: [.capsLock, .shift]), validInputs.contains(charScalar) {
+                    Logger.log.debug("character event: \(chars)")
+                    return processInput(chars)
+                }
             }
         }
+        
         return false
     }
     
@@ -231,10 +299,10 @@ public class VarnamController: IMKInputController {
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if schemeID != config.schemeID {
             Logger.log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
-            initVarnam()
+            _ = initVarnam()
         }
         if (varnam == nil) {
-            initVarnam()
+            _ = initVarnam()
         }
     }
     
@@ -259,7 +327,9 @@ public class VarnamController: IMKInputController {
     
     public override func commitComposition(_ sender: Any!) {
         Logger.log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        commit()
+        // This is usually called when current input method is changed.
+        // Some apps also call to commit
+        _ = commitPreedit()
     }
     
     @objc public func menuItemSelected(sender: NSDictionary) {
@@ -268,6 +338,6 @@ public class VarnamController: IMKInputController {
         // Converge (b) -> (c)
         config.schemeID = item.representedObject as! String
         // Converge (a) -> (b)
-        initVarnam()
+        _ = initVarnam()
     }
 }

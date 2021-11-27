@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040A907E27523D2F008E365B /* RLWTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A907D27523D2F008E365B /* RLWTable.swift */; };
 		043C818D274139D900E6832E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69827411F47006C3B54 /* Config.swift */; };
 		043C818E274139DC00E6832E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69A27411F6D006C3B54 /* Logger.swift */; };
 		043C818F274139DE00E6832E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A69C27411FB1006C3B54 /* Common.swift */; };
@@ -14,6 +15,7 @@
 		043C819B27413CB500E6832E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C819A27413CB500E6832E /* SettingsView.swift */; };
 		043C819C27413D8000E6832E /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
 		043C819D27413D8000E6832E /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0460D233274D668B005B91DB /* RecentlyLearnedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0460D232274D668B005B91DB /* RecentlyLearnedWordsView.swift */; };
 		04D0A680273FC2BC006C3B54 /* libgovarnam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; };
 		04D0A681273FC2C0006C3B54 /* libgovarnam.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D0A683273FC367006C3B54 /* Varnam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0A682273FC367006C3B54 /* Varnam.swift */; };
@@ -97,9 +99,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		040A907D27523D2F008E365B /* RLWTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLWTable.swift; sourceTree = "<group>"; };
 		043C819027413A2400E6832E /* LipikaEngine_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LipikaEngine_OSX.framework; path = "../lipika-engine/build/Release/LipikaEngine_OSX.framework"; sourceTree = "<group>"; };
 		043C819527413C1E00E6832E /* govarnam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "govarnam-Bridging-Header.h"; sourceTree = "<group>"; };
 		043C819A27413CB500E6832E /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0460D232274D668B005B91DB /* RecentlyLearnedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyLearnedWordsView.swift; sourceTree = "<group>"; };
 		04D0A67F273FC2BC006C3B54 /* libgovarnam.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgovarnam.dylib; sourceTree = "<group>"; };
 		04D0A682273FC367006C3B54 /* Varnam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varnam.swift; sourceTree = "<group>"; };
 		04D0A696274112BE006C3B54 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -252,9 +256,11 @@
 				A52905DC234EC67900A8D95E /* MainView.swift */,
 				A5E9827F2480658900D7B9A9 /* SettingsModel.swift */,
 				A59E32552495A93300736334 /* LanguageTable.swift */,
+				0460D232274D668B005B91DB /* RecentlyLearnedWordsView.swift */,
 				A5E20D8324944B6E00EF7B1C /* LanguageView.swift */,
 				A585A17C24AC28FC00816D1E /* PersistenceView.swift */,
 				043C819A27413CB500E6832E /* SettingsView.swift */,
+				040A907D27523D2F008E365B /* RLWTable.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -492,7 +498,9 @@
 				A5698AE9247EFA8E00443158 /* MainView.swift in Sources */,
 				A59E32562495A93300736334 /* LanguageTable.swift in Sources */,
 				043C818D274139D900E6832E /* Config.swift in Sources */,
+				0460D233274D668B005B91DB /* RecentlyLearnedWordsView.swift in Sources */,
 				043C818F274139DE00E6832E /* Common.swift in Sources */,
+				040A907E27523D2F008E365B /* RLWTable.swift in Sources */,
 				A5E20D8424944B6E00EF7B1C /* LanguageView.swift in Sources */,
 				A585A17D24AC28FC00816D1E /* PersistenceView.swift in Sources */,
 				043C818E274139DC00E6832E /* Logger.swift in Sources */,

@@ -82,6 +82,15 @@ class ClientManager: CustomStringConvertible {
         candidatesWindow.interpretKeyEvents([event])
     }
     
+    func getCandidateAt(_ index: Int) -> String? {
+        if candidates.count < index {
+            return nil
+        } else {
+            return candidates[index]
+        }
+    }
+    
+    // Get candidate at current highlighted position
     func getCandidate() -> String? {
         if candidates.count == 0 {
             return nil
@@ -90,7 +99,7 @@ class ClientManager: CustomStringConvertible {
         }
     }
     
-    func finalize(_ output: String) {
+    func commitText(_ output: String) {
         Logger.log.debug("Finalizing with: \(output)")
         client.insertText(output, replacementRange: notFoundRange)
         candidatesWindow.hide()

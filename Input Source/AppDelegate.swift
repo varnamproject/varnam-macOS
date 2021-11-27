@@ -41,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }}
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setVarnamPaths()
+
         for arg in CommandLine.arguments {
             if arg == "-import" {
                 importVLF()
@@ -72,6 +74,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         Logger.log.debug("Comitting all editing before terminating")
         server.commitComposition(self)
+    }
+    
+    func setVarnamPaths() {
+        // This is being set because VarnamApp doesn't know
+        // the location to look for VST files.
+        // See comments inside Varnam.swift
+        let config = VarnamConfig()
+        config.vstDir = Varnam.assetsFolderPath
+        Varnam.setVSTLookupDir(config.vstDir)
     }
     
     func importVLF() {
