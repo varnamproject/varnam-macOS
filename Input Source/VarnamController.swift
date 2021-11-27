@@ -107,6 +107,14 @@ public class VarnamController: IMKInputController {
         }
     }
     
+    func commitPreedit() -> Bool {
+        if preedit.isEmpty {
+           return false
+        }
+        commitText(preedit)
+        return true
+    }
+    
     // Commits the first candidate if available
     func commit() -> Bool {
         if let text = clientManager.getCandidate() {
@@ -162,18 +170,13 @@ public class VarnamController: IMKInputController {
         case kVK_Return:
             let text = clientManager.getCandidate()
             if text == nil {
-                commitText(preedit)
-                return false
+                return commitPreedit()
             } else {
                 commitText(text!)
             }
             return true
         case kVK_Escape:
-            if preedit.isEmpty {
-               return false
-            }
-            commitText(preedit)
-            return true
+            return commitPreedit()
         case kVK_LeftArrow:
             if preedit.isEmpty {
                 return false
@@ -296,10 +299,10 @@ public class VarnamController: IMKInputController {
         // (b) could have changed while we were in background - converge (a) -> (b) if global script selection is configured
         if schemeID != config.schemeID {
             Logger.log.debug("Initializing varnam: \(schemeID) to: \(config.schemeID)")
-            initVarnam()
+            _ = initVarnam()
         }
         if (varnam == nil) {
-            initVarnam()
+            _ = initVarnam()
         }
     }
     
@@ -324,7 +327,9 @@ public class VarnamController: IMKInputController {
     
     public override func commitComposition(_ sender: Any!) {
         Logger.log.debug("Commit Composition called by: \((sender as? IMKTextInput)?.bundleIdentifier() ?? "unknown")")
-        commit()
+        // This is usually called when current input method is changed.
+        // Some apps also call to commit
+        _ = commitPreedit()
     }
     
     @objc public func menuItemSelected(sender: NSDictionary) {
@@ -333,6 +338,6 @@ public class VarnamController: IMKInputController {
         // Converge (b) -> (c)
         config.schemeID = item.representedObject as! String
         // Converge (a) -> (b)
-        initVarnam()
+        _ = initVarnam()
     }
 }
