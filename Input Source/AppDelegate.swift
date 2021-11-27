@@ -66,6 +66,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleColumnScrollingCandidatePanel)
         candidatesWindow.setAttributes([IMKCandidatesSendServerKeyEventFirst: NSNumber(booleanLiteral: true)])
         
+        // This is being set because VarnamApp doesn't know
+        // the location to look for VST files.
+        // See comments inside Varnam.swift
+        let config = VarnamConfig()
+        config.vstDir = Varnam.assetsFolderPath
+        Varnam.setVSTLookupDir(config.vstDir)
+        
         print("Inited")
     }
 

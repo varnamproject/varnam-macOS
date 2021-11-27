@@ -47,7 +47,15 @@ extension String {
 public class Varnam {
     private var varnamHandle: Int32 = 0;
     
+    // VSTs are stored in VarnamIME.app's assets.
+    // VarnamApp.app will know this path by a config value
+    // set by the IME app. Kind of weird, yes.
+    // Setting the lookup dir to assetsFolderPath only
+    // works for VarnamIME.app. For VarnamApp, the VST
+    // lookup path should be set from the config value.
+
     static let assetsFolderPath = Bundle.main.resourceURL!.appendingPathComponent("assets").path
+
     static func importAllVLFInAssets() {
         // TODO import only necessary ones
         let fm = FileManager.default
@@ -69,20 +77,10 @@ public class Varnam {
     }
     
     static func setVSTLookupDir(_ path: String) {
-        varnam_set_vst_lookup_dir(assetsFolderPath.toCStr())
-    }
-    
-    // This will only run once
-    struct VarnamInit {
-        static let once = VarnamInit()
-        init() {
-            Varnam.setVSTLookupDir(assetsFolderPath)
-        }
+        varnam_set_vst_lookup_dir(path.toCStr())
     }
     
     internal init(_ schemeID: String = "ml") throws {
-        _ = VarnamInit.once
-
         try checkError(varnam_init_from_id(schemeID.toCStr(), &varnamHandle))
     }
     
@@ -152,8 +150,6 @@ public class Varnam {
     }
     
     public static func getAllSchemeDetails() -> [SchemeDetails] {
-        _ = VarnamInit.once
-        
         var schemes = [SchemeDetails]()
 
         let arr = varnam_get_all_scheme_details()

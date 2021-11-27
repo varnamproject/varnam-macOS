@@ -16,6 +16,11 @@ struct LanguageConfig: Codable, Equatable, Hashable {
     var isEnabled: Bool
     var shortcutKey: String?
     var shortcutModifiers: UInt?
+    
+    // TODO make this struct same as SchemeDetails
+    var Identifier: String
+    var DisplayName: String
+    var LangCode: String
 }
 
 class VarnamConfig: Config {
@@ -96,16 +101,27 @@ class VarnamConfig: Config {
     
     var languageConfig: [LanguageConfig] {
         get {
+            var langConfigs = factoryLanguageConfig
             if let encoded = userDefaults.data(forKey: #function) {
                 do {
-                    return try JSONDecoder().decode(Array<LanguageConfig>.self, from: encoded)
+                    let savedLangConfigs = try JSONDecoder().decode(Array<LanguageConfig>.self, from: encoded)
+                    for slc in savedLangConfigs {
+                        if let row = langConfigs.firstIndex(where: {$0.identifier == slc.identifier}) {
+                            // Only changing the setting values
+                            // Other properties such as display name are constant,
+                            // They are obtained from VST
+                            langConfigs[row].isEnabled = slc.isEnabled
+                            langConfigs[row].shortcutKey = slc.shortcutKey
+                            langConfigs[row].shortcutModifiers = slc.shortcutModifiers
+                        }
+                    }
                 }
                 catch {
                     Logger.log.error("Exception while trying to decode languageConfig: \(error)")
                     resetLanguageConfig()
                 }
             }
-            return factoryLanguageConfig
+            return langConfigs
         }
         set(value) {
             let encodedData: Data = try! JSONEncoder().encode(value)
@@ -121,7 +137,11 @@ class VarnamConfig: Config {
                 configs.append(LanguageConfig(
                     identifier: scheme.Identifier,
                     language: scheme.DisplayName,
-                    isEnabled: true
+                    isEnabled: true,
+                    
+                    Identifier: scheme.Identifier,
+                    DisplayName: scheme.DisplayName,
+                    LangCode: scheme.LangCode
                 ))
             }
             return configs

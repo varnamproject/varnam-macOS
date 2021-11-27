@@ -30,12 +30,6 @@ public class VarnamController: IMKInputController {
     private (set) var wordBreakChars: CharacterSet;
     
     private func initVarnam() -> Bool {
-        // This is being set because VarnamApp doesn't know
-        // the location who also access govarnam
-        if config.vstDir == "" {
-            config.vstDir = Varnam.assetsFolderPath
-        }
-
         if (varnam != nil) {
             closeVarnam()
         }

@@ -13,9 +13,12 @@ import SwiftUI
 
 class RLWModel: ObservableObject {
     @Published public var words: [Suggestion] = [Suggestion]();
-
-    let config = VarnamConfig()
     
+    @Published var languages: [LanguageConfig];
+    @Published var schemeID: String = "ml";
+    @Published var schemeLangName: String = "Malayalam";
+    
+    let config = VarnamConfig()
     private (set) var varnam: Varnam! = nil;
     
     private func closeVarnam() {
@@ -28,7 +31,7 @@ class RLWModel: ObservableObject {
             closeVarnam()
         }
         do {
-            varnam = try Varnam(config.schemeID)
+            varnam = try Varnam(schemeID)
         } catch let error {
             Logger.log.error(error.localizedDescription)
             return false
@@ -38,6 +41,12 @@ class RLWModel: ObservableObject {
     
     init() {
         Varnam.setVSTLookupDir(config.vstDir)
+        
+        // One language = One dictionary
+        // Same language can have multiple schemes
+        schemeID = config.schemeID
+        languages = config.languageConfig
+        
         if initVarnam() {
             refreshWords()
         }
@@ -59,6 +68,13 @@ class RLWModel: ObservableObject {
         }
         refreshWords()
     }
+    
+    func changeScheme(_ id: String) {
+        schemeID = id
+        schemeLangName = languages.first(where: { $0.identifier == schemeID })?.DisplayName ?? ""
+        initVarnam()
+        refreshWords()
+    }
 }
 
 struct RecentlyLearnedWordsView: View {
@@ -66,13 +82,25 @@ struct RecentlyLearnedWordsView: View {
     @ObservedObject var model = RLWModel()
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Language: ")
+                MenuButton(model.schemeLangName) {
+                    ForEach(model.languages, id: \.self) { (lang) in
+                        Button(lang.DisplayName) {
+                            self.model.changeScheme(lang.identifier)
+                        }
+                    }
+                }
+                .fixedSize()
+                .padding(0)
+            }
+            Spacer(minLength: 5)
             RLWTable(
                 words: model.words,
                 unlearn: model.unlearn
-            ).padding(16)
-            Spacer(minLength: 10)
-        }
+            )
+        }.padding(16)
     }
 }
 
