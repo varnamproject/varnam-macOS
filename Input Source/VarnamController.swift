@@ -154,6 +154,7 @@ public class VarnamController: IMKInputController {
                 if let text = clientManager.getCandidate() {
                     try! varnam.unlearn(text)
                     updateLookupTable()
+                    return true
                 }
             }
         }
