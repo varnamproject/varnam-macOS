@@ -83,10 +83,10 @@ class ClientManager: CustomStringConvertible {
     }
     
     func getCandidateAt(_ index: Int) -> String? {
-        if candidates.count < index {
-            return nil
-        } else {
+        if candidates.count > index {
             return candidates[index]
+        } else {
+            return nil
         }
     }
     

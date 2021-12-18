@@ -99,12 +99,17 @@ public class VarnamController: IMKInputController {
         }
     }
     
-    func commitCandidateAt(_ position: Int) {
+    func commitCandidateAt(_ position: Int) -> Bool {
         if position == 0 {
-            commitText(preedit)
+            if preedit.count > 0 {
+                commitText(preedit)
+                return true
+            }
         } else if let text = clientManager.getCandidateAt(position-1) {
             commitText(text)
+            return true
         }
+        return false
     }
     
     func commitPreedit() -> Bool {
@@ -237,8 +242,7 @@ public class VarnamController: IMKInputController {
                 
                 if numericKey >= 0 && numericKey <= 9 {
                     // Numeric key press
-                    commitCandidateAt(numericKey)
-                    return true
+                    return commitCandidateAt(numericKey)
                 }
                 
                 let charScalar = chars.unicodeScalars.first!
