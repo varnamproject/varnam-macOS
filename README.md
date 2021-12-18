@@ -4,23 +4,7 @@ Easily type Indian languages on macOS using [Varnam transliteration engine](http
 
 Built at FOSSUnited's [FOSSHack21](https://fossunited.org/fosshack/2021/project?project=Type%20Indian%20Languages%20natively%20on%20Mac).
 
-This project is a hard-fork of [lipika-ime](https://github.com/ratreya/Lipika_IME). Changes made:
-* https://github.com/varnamproject/varnam-macOS/pull/1
-* https://github.com/varnamproject/varnam-macOS/pull/2
-* https://github.com/varnamproject/varnam-macOS/pull/3
-* https://github.com/varnamproject/varnam-macOS/pull/4
-
-Lipika & Varnam is very different in their handling of transliteration. Both are incompatible with each other. Lipika is a good project to hack on to make your IME, it has a settings window, IME and installer. But it's difficult to get started. This IME removes many complicated code from it and tries to make it easier with improved documentation as well.
-
-There aren't many documentation on how to make IMEs for macOS, especially in **English**. Getting started with XCode is also tricky for beginners. Setting up **Lipika** was also difficult.
-
-Resources that helped in making IME on macOS (ordered by most important to the least):
-* https://blog.inoki.cc/2021/06/19/Write-your-own-IME-on-macOS-1/ (The last section is very important!)
-* https://jyhong836.github.io/tech/2015/07/29/add-3rd-part-dynamic-library-dylib-to-xcode-target.html
-* https://github.com/lennylxx/google-input-tools-macos (An IME made 2 months ago, Has GitHub CI builds)
-* https://github.com/nh7a/hiragany (Simple Japanese IME)
-* https://github.com/pkamb/NumberInput_IMKit_Sample/issues/1
-* API Docs: https://developer.apple.com/documentation/inputmethodkit/imkcandidates
+This project is a hard-fork of [lipika-ime](https://github.com/ratreya/Lipika_IME)
 
 ## Installation
 
@@ -48,6 +32,18 @@ See a demo of how Varnam works: https://www.youtube.com/watch?v=7bvahY0sdWo
 * Clone and do `git submodule update --init`
 * `cd Installation && ./build`
 * Run the newly built `VarnamIME.pkg` installer
+
+## Resources
+
+There aren't many documentation on how to make IMEs for macOS, especially in **English**. Getting started with XCode is also tricky for beginners. Setting up **Lipika** was also difficult.
+
+Resources that helped in making IME on macOS (ordered by most important to the least):
+* https://blog.inoki.cc/2021/06/19/Write-your-own-IME-on-macOS-1/ (The last section is very important!)
+* https://jyhong836.github.io/tech/2015/07/29/add-3rd-part-dynamic-library-dylib-to-xcode-target.html
+* https://github.com/lennylxx/google-input-tools-macos (An IME made 2 months ago, Has GitHub CI builds)
+* https://github.com/nh7a/hiragany (Simple Japanese IME)
+* https://github.com/pkamb/NumberInput_IMKit_Sample/issues/1
+* API Docs: https://developer.apple.com/documentation/inputmethodkit/imkcandidates
 
 ## License
 
