@@ -2,27 +2,9 @@
 
 Easily type Indian languages on macOS using [Varnam transliteration engine](https://varnamproject.github.io/).
 
-Built at FOSSUnited's [FOSSHack21](https://fossunited.org/fosshack/2021/project?project=Type%20Indian%20Languages%20natively%20on%20Mac).
-
-This project is a hard-fork of [lipika-ime](https://github.com/ratreya/Lipika_IME)
-
 ## Installation
 
-Download `VarnamIME.pkg` installer from Releases. Double click to open the installer. You might need to explicitly allow installer to run from security settings.
-
-After installation, you need to codesign manually to run it:
-```
-sudo codesign --force --deep --sign - /Library/Input\ Methods/VarnamIME.app
-sudo codesign --force --deep --sign - /Applications/VarnamApp.app
-/Library/Input\ Methods/VarnamIME.app/Contents/MacOS/VarnamIME -import # Import words
-open /Library/Input\ Methods/VarnamIME.app # Run IME
-```
-
-This will get fixed once an Apple Developer account is purchased and the apps are signed with an official certificate.
-
-After this, VarnamIME will be running in the background and you can switch to it from the system tray: https://apple.stackexchange.com/questions/135370/how-can-i-set-up-a-keyboard-shortcut-for-switching-input-source
-
-If the installation didn't enable IME by default, try this: https://github.com/ratreya/lipika-ime/wiki#installation
+[See this](https://varnamproject.com/download/mac/)
 
 See a demo of how Varnam works: https://www.youtube.com/watch?v=7bvahY0sdWo
 
@@ -33,7 +15,13 @@ See a demo of how Varnam works: https://www.youtube.com/watch?v=7bvahY0sdWo
 * `cd Installation && ./build`
 * Run the newly built `VarnamIME.pkg` installer
 
-## Resources
+## About
+
+Built at FOSSUnited's [FOSSHack21](https://fossunited.org/fosshack/2021/project?project=Type%20Indian%20Languages%20natively%20on%20Mac).
+
+This project is a hard-fork of [lipika-ime](https://github.com/ratreya/Lipika_IME)
+
+### Resources
 
 There aren't many documentation on how to make IMEs for macOS, especially in **English**. Getting started with XCode is also tricky for beginners. Setting up **Lipika** was also difficult.
 
@@ -45,7 +33,7 @@ Resources that helped in making IME on macOS (ordered by most important to the l
 * https://github.com/pkamb/NumberInput_IMKit_Sample/issues/1
 * API Docs: https://developer.apple.com/documentation/inputmethodkit/imkcandidates
 
-## License
+### License
 
 > Copyright (C) 2018 Ranganath Atreya
 >
