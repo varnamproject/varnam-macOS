@@ -284,7 +284,9 @@ public class VarnamController: IMKInputController {
     }
     
     private func updateLookupTable() {
-        let sugs = varnam.transliterate(preedit)
+        let handleID: Int32 = 1
+        varnam.cancel(handleID)
+        let sugs = varnam.transliterate(handleID, preedit)
         clientManager.updateCandidates(sugs)
     }
     

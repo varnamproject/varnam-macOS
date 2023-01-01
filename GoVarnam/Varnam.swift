@@ -98,11 +98,15 @@ public class Varnam {
         varnam_close(varnamHandle)
     }
 
-    public func transliterate(_ input: String) -> [String] {
+    public func cancel(_ handleID: Int32) {
+        varnam_cancel(handleID)
+    }
+
+    public func transliterate(_ handleID: Int32, _ input: String) -> [String] {
         var arr: UnsafeMutablePointer<varray>? = varray_init()
         varnam_transliterate(
             varnamHandle,
-            1,
+            handleID,
             input.toCStr(),
             &arr
         )
