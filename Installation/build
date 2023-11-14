@@ -78,27 +78,27 @@ clean() {
 
 build_varnam_ime() {
     rm -rf ./VarnamIME.app
-    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build || exit 1
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamIME -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO || exit 1
     cp -R ../build/Release/VarnamIME.app .
     # notarizefile "VarnamIME.app" "com.varnamproject.mac.Varnam"
 }
 
 build_shortcut_recorder() {
-    xcodebuild -project ../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build || exit 1
+    xcodebuild -project ../ShortcutRecorder/ShortcutRecorder.xcodeproj -scheme "ShortcutRecorder.framework" -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO || exit 1
     rm -rf ../Application/ShortcutRecorder.framework
     cp -R ../ShortcutRecorder/build/Release/ShortcutRecorder.framework ../Application/ || exit 1
 }
 
 build_varnam_app() {
     rm -rf ./VarnamApp.app
-    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build || exit 1
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme VarnamApp -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO || exit 1
     cp -R ../build/Release/VarnamApp.app .
     # notarizefile "VarnamApp.app" "com.varnamproject.mac.VarnamApp"
 }
 
 build_varnam_installer() {
     rm ./Scripts/installer
-    xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build  || exit 1
+    xcodebuild -project ../VarnamIME.xcodeproj -scheme Installer -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO || exit 1
     cp ../build/Release/installer ./Scripts/
 }
 
